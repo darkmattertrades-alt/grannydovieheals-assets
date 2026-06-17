@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Lora, Dancing_Script } from "next/font/google"
 import "./globals.css"
+import { GrannyChat } from "@/components/granny-chat"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -47,7 +48,10 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${lora.variable} ${dancing.variable} bg-parchment`}
     >
-      <body className="font-body text-ink antialiased">{children}</body>
+      <body className="font-body text-ink antialiased">
+        {children}
+        <GrannyChat />
+      </body>
     </html>
   )
 }
