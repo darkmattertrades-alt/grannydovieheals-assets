@@ -52,7 +52,7 @@ export function HomeScripture() {
       }}
     >
       <div className="mx-auto max-w-3xl px-4 text-center">
-        <p className="text-balance font-script text-3xl leading-snug text-parchment drop-shadow sm:text-4xl md:text-5xl">
+        <p className="text-balance font-serif italic text-3xl leading-snug text-parchment drop-shadow sm:text-4xl md:text-5xl">
           &ldquo;And the fruit thereof shall be for meat, and the leaf thereof
           for medicine.&rdquo;
         </p>

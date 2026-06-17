@@ -175,7 +175,7 @@ export function SupplementsScripture() {
       />
       <div className="absolute inset-0 bg-ink/55" aria-hidden="true" />
       <div className="relative z-10 mx-auto max-w-3xl px-6 py-20 text-center">
-        <p className="text-balance font-script text-3xl leading-relaxed text-parchment sm:text-4xl lg:text-5xl">
+        <p className="text-balance font-serif italic text-3xl leading-relaxed text-parchment sm:text-4xl lg:text-5xl">
           &ldquo;He causeth the grass to grow for the cattle, and herb for the
           service of man.&rdquo;
         </p>
