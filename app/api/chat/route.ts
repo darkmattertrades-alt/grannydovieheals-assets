@@ -1,5 +1,5 @@
 import { groq } from "@ai-sdk/groq"
-import { generateText } from "ai"
+import { streamText } from "ai"
 
 export const maxDuration = 30
 
@@ -65,8 +65,7 @@ RULES:
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const message = body?.message
+    const { message } = await req.json()
 
     if (!message || typeof message !== "string") {
       return Response.json({
@@ -74,14 +73,19 @@ export async function POST(req: Request) {
       })
     }
 
-    const { text } = await generateText({
+    const result = streamText({
       model: groq("llama-3.1-8b-instant"),
       system: SYSTEM_PROMPT,
-      prompt: message,
-      maxOutputTokens: 1024,
+      messages: [{ role: "user", content: message }],
     })
 
-    return Response.json({ reply: text })
+    // Collect the full streamed text and return as JSON
+    let fullText = ""
+    for await (const chunk of result.textStream) {
+      fullText += chunk
+    }
+
+    return Response.json({ reply: fullText })
 
   } catch (err) {
     console.error("[GrannyDovie] /api/chat error:", err)
