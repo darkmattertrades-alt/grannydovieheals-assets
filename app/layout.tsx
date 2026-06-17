@@ -51,6 +51,51 @@ export default function RootLayout({
       <body className="font-body text-ink antialiased">
         {children}
         <GrannyChat />
+        {/* Plain vanilla JS toggle for the chat bubble/window. No React state. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+(function () {
+  function init() {
+    var bubble = document.getElementById('chat-bubble');
+    var win = document.getElementById('chat-window');
+    var label = document.getElementById('chat-label');
+    var closeBtn = document.getElementById('chat-close');
+
+    if (!bubble || !win) { return; }
+    if (bubble.getAttribute('data-bound') === '1') { return; }
+    bubble.setAttribute('data-bound', '1');
+
+    function show() {
+      win.style.display = 'flex';
+      win.style.flexDirection = 'column';
+      if (label) { label.style.display = 'none'; }
+    }
+    function hide() {
+      win.style.display = 'none';
+      if (label) { label.style.display = 'block'; }
+    }
+
+    bubble.onclick = function () {
+      if (win.style.display === 'none' || win.style.display === '') {
+        show();
+      } else {
+        hide();
+      }
+    };
+
+    if (closeBtn) { closeBtn.onclick = hide; }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+`,
+          }}
+        />
       </body>
     </html>
   )

@@ -44,3 +44,10 @@
   max-width: 8rem;
   background: linear-gradient(to right, transparent, #c8922a, transparent);
 }
+
+/* Chat window starts hidden. Visibility is controlled entirely by the
+   vanilla JS toggle (inline style.display), never by React, so streaming
+   re-renders cannot reset it. */
+#chat-window {
+  display: none;
+}
