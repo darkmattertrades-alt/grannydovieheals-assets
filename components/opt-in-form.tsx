@@ -25,21 +25,26 @@ export function OptInForm({
     if (!firstName.trim() || !email.trim()) return
     setStatus("loading")
 
-    try {
-      const formData = new FormData()
-      formData.append("First Name", firstName)
-      formData.append("Email Address", email)
+    const payload = {
+      name: firstName,
+      email: email,
+    }
 
+    try {
       await fetch(OPT_IN_ENDPOINT, {
         method: "POST",
         mode: "no-cors",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       })
 
       setStatus("success")
       setFirstName("")
       setEmail("")
-    } catch {
+    } catch (error) {
+      console.error("Error:", error)
       setStatus("error")
     }
   }
