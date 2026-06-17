@@ -1,4 +1,4 @@
-import { images, AFFILIATE_DISCLOSURE } from "@/lib/site"
+import { images } from "@/lib/site"
 import { ProductCard, type Product } from "@/components/product-card"
 
 const topTier: Product[] = [
@@ -79,18 +79,6 @@ export function SupplementsHero() {
         </h1>
         <p className="mx-auto mt-6 max-w-xl text-pretty font-body text-xl leading-relaxed text-parchment/90">
           Every root, herb, and seed was put here for a reason, honey.
-        </p>
-      </div>
-    </section>
-  )
-}
-
-export function SupplementsDisclosure() {
-  return (
-    <section className="bg-parchment py-8">
-      <div className="mx-auto max-w-3xl px-6">
-        <p className="text-center font-body text-sm leading-relaxed text-heading/80">
-          {AFFILIATE_DISCLOSURE}
         </p>
       </div>
     </section>

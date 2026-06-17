@@ -3,7 +3,6 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import {
   SkincareHero,
-  SkincareDisclosure,
   SkincareTopTier,
   SkincareMidTier,
   SkincareLowTier,
@@ -22,7 +21,6 @@ export default function SkincarePage() {
       <SiteHeader />
       <main>
         <SkincareHero />
-        <SkincareDisclosure />
         <SkincareTopTier />
         <SkincareMidTier />
         <SkincareLowTier />

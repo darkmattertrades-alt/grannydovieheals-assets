@@ -3,7 +3,6 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import {
   SupplementsHero,
-  SupplementsDisclosure,
   SupplementsTopTier,
   SupplementsMidTier,
   SupplementsLowTier,
@@ -22,7 +21,6 @@ export default function SupplementsPage() {
       <SiteHeader />
       <main>
         <SupplementsHero />
-        <SupplementsDisclosure />
         <SupplementsTopTier />
         <SupplementsMidTier />
         <SupplementsLowTier />
