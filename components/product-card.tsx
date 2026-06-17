@@ -10,12 +10,15 @@ export type Product = {
 export function ProductCard({
   product,
   variant = "cream",
+  image,
 }: {
   product: Product
   variant?: "cream" | "forest"
+  image?: string
 }) {
   const isForest = variant === "forest"
   const buttonColor = isForest ? "bg-gold hover:bg-gold/90" : "bg-cta hover:bg-cta/90"
+  const imageSrc = image ?? images.productSupplements
 
   return (
     <article
@@ -25,7 +28,7 @@ export function ProductCard({
     >
       <div className="h-52 overflow-hidden bg-parchment">
         <img
-          src={images.productSupplements || "/placeholder.svg"}
+          src={imageSrc || "/placeholder.svg"}
           alt={product.name}
           className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
         />
