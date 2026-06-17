@@ -41,24 +41,46 @@ export function GrannyChat() {
 
   return (
     <>
-      {/* Floating bubble */}
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Close chat with Granny Dovie" : "Chat with Granny Dovie"}
-        className="fixed bottom-5 right-5 flex h-[60px] w-[60px] items-center justify-center rounded-full text-2xl shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2"
-        style={{ backgroundColor: "#3B5E3A", zIndex: 9999 }}
+      {/* Floating bubble + always-visible label */}
+      <div
+        className="fixed bottom-5 right-5 flex flex-col items-center gap-2"
+        style={{ zIndex: 9999 }}
       >
-        {open ? <span className="text-parchment">×</span> : <span aria-hidden>🌿</span>}
-      </button>
+        {!open && (
+          <span
+            className="font-body whitespace-nowrap"
+            style={{
+              color: "#F5ECD7",
+              backgroundColor: "#3B5E3A",
+              padding: "6px 12px",
+              borderRadius: "20px",
+              fontSize: "12px",
+            }}
+          >
+            Chat with Granny Dovie 🌿
+          </span>
+        )}
+        <button
+          id="chat-bubble"
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-label={open ? "Close chat with Granny Dovie" : "Chat with Granny Dovie"}
+          className="flex h-[60px] w-[60px] items-center justify-center rounded-full text-2xl shadow-lg transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2"
+          style={{ backgroundColor: "#3B5E3A", cursor: "pointer", zIndex: 9999 }}
+        >
+          {open ? <span className="text-parchment">×</span> : <span aria-hidden>🌿</span>}
+        </button>
+      </div>
 
       {/* Chat window */}
       {open && (
         <div
+          id="chat-window"
           role="dialog"
           aria-label="Chat with Granny Dovie"
           className="fixed bottom-[80px] right-5 flex flex-col overflow-hidden"
           style={{
+            display: "flex",
             width: "min(380px, calc(100vw - 2.5rem))",
             height: "min(520px, calc(100vh - 7rem))",
             backgroundColor: "#F5ECD7",
