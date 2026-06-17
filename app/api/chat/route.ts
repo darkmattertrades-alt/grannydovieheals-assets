@@ -76,10 +76,40 @@ export async function POST(req: Request) {
       prompt: message,
     })
 
-    // Process the reply on the server to convert BUY_LINK: into HTML button
+    // Map Amazon ASINs to product names
+    const productNames: Record<string, string> = {
+      "B07G2LBQ1G": "Garden of Life Turmeric",
+      "B003HD9H0G": "Gaia Herbs Ashwagandha",
+      "B0036THLPE": "Gaia Herbs Elderberry Syrup",
+      "B000BD0RT0": "Doctor's Best Magnesium",
+      "B017JXZPPU": "Doctor's Best Vitamin K2 + D3",
+      "B0036THLRW": "Gaia Herbs Quick Defense",
+      "B001I7MVG0": "Bragg Apple Cider Vinegar",
+      "B001E10C9I": "Nature's Way Ginger Root",
+      "B000GG5IZK": "Bigelow Peppermint Tea",
+      "B001NJNV12": "Trilogy Organic Rosehip Oil",
+      "B07G14PWZN": "Cliganic Organic Rosehip Oil",
+      "B00D9NV2D4": "Pure Unrefined Shea Butter",
+      "B0186U9736": "Sky Organics Castor Oil",
+      "B00GJX58PE": "Leven Rose Jojoba Oil",
+      "B00987FWHW": "RA Cosmetics Shea Butter",
+      "B09Q2X99XG": "The Ordinary Rosehip Oil",
+      "B0009F3O8Q": "Palmer's Cocoa Butter Lotion",
+      "B073TJ18JY": "Bigelow Peppermint Spearmint Tea",
+    }
+
     const processed = text.replace(
-      /BUY_LINK:\s*(https?:\/\/(?:www\.)?amazon\.com\/[^\s\n]+)/g,
-      '<a href="$1" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin-top:8px;margin-bottom:8px;">&#128722; Shop on Amazon &#8594;</a>'
+      /BUY_LINK:\s*(https?:\/\/(?:www\.)?amazon\.com\/dp\/([A-Z0-9]+)[^\s\n]*)/g,
+      function(_match: string, url: string, asin: string) {
+        const name = productNames[asin] || "Granny Dovie's Pick"
+        return (
+          '<a href="' +
+          url +
+          '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin-top:8px;margin-bottom:8px;">&#128722; ' +
+          name +
+          ' &#8594; Shop on Amazon</a>'
+        )
+      }
     )
 
     return Response.json({ reply: processed })
