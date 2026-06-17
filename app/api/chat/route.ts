@@ -65,7 +65,8 @@ RULES:
 
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json()
+    const body = await req.json()
+    const message = body?.message
 
     if (!message || typeof message !== "string") {
       return Response.json({
@@ -75,10 +76,11 @@ export async function POST(req: Request) {
 
     const { text } = await generateText({
       model: groq("llama-3.1-8b-instant"),
-      system: SYSTEM_PROMPT,
-      prompt: message,
-      temperature: 0.7,
-      maxTokens: 1024,
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message },
+      ],
+      maxOutputTokens: 1024,
     })
 
     return Response.json({ reply: text })
