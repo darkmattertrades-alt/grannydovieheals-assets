@@ -76,7 +76,6 @@ export async function POST(req: Request) {
       prompt: message,
     })
 
-    // Map Amazon ASINs to product names
     const productNames: Record<string, string> = {
       "B07G2LBQ1G": "Garden of Life Turmeric",
       "B003HD9H0G": "Gaia Herbs Ashwagandha",
@@ -107,7 +106,7 @@ export async function POST(req: Request) {
           url +
           '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;margin-top:8px;margin-bottom:8px;">&#128722; ' +
           name +
-          ' &#8594; Shop on Amazon</a>'
+          ' &#8594; Buy Now on Amazon</a>'
         )
       }
     )
