@@ -51,7 +51,6 @@ export default function RootLayout({
       <body className="font-body text-ink antialiased">
         {children}
         <GrannyChat />
-        {/* Plain vanilla JS toggle for the chat bubble/window. No React state. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -86,7 +85,6 @@ export default function RootLayout({
 
     if (closeBtn) { closeBtn.onclick = hide; }
 
-    // ----- Send logic (no <form>, never closes the window) -----
     var sendBtn = document.getElementById('chat-send');
     var chatInput = document.getElementById('chat-input');
     var chatMessages = document.getElementById('chat-messages');
@@ -122,7 +120,13 @@ export default function RootLayout({
 
           var grannyMsg = document.createElement('div');
           grannyMsg.className = 'granny-message';
-          grannyMsg.textContent = data.reply;
+
+          var formatted = data.reply.replace(
+            /(https:\/\/www\.amazon\.com\/[^\s"<]+)/g,
+            '<br/><br/><a href="$1" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;margin-top:4px;">🛒 Shop on Amazon \u2192</a><br/>'
+          );
+          grannyMsg.innerHTML = formatted;
+
           chatMessages.appendChild(grannyMsg);
           chatMessages.scrollTop = chatMessages.scrollHeight;
         })
