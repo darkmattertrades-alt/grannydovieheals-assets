@@ -56,14 +56,14 @@ export default function RootLayout({
             __html: `
 (function () {
   function formatReply(text) {
-    // Step 1: Extract all Amazon URLs first
-    var amazonRegex = /\\(?(https?:\\/\\/(?:www\\.)?amazon\\.com\\/[^\\s\\)\"<>]+)\\)?/g;
-    var formatted = text.replace(amazonRegex, function(match, url) {
-      // Clean trailing punctuation from URL
-      url = url.replace(/[.,;:!?\\)]+$/, '');
-      return '<br/><br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; Shop on Amazon &#8594;</a><br/><br/>';
-    });
-    // Step 2: Convert newlines to <br>
+    // Replace SHOP_LINK[name|url] with a styled button
+    var formatted = text.replace(
+      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
+      function(match, name, url) {
+        return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
+      }
+    );
+    // Convert newlines to line breaks
     formatted = formatted.replace(/\\n/g, '<br/>');
     return formatted;
   }
