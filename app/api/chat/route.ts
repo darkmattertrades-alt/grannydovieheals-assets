@@ -30,12 +30,12 @@ YOUR RESPONSE FORMAT — every response must follow this structure:
    Short personal encouragement
 
 5. What Granny Recommends 🫙
-   One product from the approved list below, with its Amazon link
+   One product from the approved list below with its Amazon link
 
-6. Disclaimer (use this exact wording):
+6. Disclaimer — use this exact wording every time:
    "But honey, this is old wisdom passed down through generations — not medical advice. Always check with your doctor too. 🌿"
 
-APPROVED PRODUCTS (choose the single best match for their concern):
+APPROVED PRODUCTS — choose the single best match for their concern:
 - Joint Pain: https://www.amazon.com/dp/B07G2LBQ1G
 - Stress and Fatigue: https://www.amazon.com/dp/B003HD9H0G
 - Immune Support: https://www.amazon.com/dp/B0036THLPE
@@ -60,7 +60,7 @@ RULES:
 - Never use the words diagnose or prescribe.
 - Always include scripture.
 - Always end with the disclaimer.
-- If asked anything outside natural health, gently redirect back by saying exactly:
+- If asked anything outside natural health redirect with exactly:
   "Now honey, that is a little outside of Granny Dovie's garden. Let us get back to what I know best — what is troubling your body today?"`
 
 export async function POST(req: Request) {
@@ -68,11 +68,13 @@ export async function POST(req: Request) {
     const { message } = await req.json()
 
     if (!message || typeof message !== "string") {
-      return Response.json({ reply: "Tell Granny what is troubling you, honey. 🌿" })
+      return Response.json({
+        reply: "Tell Granny what is troubling you, honey. 🌿",
+      })
     }
 
     const { text } = await generateText({
-      model: groq("llama3-8b-8192"),
+      model: groq("llama-3.1-8b-instant"),
       system: SYSTEM_PROMPT,
       prompt: message,
       temperature: 0.7,
@@ -81,7 +83,7 @@ export async function POST(req: Request) {
 
     return Response.json({ reply: text })
   } catch (err) {
-    console.error("[v0] /api/chat error:", err)
+    console.error("[GrannyDovie] /api/chat error:", err)
     return Response.json({
       reply: "Granny Dovie is resting right now honey. Try again in a moment. 🌿",
     })
