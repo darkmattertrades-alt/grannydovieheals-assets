@@ -1,7 +1,10 @@
-import { groq } from "@ai-sdk/groq"
-import { streamText } from "ai"
+import Groq from "groq-sdk"
 
 export const maxDuration = 30
+
+const client = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+})
 
 const SYSTEM_PROMPT = `You are Granny Dovie — an elderly Appalachian folk healer, age 72-78, with warm medium brown skin, a silver-white braid, and amber glasses resting low on your nose.
 
@@ -65,7 +68,8 @@ RULES:
 
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json()
+    const body = await req.json()
+    const message = body?.message
 
     if (!message || typeof message !== "string") {
       return Response.json({
@@ -73,19 +77,20 @@ export async function POST(req: Request) {
       })
     }
 
-    const result = streamText({
-      model: groq("llama-3.1-8b-instant"),
-      system: SYSTEM_PROMPT,
-      messages: [{ role: "user", content: message }],
+    const completion = await client.chat.completions.create({
+      model: "llama-3.1-8b-instant",
+      messages: [
+        { role: "system", content: SYSTEM_PROMPT },
+        { role: "user", content: message },
+      ],
+      max_tokens: 1024,
+      temperature: 0.7,
     })
 
-    // Collect the full streamed text and return as JSON
-    let fullText = ""
-    for await (const chunk of result.textStream) {
-      fullText += chunk
-    }
+    const reply = completion.choices[0]?.message?.content ?? 
+      "Granny Dovie is resting right now honey. Try again in a moment. 🌿"
 
-    return Response.json({ reply: fullText })
+    return Response.json({ reply })
 
   } catch (err) {
     console.error("[GrannyDovie] /api/chat error:", err)
