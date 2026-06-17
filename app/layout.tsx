@@ -55,6 +55,19 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
 (function () {
+  function formatReply(text) {
+    // Step 1: Extract all Amazon URLs first
+    var amazonRegex = /\\(?(https?:\\/\\/(?:www\\.)?amazon\\.com\\/[^\\s\\)\"<>]+)\\)?/g;
+    var formatted = text.replace(amazonRegex, function(match, url) {
+      // Clean trailing punctuation from URL
+      url = url.replace(/[.,;:!?\\)]+$/, '');
+      return '<br/><br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; Shop on Amazon &#8594;</a><br/><br/>';
+    });
+    // Step 2: Convert newlines to <br>
+    formatted = formatted.replace(/\\n/g, '<br/>');
+    return formatted;
+  }
+
   function init() {
     var bubble = document.getElementById('chat-bubble');
     var win = document.getElementById('chat-window');
@@ -103,7 +116,7 @@ export default function RootLayout({
 
       var loading = document.createElement('div');
       loading.className = 'granny-message';
-      loading.textContent = 'Granny Dovie is thinking... 🌿';
+      loading.textContent = 'Granny Dovie is thinking... \uD83C\uDF3F';
       loading.id = 'loading-msg';
       chatMessages.appendChild(loading);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -120,13 +133,7 @@ export default function RootLayout({
 
           var grannyMsg = document.createElement('div');
           grannyMsg.className = 'granny-message';
-
-          var formatted = data.reply.replace(
-            /(https:\/\/www\.amazon\.com\/[^\s"<]+)/g,
-            '<br/><br/><a href="$1" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:8px 16px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;margin-top:4px;">🛒 Shop on Amazon \u2192</a><br/>'
-          );
-          grannyMsg.innerHTML = formatted;
-
+          grannyMsg.innerHTML = formatReply(data.reply);
           chatMessages.appendChild(grannyMsg);
           chatMessages.scrollTop = chatMessages.scrollHeight;
         })
@@ -136,7 +143,7 @@ export default function RootLayout({
 
           var errMsg = document.createElement('div');
           errMsg.className = 'granny-message';
-          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. 🌿';
+          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
           chatMessages.appendChild(errMsg);
           chatMessages.scrollTop = chatMessages.scrollHeight;
         });
