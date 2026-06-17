@@ -20,7 +20,6 @@ export function FreeGiftOptIn() {
         <div className="mt-8 rounded-xl bg-parchment/10 p-6 backdrop-blur-sm sm:p-8">
           <OptInForm
             compact
-            download
             buttonLabel="Get My Free Guide Now 🌿"
             emailPlaceholder="your@email.com"
           />

@@ -24,8 +24,8 @@ export const AFFILIATE_DISCLOSURE =
 export const OPT_IN_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbzRjlS1nXNemUpfVaH1iFU4PkytYTISXb1W7taEywz1hINqgUqLDuhc-Slz0MZvCqj9/exec"
 
-// TODO: Replace with the final Google Docs PDF link once provided.
-export const GUIDE_DOWNLOAD_URL = "#"
+export const GUIDE_DOWNLOAD_URL =
+  "https://drive.google.com/file/d/1Of1gKx-q2Fh99ijE60QvaAcdhL_R0Pfw/view?usp=sharing"
 
 export const navLinks = [
   { href: "/", label: "Home" },

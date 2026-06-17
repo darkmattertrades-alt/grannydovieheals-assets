@@ -155,7 +155,6 @@ export function AboutFreeGift() {
         <div className="mt-8 rounded-xl border-2 border-gold/30 bg-parchment p-6 shadow-md sm:p-8">
           <OptInForm
             compact
-            download
             buttonLabel="Get My Free Guide Now 🌿"
             emailPlaceholder="your@email.com"
           />

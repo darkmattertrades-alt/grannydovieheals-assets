@@ -7,12 +7,10 @@ export function OptInForm({
   compact = false,
   buttonLabel = "Send My Free Guide",
   emailPlaceholder = "you@example.com",
-  download = false,
 }: {
   compact?: boolean
   buttonLabel?: string
   emailPlaceholder?: string
-  download?: boolean
 }) {
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
@@ -50,30 +48,22 @@ export function OptInForm({
   }
 
   if (status === "success") {
-    if (download) {
-      return (
-        <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
-          <p className="text-balance font-body text-xl font-semibold leading-relaxed text-cta">
-            Your guide is ready honey!
-            <br />
-            Click below to download 🌿
-          </p>
-          <a
-            href={GUIDE_DOWNLOAD_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90"
-          >
-            Download Your Free Guide →
-          </a>
-        </div>
-      )
-    }
     return (
       <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
-        <p className="font-body text-xl font-semibold text-cta">
-          Your guide is on its way, honey! 🌿
+        <p className="font-body text-2xl font-bold text-cta">
+          Your guide is ready honey! 🌿
         </p>
+        <p className="mt-3 text-pretty font-body text-base leading-relaxed text-heading">
+          Click the button below to download your free copy now.
+        </p>
+        <a
+          href={GUIDE_DOWNLOAD_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90"
+        >
+          Download Your Free Guide →
+        </a>
       </div>
     )
   }
