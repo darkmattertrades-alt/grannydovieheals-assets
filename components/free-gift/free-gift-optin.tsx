@@ -11,15 +11,17 @@ export function FreeGiftOptIn() {
           className="mx-auto mb-8 h-20 w-auto object-contain"
         />
         <h2 className="text-balance font-serif text-3xl font-bold text-parchment sm:text-4xl">
-          Yes! Send Me The Free Guide 🌿
+          Get Instant Access to the Free Guide 🌿
         </h2>
         <p className="mx-auto mt-4 max-w-lg text-pretty font-body text-lg leading-relaxed text-parchment/90">
-          Enter your name and email below and Granny Dovie will send it straight to you.
+          Leave your name and email below and your free guide will be ready to
+          download immediately, honey.
         </p>
         <div className="mt-8 rounded-xl bg-parchment/10 p-6 backdrop-blur-sm sm:p-8">
           <OptInForm
             compact
-            buttonLabel="Send Me The Guide 🌿"
+            download
+            buttonLabel="Get My Free Guide Now 🌿"
             emailPlaceholder="your@email.com"
           />
         </div>

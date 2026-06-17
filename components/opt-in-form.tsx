@@ -1,16 +1,18 @@
 "use client"
 
 import { useState } from "react"
-import { OPT_IN_ENDPOINT } from "@/lib/site"
+import { OPT_IN_ENDPOINT, GUIDE_DOWNLOAD_URL } from "@/lib/site"
 
 export function OptInForm({
   compact = false,
   buttonLabel = "Send My Free Guide",
   emailPlaceholder = "you@example.com",
+  download = false,
 }: {
   compact?: boolean
   buttonLabel?: string
   emailPlaceholder?: string
+  download?: boolean
 }) {
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
@@ -43,6 +45,25 @@ export function OptInForm({
   }
 
   if (status === "success") {
+    if (download) {
+      return (
+        <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
+          <p className="text-balance font-script text-2xl leading-relaxed text-cta">
+            Your guide is ready honey!
+            <br />
+            Click below to download 🌿
+          </p>
+          <a
+            href={GUIDE_DOWNLOAD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90"
+          >
+            Download Your Free Guide →
+          </a>
+        </div>
+      )
+    }
     return (
       <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
         <p className="font-script text-2xl text-cta">

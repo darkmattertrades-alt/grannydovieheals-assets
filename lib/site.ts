@@ -24,6 +24,9 @@ export const AFFILIATE_DISCLOSURE =
 export const OPT_IN_ENDPOINT =
   "https://script.google.com/macros/s/AKfycbw0K8xo-Kj1h4oiIw_tiJmZAoYLMTZeVKzv3_QURAUma3rU7D5tnMFAdzRCcId9lj8k/exec"
 
+// TODO: Replace with the final Google Docs PDF link once provided.
+export const GUIDE_DOWNLOAD_URL = "#"
+
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/supplements", label: "God's Pharmacy" },
