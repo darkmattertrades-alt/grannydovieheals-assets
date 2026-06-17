@@ -3,7 +3,15 @@
 import { useState } from "react"
 import { OPT_IN_ENDPOINT } from "@/lib/site"
 
-export function OptInForm({ compact = false }: { compact?: boolean }) {
+export function OptInForm({
+  compact = false,
+  buttonLabel = "Send My Free Guide",
+  emailPlaceholder = "you@example.com",
+}: {
+  compact?: boolean
+  buttonLabel?: string
+  emailPlaceholder?: string
+}) {
   const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
@@ -79,7 +87,7 @@ export function OptInForm({ compact = false }: { compact?: boolean }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          placeholder="you@example.com"
+          placeholder={emailPlaceholder}
           className="w-full rounded-md border border-gold/50 bg-parchment px-4 py-3 font-body text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
         />
       </div>
@@ -88,7 +96,7 @@ export function OptInForm({ compact = false }: { compact?: boolean }) {
         disabled={status === "loading"}
         className="rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90 disabled:opacity-60 sm:shrink-0"
       >
-        {status === "loading" ? "Sending…" : "Send My Free Guide"}
+        {status === "loading" ? "Sending…" : buttonLabel}
       </button>
       {status === "error" && (
         <p className="font-body text-sm text-cta sm:w-full">
