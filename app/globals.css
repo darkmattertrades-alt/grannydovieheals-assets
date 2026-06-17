@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #f5ecd7;
+    --foreground: #2c1a0e;
+  }
+
+  html {
+    background-color: var(--background);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Botanical divider */
+.botanical-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #c8922a;
+}
+.botanical-divider::before,
+.botanical-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  max-width: 8rem;
+  background: linear-gradient(to right, transparent, #c8922a, transparent);
+}
