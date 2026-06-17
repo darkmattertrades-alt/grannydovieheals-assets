@@ -14,7 +14,7 @@ export function HomeAbout() {
           />
         </div>
         <div>
-          <p className="font-script text-2xl text-gold">A word from Granny</p>
+          <p className="font-body text-lg font-semibold uppercase tracking-wide text-gold">A word from Granny</p>
           <h2 className="mt-2 text-balance font-serif text-3xl font-bold text-heading sm:text-4xl">
             I&apos;m Granny Dovie, and I&apos;ve Been Tendin&apos; Folks My Whole Life
           </h2>

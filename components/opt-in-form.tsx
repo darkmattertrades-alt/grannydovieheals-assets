@@ -48,7 +48,7 @@ export function OptInForm({
     if (download) {
       return (
         <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
-          <p className="text-balance font-script text-2xl leading-relaxed text-cta">
+          <p className="text-balance font-body text-xl font-semibold leading-relaxed text-cta">
             Your guide is ready honey!
             <br />
             Click below to download 🌿
@@ -66,7 +66,7 @@ export function OptInForm({
     }
     return (
       <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
-        <p className="font-script text-2xl text-cta">
+        <p className="font-body text-xl font-semibold text-cta">
           Your guide is on its way, honey! 🌿
         </p>
       </div>

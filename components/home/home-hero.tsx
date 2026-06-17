@@ -12,7 +12,7 @@ export function HomeHero() {
     >
       {/* Mobile-specific image preloaded via picture for performance-conscious browsers */}
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
-        <p className="font-script text-2xl text-gold drop-shadow sm:text-3xl">
+        <p className="font-body text-lg font-semibold uppercase tracking-wide text-gold drop-shadow sm:text-xl">
           Welcome in, child
         </p>
         <h1 className="mt-3 text-balance font-serif text-4xl font-bold leading-tight text-parchment drop-shadow-lg sm:text-5xl md:text-6xl">

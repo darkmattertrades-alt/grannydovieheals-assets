@@ -50,7 +50,7 @@ export function HomePaths() {
                 />
               </div>
               <div className="flex flex-1 flex-col p-6">
-                <p className="font-script text-xl text-gold">{p.subtitle}</p>
+                <p className="font-body text-sm font-semibold uppercase tracking-wide text-gold">{p.subtitle}</p>
                 <h3 className="font-serif text-2xl font-bold text-heading">
                   {p.title}
                 </h3>

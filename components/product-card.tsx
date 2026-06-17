@@ -34,17 +34,17 @@ export function ProductCard({
         <h3 className="font-serif text-xl font-bold leading-snug text-heading">
           {product.name}
         </h3>
-        <p className="mt-2 font-serif text-lg font-semibold text-gold">
+        <p className="mt-2 font-body text-lg font-semibold text-gold">
           {product.price}
         </p>
-        <p className="mt-4 flex-1 text-pretty font-script text-xl leading-relaxed text-ink/85">
+        <p className="mt-4 flex-1 text-pretty font-body text-lg italic leading-relaxed text-ink">
           &ldquo;{product.quote}&rdquo;
         </p>
         <a
           href={product.href}
           target="_blank"
           rel="noopener noreferrer sponsored"
-          className={`mt-6 inline-block rounded-md px-6 py-3 text-center font-serif font-semibold text-parchment transition-all ${buttonColor}`}
+          className={`mt-6 inline-block rounded-md px-6 py-3 text-center font-body font-semibold text-parchment transition-all ${buttonColor}`}
         >
           Shop on Amazon →
         </a>

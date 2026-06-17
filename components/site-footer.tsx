@@ -17,7 +17,7 @@ export function SiteFooter() {
             <h3 className="font-serif text-2xl font-bold text-gold">
               Granny Dovie Heals
             </h3>
-            <p className="mt-3 font-script text-xl text-parchment/90">
+            <p className="mt-3 font-body text-base italic text-parchment/90">
               &ldquo;The good Lord put a remedy in every garden.&rdquo;
             </p>
             <img

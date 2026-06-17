@@ -14,7 +14,7 @@ export function SiteHeader() {
           <span className="font-serif text-xl font-bold text-heading sm:text-2xl">
             Granny Dovie Heals
           </span>
-          <span className="font-script text-sm text-gold">
+          <span className="font-body text-xs text-gold">
             Old wisdom, faithful healing
           </span>
         </Link>

@@ -6,7 +6,7 @@ export function BotanicalDivider({ label }: { label?: string }) {
         <path d="M12 22V10" strokeLinecap="round" />
       </svg>
       {label ? (
-        <span className="font-script text-xl text-gold not-sr-only">{label}</span>
+        <span className="font-body text-base text-gold not-sr-only">{label}</span>
       ) : null}
     </div>
   )

@@ -113,7 +113,7 @@ function Tier({
     <section className={isForest ? "bg-forest py-16" : "bg-parchment py-16"}>
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <p className="font-script text-2xl text-gold">{label}</p>
+          <p className="font-body text-lg font-semibold uppercase tracking-wide text-gold">{label}</p>
           <h2
             className={`mt-1 text-balance font-serif text-3xl font-bold sm:text-4xl ${
               isForest ? "text-parchment" : "text-heading"
