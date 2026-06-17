@@ -82,7 +82,6 @@ export async function POST(req: Request) {
       model: groq("llama-3.1-8b-instant"),
       system: SYSTEM_PROMPT,
       prompt: message,
-      maxTokens: 1024,
     })
 
     return Response.json({ reply: text })
