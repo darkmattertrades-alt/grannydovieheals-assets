@@ -1,8 +1,9 @@
-import Groq from "groq-sdk"
+import { createGroq } from "@ai-sdk/groq"
+import { generateText } from "ai"
 
 export const maxDuration = 30
 
-const client = new Groq({
+const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 })
 
@@ -77,20 +78,14 @@ export async function POST(req: Request) {
       })
     }
 
-    const completion = await client.chat.completions.create({
-      model: "llama-3.1-8b-instant",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        { role: "user", content: message },
-      ],
-      max_tokens: 1024,
-      temperature: 0.7,
+    const { text } = await generateText({
+      model: groq("llama-3.1-8b-instant"),
+      system: SYSTEM_PROMPT,
+      prompt: message,
+      maxTokens: 1024,
     })
 
-    const reply = completion.choices[0]?.message?.content ?? 
-      "Granny Dovie is resting right now honey. Try again in a moment. 🌿"
-
-    return Response.json({ reply })
+    return Response.json({ reply: text })
 
   } catch (err) {
     console.error("[GrannyDovie] /api/chat error:", err)
