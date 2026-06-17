@@ -85,6 +85,75 @@ export default function RootLayout({
     };
 
     if (closeBtn) { closeBtn.onclick = hide; }
+
+    // ----- Send logic (no <form>, never closes the window) -----
+    var sendBtn = document.getElementById('chat-send');
+    var chatInput = document.getElementById('chat-input');
+    var chatMessages = document.getElementById('chat-messages');
+
+    function sendMessage() {
+      if (!chatInput || !chatMessages) { return; }
+      var message = chatInput.value.trim();
+      if (!message) { return; }
+
+      var userMsg = document.createElement('div');
+      userMsg.className = 'user-message';
+      userMsg.textContent = message;
+      chatMessages.appendChild(userMsg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+      chatInput.value = '';
+
+      var loading = document.createElement('div');
+      loading.className = 'granny-message';
+      loading.textContent = 'Granny Dovie is thinking... 🌿';
+      loading.id = 'loading-msg';
+      chatMessages.appendChild(loading);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var loadingEl = document.getElementById('loading-msg');
+          if (loadingEl) { loadingEl.remove(); }
+
+          var grannyMsg = document.createElement('div');
+          grannyMsg.className = 'granny-message';
+          grannyMsg.textContent = data.reply;
+          chatMessages.appendChild(grannyMsg);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        })
+        .catch(function () {
+          var loadingEl = document.getElementById('loading-msg');
+          if (loadingEl) { loadingEl.remove(); }
+
+          var errMsg = document.createElement('div');
+          errMsg.className = 'granny-message';
+          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. 🌿';
+          chatMessages.appendChild(errMsg);
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    }
+
+    if (sendBtn) {
+      sendBtn.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        sendMessage();
+      };
+    }
+
+    if (chatInput) {
+      chatInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {

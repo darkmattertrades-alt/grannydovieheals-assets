@@ -1,43 +1,4 @@
-"use client"
-
-import { useState, useRef, useEffect } from "react"
-import { useChat } from "@ai-sdk/react"
-import { DefaultChatTransport } from "ai"
-
-const OPENING_MESSAGE =
-  "Well hello there, honey. 🌿 What is troubling you today? Tell Granny Dovie everything."
-
-function getText(parts: { type: string; text?: string }[]) {
-  return parts
-    .filter((p) => p.type === "text")
-    .map((p) => (p as { text: string }).text)
-    .join("")
-}
-
 export function GrannyChat() {
-  const [input, setInput] = useState("")
-  const scrollRef = useRef<HTMLDivElement>(null)
-
-  const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
-  })
-
-  const isBusy = status === "streaming" || status === "submitted"
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-    }
-  }, [messages, isBusy])
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    const text = input.trim()
-    if (!text || isBusy) return
-    sendMessage({ text })
-    setInput("")
-  }
-
   return (
     <>
       {/* Always-visible label (hidden by the vanilla script when chat opens) */}
@@ -80,8 +41,8 @@ export function GrannyChat() {
       </button>
 
       {/* Chat window — ALWAYS rendered. Default hidden via CSS (#chat-window).
-          The vanilla script toggles inline style.display; React never sets
-          `display`, so streaming re-renders cannot reset it. */}
+          All interactivity is plain vanilla JS in layout.tsx, so there is no
+          <form>, no React state, and nothing that closes the window on send. */}
       <div
         id="chat-window"
         role="dialog"
@@ -102,7 +63,7 @@ export function GrannyChat() {
       >
         {/* Header */}
         <div
-          className="flex items-start justify-between px-4 py-3"
+          className="flex shrink-0 items-start justify-between px-4 py-3"
           style={{ backgroundColor: "#3B5E3A" }}
         >
           <div>
@@ -126,87 +87,39 @@ export function GrannyChat() {
 
         {/* Messages */}
         <div
-          ref={scrollRef}
-          className="space-y-3 overflow-y-auto px-3 py-4"
-          style={{ height: "calc(100% - 64px - 64px)" }}
+          id="chat-messages"
+          className="flex-1 space-y-3 overflow-y-auto px-3 py-4"
         >
           {/* Opening message */}
-          <GrannyBubble text={OPENING_MESSAGE} />
-
-          {messages.map((m) =>
-            m.role === "assistant" ? (
-              <GrannyBubble key={m.id} text={getText(m.parts)} />
-            ) : (
-              <VisitorBubble key={m.id} text={getText(m.parts)} />
-            ),
-          )}
-
-          {isBusy && (
-            <p className="px-2 font-body text-sm italic" style={{ color: "#5C4A1E" }}>
-              Granny Dovie is thinking... 🌿
-            </p>
-          )}
+          <div className="granny-message">
+            Well hello there, honey. 🌿 What is troubling you today? Tell Granny Dovie everything.
+          </div>
         </div>
 
-        {/* Input */}
-        <form
-          onSubmit={handleSubmit}
-          className="flex items-center gap-2 px-3 py-3"
+        {/* Input area — intentionally NOT a <form> so the Send button never
+            triggers a page submit. */}
+        <div
+          className="flex shrink-0 items-center gap-2 px-3 py-3"
           style={{ backgroundColor: "#F5ECD7", borderTop: "1px solid #C8922A" }}
         >
           <input
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
+            id="chat-input"
+            type="text"
             placeholder="Ask Granny Dovie anything..."
             aria-label="Ask Granny Dovie anything"
             className="min-w-0 flex-1 rounded-md border px-3 py-2 font-body text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
             style={{ backgroundColor: "#F5ECD7", borderColor: "#C8922A" }}
           />
           <button
-            type="submit"
-            disabled={isBusy}
-            className="shrink-0 rounded-md px-4 py-2 font-body text-sm font-semibold text-parchment transition-opacity hover:opacity-90 disabled:opacity-50"
-            style={{ backgroundColor: "#8B3A3A" }}
+            id="chat-send"
+            type="button"
+            className="shrink-0 rounded-md px-4 py-2 font-body text-sm font-semibold text-parchment transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#8B3A3A", cursor: "pointer" }}
           >
             Send 🌿
           </button>
-        </form>
+        </div>
       </div>
     </>
-  )
-}
-
-function GrannyBubble({ text }: { text: string }) {
-  if (!text) return null
-  return (
-    <div className="flex items-start gap-2">
-      <span
-        aria-hidden
-        className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-sm"
-        style={{ backgroundColor: "#3B5E3A" }}
-      >
-        🌿
-      </span>
-      <div
-        className="max-w-[80%] whitespace-pre-wrap rounded-xl px-3 py-2 font-body text-sm leading-relaxed"
-        style={{ backgroundColor: "#3B5E3A", color: "#F5ECD7", borderRadius: "12px" }}
-      >
-        {text}
-      </div>
-    </div>
-  )
-}
-
-function VisitorBubble({ text }: { text: string }) {
-  if (!text) return null
-  return (
-    <div className="flex justify-end">
-      <div
-        className="max-w-[80%] whitespace-pre-wrap rounded-xl px-3 py-2 font-body text-sm leading-relaxed"
-        style={{ backgroundColor: "#C8922A", color: "#F5ECD7", borderRadius: "12px" }}
-      >
-        {text}
-      </div>
-    </div>
   )
 }

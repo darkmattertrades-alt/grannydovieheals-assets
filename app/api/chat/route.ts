@@ -1,4 +1,4 @@
-import { streamText, convertToModelMessages, type UIMessage } from "ai"
+import { generateText } from "ai"
 import { groq } from "@ai-sdk/groq"
 
 export const maxDuration = 30
@@ -64,15 +64,26 @@ RULES:
   "Now honey, that is a little outside of Granny Dovie's garden. Let us get back to what I know best — what is troubling your body today?"`
 
 export async function POST(req: Request) {
-  const { messages }: { messages: UIMessage[] } = await req.json()
+  try {
+    const { message } = await req.json()
 
-  const result = streamText({
-    model: groq("llama-3.1-8b-instant"),
-    system: SYSTEM_PROMPT,
-    messages: await convertToModelMessages(messages),
-    temperature: 0.7,
-    maxOutputTokens: 1024,
-  })
+    if (!message || typeof message !== "string") {
+      return Response.json({ reply: "Tell Granny what is troubling you, honey. 🌿" })
+    }
 
-  return result.toUIMessageStreamResponse()
+    const { text } = await generateText({
+      model: groq("llama3-8b-8192"),
+      system: SYSTEM_PROMPT,
+      prompt: message,
+      temperature: 0.7,
+      maxOutputTokens: 1024,
+    })
+
+    return Response.json({ reply: text })
+  } catch (err) {
+    console.error("[v0] /api/chat error:", err)
+    return Response.json({
+      reply: "Granny Dovie is resting right now honey. Try again in a moment. 🌿",
+    })
+  }
 }

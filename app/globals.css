@@ -51,3 +51,28 @@
 #chat-window {
   display: none;
 }
+
+/* Chat message bubbles (the opening message and those appended by the
+   vanilla send script). */
+.granny-message,
+.user-message {
+  max-width: 80%;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  font-family: var(--font-lora), serif;
+}
+
+.granny-message {
+  background-color: #3b5e3a;
+  color: #f5ecd7;
+  margin-right: auto;
+}
+
+.user-message {
+  background-color: #c8922a;
+  color: #f5ecd7;
+  margin-left: auto;
+}
