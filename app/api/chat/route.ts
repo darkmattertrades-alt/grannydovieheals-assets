@@ -1,5 +1,5 @@
-import { generateText } from "ai"
 import { groq } from "@ai-sdk/groq"
+import { generateText } from "ai"
 
 export const maxDuration = 30
 
@@ -78,7 +78,7 @@ export async function POST(req: Request) {
       system: SYSTEM_PROMPT,
       prompt: message,
       temperature: 0.7,
-      maxOutputTokens: 1024,
+      maxTokens: 1024,
     })
 
     return Response.json({ reply: text })
