@@ -22,7 +22,7 @@ export const AFFILIATE_DISCLOSURE =
   "Granny Dovie Heals is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com"
 
 export const OPT_IN_ENDPOINT =
-  "https://script.google.com/macros/s/AKfycbw0K8xo-Kj1h4oiIw_tiJmZAoYLMTZeVKzv3_QURAUma3rU7D5tnMFAdzRCcId9lj8k/exec"
+  "https://script.google.com/macros/s/AKfycbzRjlS1nXNemUpfVaH1iFU4PkytYTISXb1W7taEywz1hINqgUqLDuhc-Slz0MZvCqj9/exec"
 
 // TODO: Replace with the final Google Docs PDF link once provided.
 export const GUIDE_DOWNLOAD_URL = "#"
