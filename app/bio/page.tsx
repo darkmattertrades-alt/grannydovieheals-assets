@@ -151,7 +151,7 @@ export default function BioPage() {
         </Link>
 
         {/* Button 2 — Supplements Accordion */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "0px" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <button
             onClick={() => toggle("supplements")}
             style={{
@@ -161,9 +161,8 @@ export default function BioPage() {
               backgroundColor: "#3b5e3a",
               color: "#f5ecd7",
               padding: "16px 24px",
-              borderRadius: openSection === "supplements"
-                ? "12px 12px 0 0"
-                : "12px",
+              borderRadius:
+                openSection === "supplements" ? "12px 12px 0 0" : "12px",
               fontSize: "15px",
               fontWeight: "600",
               textAlign: "left",
@@ -244,9 +243,8 @@ export default function BioPage() {
               backgroundColor: "#3b5e3a",
               color: "#f5ecd7",
               padding: "16px 24px",
-              borderRadius: openSection === "skincare"
-                ? "12px 12px 0 0"
-                : "12px",
+              borderRadius:
+                openSection === "skincare" ? "12px 12px 0 0" : "12px",
               fontSize: "15px",
               fontWeight: "600",
               textAlign: "left",
@@ -338,13 +336,31 @@ export default function BioPage() {
         </Link>
       </div>
 
+      {/* Amazon Affiliate Disclaimer */}
+      <p
+        style={{
+          color: "#6b4c2a",
+          fontSize: "11px",
+          textAlign: "center",
+          maxWidth: "320px",
+          lineHeight: "1.7",
+          marginTop: "24px",
+        }}
+      >
+        This page contains affiliate links.
+        Product recommendations are from Amazon.
+        If you purchase through any link a small
+        commission may be earned at no extra
+        cost to you. 🌿
+      </p>
+
       {/* Divider */}
       <div
         style={{
           display: "flex",
           alignItems: "center",
           gap: "12px",
-          margin: "36px 0 16px",
+          margin: "24px 0 16px",
           width: "100%",
           maxWidth: "380px",
         }}
@@ -376,14 +392,17 @@ export default function BioPage() {
           textAlign: "center",
           maxWidth: "320px",
           lineHeight: "1.7",
+          marginBottom: "40px",
         }}
       >
-        Granny Dovie is an AI-generated character created to share the wisdom
-        of Appalachian folk healing tradition. The remedies are real. The love
-        is real. 🌿
+        Granny Dovie is an AI-generated character
+        created to share the wisdom of Appalachian
+        folk healing tradition. The remedies are
+        real. The love is real. 🌿
         <br />
-        All content is for informational purposes only. Always consult your
-        healthcare provider.
+        All content is for informational purposes
+        only. Always consult your healthcare
+        provider.
       </p>
     </main>
   )
