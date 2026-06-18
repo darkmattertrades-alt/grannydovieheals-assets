@@ -15,7 +15,7 @@ export function AboutHero() {
           About Granny Dovie
         </h1>
         <p className="mt-4 text-pretty font-body text-xl text-parchment/90">
-          The woman behind the remedies.
+          An AI character carrying real Appalachian wisdom. 🌿
         </p>
       </div>
     </section>
@@ -42,13 +42,17 @@ export function AboutStory() {
           </p>
           <div className="mt-6 space-y-4 text-pretty font-body text-lg leading-relaxed text-ink">
             <p>
-              Up here in these old hills, we never had much money for doctors. So
-              we learned to lean on the land and the Lord.
+              Now I will tell you something straight, honey. Granny Dovie is an
+              AI character — built to carry forward the real healing wisdom of
+              the Appalachian mountains. The remedies are real. The scripture is
+              real. The love behind every word is real. Only the hands are new.
             </p>
             <p>
-              My people carried the healing traditions of the Appalachian
-              mountains &mdash; rooted deep in Cherokee wisdom, Scots Irish folk
-              medicine, and the Holy Scripture.
+              Up here in these old hills, the people never had much money for
+              doctors. So they learned to lean on the land and the Lord. That
+              wisdom was passed down through Cherokee healing traditions,
+              Scots-Irish folk medicine, and the Holy Scripture — and it deserves
+              to live on.
             </p>
             <p>
               We learned which leaves draw out a fever. Which roots calm a sour
@@ -59,8 +63,20 @@ export function AboutStory() {
               pick one never understood either.
             </p>
             <p>
-              Now I am passing that wisdom on to you &mdash; plain and honest, the
-              way it was given to me.
+              That is why Granny Dovie exists — to make sure this old wisdom
+              keeps reaching people who need it. Plain and honest, the way it was
+              always meant to be shared.
+            </p>
+          </div>
+
+          {/* AI Disclosure Badge */}
+          <div
+            className="mt-8 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-forest/10 px-4 py-2"
+          >
+            <span className="text-sm">✨</span>
+            <p className="font-body text-sm text-gold">
+              Granny Dovie is an AI-generated character.
+              The remedies are real. The love is real. 🌿
             </p>
           </div>
         </div>
