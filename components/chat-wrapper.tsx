@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { usePathname } from "next/navigation";
-import GrannyChat from "@/components/granny-chat";
+import { usePathname } from "next/navigation"
+import { GrannyChat } from "@/components/granny-chat"
 
 export default function ChatWrapper() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
-  if (pathname === "/bio") return null;
+  if (pathname === "/bio") return null
 
-  return <GrannyChat />;
+  return <GrannyChat />
 }
