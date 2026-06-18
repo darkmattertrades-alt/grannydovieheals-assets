@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Lora, Dancing_Script } from "next/font/google"
 import "./globals.css"
-import { GrannyChat } from "@/components/granny-chat"
+import ChatWrapper from "@/components/chat-wrapper"
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -81,7 +81,7 @@ export default function RootLayout({
           </p>
         </footer>
 
-        <GrannyChat />
+        <ChatWrapper />
         <script
           dangerouslySetInnerHTML={{
             __html: `
