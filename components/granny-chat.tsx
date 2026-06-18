@@ -85,16 +85,14 @@ export function GrannyChat() {
           </button>
         </div>
 
-        {/* Messages */}
+        {/* Messages — empty on render.
+            The vanilla JS addOpeningMessage() in layout.tsx
+            injects Granny Dovie's opening line the first time
+            the chat window is opened. */}
         <div
           id="chat-messages"
           className="flex-1 space-y-3 overflow-y-auto px-3 py-4"
-        >
-          {/* Opening message */}
-          <div className="granny-message">
-            Well hello there, honey. 🌿 What is troubling you today? Tell Granny Dovie everything.
-          </div>
-        </div>
+        />
 
         {/* Input area — intentionally NOT a <form> so the Send button never
             triggers a page submit. */}
