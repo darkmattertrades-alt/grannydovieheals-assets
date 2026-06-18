@@ -50,22 +50,63 @@ export default function RootLayout({
     >
       <body className="font-body text-ink antialiased">
         {children}
+
+        {/* ── SITE FOOTER DISCLOSURE ── */}
+        <footer
+          style={{
+            backgroundColor: "#2c1a0e",
+            color: "#a08060",
+            textAlign: "center",
+            padding: "20px 16px",
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "12px",
+            lineHeight: "1.8",
+            borderTop: "2px solid #c8922a",
+          }}
+        >
+          <p style={{ marginBottom: "6px", color: "#c8922a", fontSize: "13px" }}>
+            🌿 Granny Dovie Heals
+          </p>
+          <p style={{ marginBottom: "4px" }}>
+            Granny Dovie is an AI-generated character created to share the
+            wisdom of Appalachian folk healing tradition.
+            The remedies are real. The love is real. 🌿
+          </p>
+          <p style={{ marginBottom: "4px" }}>
+            All content is for informational purposes only and does not
+            constitute medical advice. Always consult your healthcare provider.
+          </p>
+          <p style={{ marginTop: "8px", color: "#6b4c2a", fontSize: "11px" }}>
+            © {new Date().getFullYear()} Granny Dovie Heals. All rights reserved.
+          </p>
+        </footer>
+
         <GrannyChat />
         <script
           dangerouslySetInnerHTML={{
             __html: `
 (function () {
   function formatReply(text) {
-    // Replace SHOP_LINK[name|url] with a styled button
     var formatted = text.replace(
       /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
       function(match, name, url) {
         return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
       }
     );
-    // Convert newlines to line breaks
     formatted = formatted.replace(/\\n/g, '<br/>');
     return formatted;
+  }
+
+  function addOpeningMessage(chatMessages) {
+    var opening = document.createElement('div');
+    opening.className = 'granny-message';
+    opening.innerHTML =
+      'Well hello there, honey. \uD83C\uDF3F I\u2019m Granny Dovie \u2014 ' +
+      'an AI character here to share the old ways of Appalachian folk healing. ' +
+      'The remedies are real, the wisdom is real, and the love behind every word is real. ' +
+      '<br/><br/>' +
+      'Now tell me \u2014 what is your body trying to tell you today?';
+    chatMessages.appendChild(opening);
   }
 
   function init() {
@@ -78,10 +119,17 @@ export default function RootLayout({
     if (bubble.getAttribute('data-bound') === '1') { return; }
     bubble.setAttribute('data-bound', '1');
 
+    var chatMessages = document.getElementById('chat-messages');
+    var openingAdded = false;
+
     function show() {
       win.style.display = 'flex';
       win.style.flexDirection = 'column';
       if (label) { label.style.display = 'none'; }
+      if (!openingAdded && chatMessages) {
+        addOpeningMessage(chatMessages);
+        openingAdded = true;
+      }
     }
     function hide() {
       win.style.display = 'none';
@@ -100,7 +148,6 @@ export default function RootLayout({
 
     var sendBtn = document.getElementById('chat-send');
     var chatInput = document.getElementById('chat-input');
-    var chatMessages = document.getElementById('chat-messages');
 
     function sendMessage() {
       if (!chatInput || !chatMessages) { return; }
