@@ -1,49 +1,51 @@
 "use client"
 
-import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
+import Image from "next/image"
 
-const BASE =
-  "https://raw.githubusercontent.com/darkmattertrades-alt/grannydovieheals-assets/main"
+const BASE = "https://raw.githubusercontent.com/darkmattertrades-alt/grannydovieheals-assets/main"
 
 const supplements = [
   {
-    name: "Garden of Life Turmeric",
-    url: "https://www.amazon.com/dp/B07G2LBQ1G",
+    name: "Garden of Life Extra Strength Turmeric",
+    price: "$38 — $45",
+    href: "https://www.amazon.com/dp/B07G2LBQ1G",
   },
   {
-    name: "Gaia Herbs Ashwagandha",
-    url: "https://www.amazon.com/dp/B003HD9H0G",
+    name: "Gaia Herbs Ashwagandha Root Liquid Phyto Capsules",
+    price: "$26 — $39",
+    href: "https://www.amazon.com/dp/B003HD9H0G",
   },
   {
-    name: "Gaia Herbs Elderberry Syrup",
-    url: "https://www.amazon.com/dp/B0036THLPE",
+    name: "Gaia Herbs Black Elderberry Syrup",
+    price: "$25 — $45",
+    href: "https://www.amazon.com/dp/B0036THLPE",
   },
 ]
 
 const skincare = [
   {
-    name: "Trilogy Organic Rosehip Oil",
-    url: "https://www.amazon.com/dp/B001NJNV12",
+    name: "Trilogy Certified Organic Rosehip Oil",
+    price: "$35 — $55",
+    href: "https://www.amazon.com/dp/B001NJNV12",
   },
   {
-    name: "Cliganic Organic Rosehip Oil",
-    url: "https://www.amazon.com/dp/B07G14PWZN",
+    name: "Cliganic USDA Organic Rosehip Seed Oil",
+    price: "$20 — $35",
+    href: "https://www.amazon.com/dp/B07G14PWZN",
   },
   {
-    name: "Pure Unrefined Shea Butter",
-    url: "https://www.amazon.com/dp/B00D9NV2D4",
+    name: "Better Shea Butter 100% Pure Unrefined African Shea Butter",
+    price: "$20 — $35",
+    href: "https://www.amazon.com/dp/B00D9NV2D4",
   },
 ]
 
 export default function BioPage() {
-  const [openSection, setOpenSection] = useState<
-    "supplements" | "skincare" | null
-  >(null)
+  const [openSection, setOpenSection] = useState<"supplements" | "skincare" | null>(null)
 
   function toggle(section: "supplements" | "skincare") {
-    setOpenSection((prev) => (prev === section ? null : section))
+    setOpenSection(openSection === section ? null : section)
   }
 
   return (
@@ -54,289 +56,288 @@ export default function BioPage() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        padding: "40px 20px",
+        padding: "40px 20px 60px",
         fontFamily: "var(--font-lora), serif",
       }}
     >
-      {/* Profile Image */}
-      <div
-        style={{
-          borderRadius: "50%",
-          overflow: "hidden",
-          width: "110px",
-          height: "110px",
-          border: "3px solid #c8922a",
-          marginBottom: "16px",
-          flexShrink: 0,
-        }}
-      >
+      {/* Profile */}
+      <div style={{ textAlign: "center", marginBottom: "28px" }}>
         <Image
           src={`${BASE}/granny-profile.png`}
           alt="Granny Dovie"
           width={110}
           height={110}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-          priority
+          style={{
+            borderRadius: "50%",
+            border: "3px solid #c8922a",
+            marginBottom: "14px",
+            objectFit: "cover",
+          }}
         />
+        <h1
+          style={{
+            color: "#f5ecd7",
+            fontSize: "22px",
+            fontWeight: "700",
+            marginBottom: "6px",
+            letterSpacing: "0.3px",
+          }}
+        >
+          Granny Dovie Heals
+        </h1>
+        <p
+          style={{
+            color: "#c8922a",
+            fontSize: "14px",
+            marginBottom: "4px",
+          }}
+        >
+          Real Remedies. Old Ways. God&apos;s Design. 🌿
+        </p>
+        <p
+          style={{
+            color: "#a08060",
+            fontSize: "13px",
+          }}
+        >
+          Ancient folk healing rooted in ✝️ Scripture
+        </p>
       </div>
-
-      {/* Name */}
-      <h1
-        style={{
-          color: "#f5ecd7",
-          fontSize: "22px",
-          fontWeight: "700",
-          marginBottom: "6px",
-          textAlign: "center",
-          fontFamily: "var(--font-playfair), serif",
-        }}
-      >
-        Granny Dovie Heals
-      </h1>
-
-      {/* Tagline */}
-      <p
-        style={{
-          color: "#c8922a",
-          fontSize: "13px",
-          marginBottom: "6px",
-          textAlign: "center",
-        }}
-      >
-        Real Remedies. Old Ways. God&apos;s Design. 🌿
-      </p>
-
-      {/* Sub tagline */}
-      <p
-        style={{
-          color: "#a08060",
-          fontSize: "12px",
-          marginBottom: "36px",
-          textAlign: "center",
-        }}
-      >
-        Ancient folk healing rooted in ✝️ Scripture
-      </p>
 
       {/* Buttons */}
       <div
         style={{
           display: "flex",
           flexDirection: "column",
-          gap: "14px",
+          gap: "12px",
           width: "100%",
           maxWidth: "380px",
         }}
       >
-        {/* Button 1 — Free Guide */}
-        <Link
+
+        {/* Free Gift */}
+        <a
           href="/free-gift"
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "block",
             backgroundColor: "#8B3A3A",
             color: "#f5ecd7",
-            padding: "16px 24px",
-            borderRadius: "12px",
+            textAlign: "center",
+            padding: "14px 20px",
+            borderRadius: "10px",
             textDecoration: "none",
             fontSize: "15px",
             fontWeight: "600",
-            textAlign: "center",
             border: "1px solid #c8922a",
+            letterSpacing: "0.3px",
           }}
         >
           🌿 Free 15 Secret Remedies Guide
-        </Link>
+        </a>
 
-        {/* Button 2 — Supplements Accordion */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        {/* Supplements Accordion */}
+        <div>
           <button
             onClick={() => toggle("supplements")}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
+              width: "100%",
               backgroundColor: "#3b5e3a",
               color: "#f5ecd7",
-              padding: "16px 24px",
-              borderRadius:
-                openSection === "supplements" ? "12px 12px 0 0" : "12px",
+              padding: "14px 20px",
+              borderRadius: openSection === "supplements" ? "10px 10px 0 0" : "10px",
+              border: "1px solid #c8922a",
               fontSize: "15px",
               fontWeight: "600",
-              textAlign: "left",
-              border: "1px solid #c8922a",
               cursor: "pointer",
-              width: "100%",
+              textAlign: "center",
+              letterSpacing: "0.3px",
             }}
           >
-            <span>💊 Shop Natural Supplements</span>
-            <span style={{ fontSize: "18px" }}>
-              {openSection === "supplements" ? "▲" : "▼"}
-            </span>
+            💊 Shop Natural Supplements {openSection === "supplements" ? "▲" : "▼"}
           </button>
 
-          {/* Supplements Expanded */}
           {openSection === "supplements" && (
             <div
               style={{
                 backgroundColor: "#1e1208",
                 border: "1px solid #c8922a",
                 borderTop: "none",
-                borderRadius: "0 0 12px 12px",
+                borderRadius: "0 0 10px 10px",
                 padding: "12px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
               }}
             >
-              {supplements.map((product) => (
-                <a
-                  key={product.name}
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {supplements.map((item) => (
+                <div
+                  key={item.name}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
                     backgroundColor: "#2c1a0e",
-                    color: "#f5ecd7",
-                    padding: "12px 16px",
                     borderRadius: "8px",
-                    textDecoration: "none",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    border: "1px solid #3b5e3a",
+                    padding: "12px 14px",
+                    border: "1px solid #3d2a14",
                   }}
                 >
-                  <span>{product.name}</span>
-                  <span
+                  <p
                     style={{
-                      backgroundColor: "#8B3A3A",
                       color: "#f5ecd7",
-                      padding: "6px 12px",
-                      borderRadius: "6px",
-                      fontSize: "12px",
-                      fontWeight: "700",
-                      whiteSpace: "nowrap",
-                      marginLeft: "10px",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      marginBottom: "4px",
+                      lineHeight: "1.4",
                     }}
                   >
-                    Buy Now 🛒
-                  </span>
-                </a>
+                    {item.name}
+                  </p>
+                  <p
+                    style={{
+                      color: "#c8922a",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {item.price}
+                  </p>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "block",
+                      backgroundColor: "#8B3A3A",
+                      color: "#f5ecd7",
+                      textAlign: "center",
+                      padding: "9px 14px",
+                      borderRadius: "6px",
+                      textDecoration: "none",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      border: "1px solid #c8922a",
+                    }}
+                  >
+                    🛒 Buy Now
+                  </a>
+                </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* Button 3 — Skincare Accordion */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        {/* Skincare Accordion */}
+        <div>
           <button
             onClick={() => toggle("skincare")}
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
+              width: "100%",
               backgroundColor: "#3b5e3a",
               color: "#f5ecd7",
-              padding: "16px 24px",
-              borderRadius:
-                openSection === "skincare" ? "12px 12px 0 0" : "12px",
+              padding: "14px 20px",
+              borderRadius: openSection === "skincare" ? "10px 10px 0 0" : "10px",
+              border: "1px solid #c8922a",
               fontSize: "15px",
               fontWeight: "600",
-              textAlign: "left",
-              border: "1px solid #c8922a",
               cursor: "pointer",
-              width: "100%",
+              textAlign: "center",
+              letterSpacing: "0.3px",
             }}
           >
-            <span>✨ Shop Organic Skincare</span>
-            <span style={{ fontSize: "18px" }}>
-              {openSection === "skincare" ? "▲" : "▼"}
-            </span>
+            ✨ Shop Organic Skincare {openSection === "skincare" ? "▲" : "▼"}
           </button>
 
-          {/* Skincare Expanded */}
           {openSection === "skincare" && (
             <div
               style={{
                 backgroundColor: "#1e1208",
                 border: "1px solid #c8922a",
                 borderTop: "none",
-                borderRadius: "0 0 12px 12px",
+                borderRadius: "0 0 10px 10px",
                 padding: "12px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "10px",
               }}
             >
-              {skincare.map((product) => (
-                <a
-                  key={product.name}
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {skincare.map((item) => (
+                <div
+                  key={item.name}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
                     backgroundColor: "#2c1a0e",
-                    color: "#f5ecd7",
-                    padding: "12px 16px",
                     borderRadius: "8px",
-                    textDecoration: "none",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    border: "1px solid #3b5e3a",
+                    padding: "12px 14px",
+                    border: "1px solid #3d2a14",
                   }}
                 >
-                  <span>{product.name}</span>
-                  <span
+                  <p
                     style={{
-                      backgroundColor: "#8B3A3A",
                       color: "#f5ecd7",
-                      padding: "6px 12px",
-                      borderRadius: "6px",
-                      fontSize: "12px",
-                      fontWeight: "700",
-                      whiteSpace: "nowrap",
-                      marginLeft: "10px",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      marginBottom: "4px",
+                      lineHeight: "1.4",
                     }}
                   >
-                    Buy Now 🛒
-                  </span>
-                </a>
+                    {item.name}
+                  </p>
+                  <p
+                    style={{
+                      color: "#c8922a",
+                      fontSize: "13px",
+                      fontWeight: "700",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    {item.price}
+                  </p>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "block",
+                      backgroundColor: "#8B3A3A",
+                      color: "#f5ecd7",
+                      textAlign: "center",
+                      padding: "9px 14px",
+                      borderRadius: "6px",
+                      textDecoration: "none",
+                      fontSize: "13px",
+                      fontWeight: "600",
+                      border: "1px solid #c8922a",
+                    }}
+                  >
+                    🛒 Buy Now
+                  </a>
+                </div>
               ))}
             </div>
           )}
         </div>
 
-        {/* Button 4 — Chat with Granny Dovie */}
-        <Link
+        {/* Chat with Granny Dovie */}
+        <a
           href="/"
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: "block",
             backgroundColor: "#5c4a1e",
             color: "#f5ecd7",
-            padding: "16px 24px",
-            borderRadius: "12px",
+            textAlign: "center",
+            padding: "14px 20px",
+            borderRadius: "10px",
             textDecoration: "none",
             fontSize: "15px",
             fontWeight: "600",
-            textAlign: "center",
             border: "1px solid #c8922a",
+            letterSpacing: "0.3px",
           }}
         >
           💬 Chat with Granny Dovie
-        </Link>
+        </a>
+
       </div>
 
-      {/* Amazon Affiliate Disclaimer */}
+      {/* Affiliate Disclaimer */}
       <p
         style={{
           color: "#6b4c2a",
@@ -344,45 +345,24 @@ export default function BioPage() {
           textAlign: "center",
           maxWidth: "320px",
           lineHeight: "1.7",
-          marginTop: "24px",
+          marginTop: "28px",
         }}
       >
-        This page contains affiliate links.
-        Product recommendations are from Amazon.
-        If you purchase through any link a small
-        commission may be earned at no extra
-        cost to you. 🌿
+        This page contains affiliate links. Product recommendations are from
+        Amazon. If you purchase through any link, a small commission may be
+        earned at no extra cost to you. 🌿
       </p>
 
-      {/* Divider */}
+      {/* Botanical Divider */}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          margin: "24px 0 16px",
-          width: "100%",
-          maxWidth: "380px",
+          width: "80%",
+          maxWidth: "320px",
+          height: "1px",
+          background: "linear-gradient(to right, transparent, #c8922a, transparent)",
+          margin: "20px auto",
         }}
-      >
-        <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background:
-              "linear-gradient(to right, transparent, #c8922a, transparent)",
-          }}
-        />
-        <span style={{ color: "#c8922a", fontSize: "14px" }}>🌿</span>
-        <div
-          style={{
-            flex: 1,
-            height: "1px",
-            background:
-              "linear-gradient(to right, transparent, #c8922a, transparent)",
-          }}
-        />
-      </div>
+      />
 
       {/* Footer Disclosure */}
       <p
@@ -392,17 +372,11 @@ export default function BioPage() {
           textAlign: "center",
           maxWidth: "320px",
           lineHeight: "1.7",
-          marginBottom: "40px",
         }}
       >
-        Granny Dovie is an AI-generated character
-        created to share the wisdom of Appalachian
-        folk healing tradition. The remedies are
-        real. The love is real. 🌿
-        <br />
-        All content is for informational purposes
-        only. Always consult your healthcare
-        provider.
+        ✨ Granny Dovie is an AI-generated character. The remedies are real.
+        The love is real. 🌿 All content is for informational purposes only.
+        Always consult your healthcare provider.
       </p>
     </main>
   )
