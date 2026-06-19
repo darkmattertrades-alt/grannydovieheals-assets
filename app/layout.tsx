@@ -165,7 +165,7 @@ export default function RootLayout({
           grannyMsg.className = 'granny-message';
           grannyMsg.innerHTML = formatReply(data.reply);
           chatMessages.appendChild(grannyMsg);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
+          grannyMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })
         .catch(function () {
           var loadingEl = document.getElementById('loading-msg');
@@ -175,7 +175,7 @@ export default function RootLayout({
           errMsg.className = 'granny-message';
           errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
           chatMessages.appendChild(errMsg);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
+          errMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     }
 
