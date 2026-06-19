@@ -86,14 +86,80 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
 (function () {
+
   function formatReply(text) {
+
+    // Handle BUY_LINK: tokens → styled Buy Now button
     var formatted = text.replace(
-      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
-      function(match, name, url) {
-        return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
+      /BUY_LINK:\\s*(https?:\\/\\/(?:www\\.)?amazon\\.com\\/dp\\/([A-Z0-9]+)[^\\s\\n<]*)/g,
+      function(match, url, asin) {
+        var names = {
+          "B07G2LBQ1G": "Garden of Life Turmeric",
+          "B003HD9H0G": "Gaia Herbs Ashwagandha",
+          "B0036THLPE": "Gaia Herbs Elderberry Syrup",
+          "B000BD0RT0": "Doctor's Best Magnesium",
+          "B017JXZPPU": "Doctor's Best Vitamin K2 + D3",
+          "B0036THLRW": "Gaia Herbs Quick Defense",
+          "B001I7MVG0": "Bragg Apple Cider Vinegar",
+          "B001E10C9I": "Nature's Way Ginger Root",
+          "B000GG5IZK": "Bigelow Peppermint Tea",
+          "B001NJNV12": "Trilogy Organic Rosehip Oil",
+          "B07G14PWZN": "Cliganic Organic Rosehip Oil",
+          "B00D9NV2D4": "Pure Unrefined Shea Butter",
+          "B0186U9736": "Sky Organics Castor Oil",
+          "B00GJX58PE": "Leven Rose Jojoba Oil",
+          "B00987FWHW": "RA Cosmetics Shea Butter",
+          "B09Q2X99XG": "The Ordinary Rosehip Oil",
+          "B0009F3O8Q": "Palmer's Cocoa Butter Lotion",
+          "B073TJ18JY": "Bigelow Peppermint Spearmint Tea"
+        };
+        var name = names[asin] || "Granny Dovie's Pick";
+        return (
+          '<br/><br/>' +
+          '<a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
+          'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
+          'padding:10px 18px;border-radius:8px;text-decoration:none;' +
+          'font-family:Lora,serif;font-size:13px;font-weight:600;' +
+          'margin-top:6px;margin-bottom:6px;">' +
+          '&#128722; ' + name + ' &#8594; Buy Now on Amazon' +
+          '</a>' +
+          '<br/><br/>'
+        );
       }
     );
+
+    // Handle legacy SHOP_LINK[Name|URL] tokens
+    formatted = formatted.replace(
+      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
+      function(match, name, url) {
+        return (
+          '<br/><br/>' +
+          '<a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" ' +
+          'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
+          'padding:10px 18px;border-radius:8px;text-decoration:none;' +
+          'font-family:Lora,serif;font-size:13px;font-weight:600;' +
+          'margin-top:6px;margin-bottom:6px;">' +
+          '&#128722; ' + name.trim() + ' &#8594; Shop on Amazon' +
+          '</a>' +
+          '<br/><br/>'
+        );
+      }
+    );
+
+    // Format Step 1 — Step 2 — Step 3 lines into bold green blocks
+    formatted = formatted.replace(
+      /(Step\\s+\\d+\\s*[\\u2014\\-]+\\s*[^\\n<]+)/gi,
+      function(match) {
+        return (
+          '<br/><span style="display:block;margin-top:6px;margin-bottom:2px;' +
+          'font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>'
+        );
+      }
+    );
+
+    // Convert remaining newlines to line breaks
     formatted = formatted.replace(/\\n/g, '<br/>');
+
     return formatted;
   }
 
