@@ -49,7 +49,7 @@ export function ProductCard({
           rel="noopener noreferrer sponsored"
           className={`mt-6 inline-block rounded-md px-6 py-3 text-center font-body font-semibold text-parchment transition-all ${buttonColor}`}
         >
-          Shop on Amazon →
+          Buy on Amazon →
         </a>
       </div>
     </article>
