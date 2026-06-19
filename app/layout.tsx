@@ -97,18 +97,6 @@ export default function RootLayout({
     return formatted;
   }
 
-  function addOpeningMessage(chatMessages) {
-    var opening = document.createElement('div');
-    opening.className = 'granny-message';
-    opening.innerHTML =
-      'Well hello there, honey. \uD83C\uDF3F I\u2019m Granny Dovie \u2014 ' +
-      'an AI character here to share the old ways of Appalachian folk healing. ' +
-      'The remedies are real, the wisdom is real, and the love behind every word is real. ' +
-      '<br/><br/>' +
-      'Now tell me \u2014 what is your body trying to tell you today?';
-    chatMessages.appendChild(opening);
-  }
-
   function init() {
     var bubble = document.getElementById('chat-bubble');
     var win = document.getElementById('chat-window');
@@ -120,17 +108,13 @@ export default function RootLayout({
     bubble.setAttribute('data-bound', '1');
 
     var chatMessages = document.getElementById('chat-messages');
-    var openingAdded = false;
 
     function show() {
       win.style.display = 'flex';
       win.style.flexDirection = 'column';
       if (label) { label.style.display = 'none'; }
-      if (!openingAdded && chatMessages) {
-        addOpeningMessage(chatMessages);
-        openingAdded = true;
-      }
     }
+
     function hide() {
       win.style.display = 'none';
       if (label) { label.style.display = 'block'; }
