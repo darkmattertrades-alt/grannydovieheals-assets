@@ -114,7 +114,6 @@ export default function BioPage() {
           maxWidth: "380px",
         }}
       >
-
         {/* Free Gift */}
         <a
           href="/free-gift"
@@ -217,7 +216,7 @@ export default function BioPage() {
                       border: "1px solid #c8922a",
                     }}
                   >
-                    🛒 Buy Now
+                    🛒 Buy on Amazon
                   </a>
                 </div>
               ))}
@@ -307,7 +306,7 @@ export default function BioPage() {
                       border: "1px solid #c8922a",
                     }}
                   >
-                    🛒 Buy Now
+                    🛒 Buy on Amazon
                   </a>
                 </div>
               ))}
@@ -334,7 +333,6 @@ export default function BioPage() {
         >
           💬 Chat with Granny Dovie
         </a>
-
       </div>
 
       {/* Affiliate Disclaimer */}
