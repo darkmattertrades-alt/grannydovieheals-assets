@@ -57,7 +57,7 @@ function makeBuyButton(name: string, url: string): string {
     `text-decoration:none;font-size:13px;font-weight:600;` +
     `border:1px solid #c8922a;margin-top:10px;margin-bottom:6px;` +
     `font-family:var(--font-lora),serif;">` +
-    `🛒 Buy Now — ${name}</a><br/>`
+    `🛒 Buy on Amazon — ${name}</a><br/>`
   )
 }
 
