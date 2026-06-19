@@ -40,11 +40,12 @@ export function GrannyChat() {
         <span aria-hidden>🌿</span>
       </button>
 
-      {/* Chat window */}
+      {/* Chat window — hidden by default via CSS in globals.css or via JS */}
       <div
         id="chat-window"
         role="dialog"
         aria-label="Chat with Granny Dovie"
+        className="overflow-hidden"
         style={{
           position: "fixed",
           bottom: "92px",
@@ -56,32 +57,23 @@ export function GrannyChat() {
           borderRadius: "12px",
           boxShadow: "0 12px 40px rgba(60, 26, 14, 0.35)",
           zIndex: 9998,
-          display: "none",
-          flexDirection: "column",
-          overflow: "hidden",
         }}
       >
         {/* Header */}
         <div
-          style={{
-            backgroundColor: "#3B5E3A",
-            padding: "12px 16px",
-            display: "flex",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-            flexShrink: 0,
-          }}
+          className="flex shrink-0 items-start justify-between px-4 py-3"
+          style={{ backgroundColor: "#3B5E3A" }}
         >
           <div>
             <h2
-              className="font-serif"
-              style={{ color: "#F5ECD7", fontSize: "17px", fontWeight: 700, lineHeight: 1.2, margin: 0 }}
+              className="font-serif text-lg font-bold leading-tight"
+              style={{ color: "#F5ECD7" }}
             >
               Chat with Granny Dovie 🌿
             </h2>
             <p
-              className="font-body"
-              style={{ color: "#C8922A", fontSize: "11px", margin: 0, marginTop: "2px" }}
+              className="font-body text-xs leading-tight"
+              style={{ color: "#C8922A" }}
             >
               Real Remedies. Old Ways. God&apos;s Design.
             </p>
@@ -90,32 +82,23 @@ export function GrannyChat() {
             id="chat-close"
             type="button"
             aria-label="Close chat"
-            style={{
-              color: "#F5ECD7",
-              cursor: "pointer",
-              background: "none",
-              border: "none",
-              fontSize: "22px",
-              lineHeight: 1,
-              padding: "0 0 0 8px",
-              marginTop: "-2px",
-            }}
+            className="ml-2 shrink-0 rounded p-1 text-xl leading-none transition-opacity hover:opacity-70 focus:outline-none"
+            style={{ color: "#F5ECD7", cursor: "pointer" }}
           >
             ×
           </button>
         </div>
 
-        {/* Suggestion pills */}
+        {/* Suggestion pills — compact, fixed height */}
         <div
           id="chat-suggestions"
           style={{
             backgroundColor: "#fdf6e3",
             borderBottom: "1px solid #C8922A",
-            padding: "8px 10px",
-            flexShrink: 0,
+            padding: "6px 10px",
             display: "flex",
             flexWrap: "wrap",
-            gap: "6px",
+            gap: "5px",
           }}
         >
           <p
@@ -125,18 +108,18 @@ export function GrannyChat() {
               color: "#8B3A3A",
               fontStyle: "italic",
               width: "100%",
-              margin: "0 0 4px 0",
+              margin: "0 0 3px 0",
             }}
           >
             Ask Granny something, honey 🌿
           </p>
           {[
-            { label: "🫐 Make elderberry syrup?", question: "How do I make elderberry syrup from scratch?" },
-            { label: "🦴 Help with joint pain", question: "What is a good natural remedy for joint pain?" },
-            { label: "😴 Help me sleep naturally", question: "What are some natural remedies to help me sleep?" },
+            { label: "🫐 Elderberry syrup?", question: "How do I make elderberry syrup from scratch?" },
+            { label: "🦴 Joint pain help", question: "What is a good natural remedy for joint pain?" },
+            { label: "😴 Help me sleep", question: "What are some natural remedies to help me sleep?" },
             { label: "🤒 Cold coming on", question: "I feel a cold coming on, what should I do?" },
-            { label: "🧴 Natural skin remedies", question: "What natural remedies are good for dry or aging skin?" },
-            { label: "🪜 Step by step please", question: "Can you walk me through how to make a natural home remedy step by step?" },
+            { label: "🧴 Skin remedies", question: "What natural remedies are good for dry or aging skin?" },
+            { label: "🪜 Step by step", question: "Can you walk me through how to make a natural home remedy step by step?" },
           ].map(({ label, question }) => (
             <button
               key={label}
@@ -147,7 +130,7 @@ export function GrannyChat() {
                 backgroundColor: "#F5ECD7",
                 border: "1px solid #C8922A",
                 borderRadius: "20px",
-                padding: "4px 9px",
+                padding: "3px 8px",
                 fontSize: "10px",
                 color: "#3B5E3A",
                 cursor: "pointer",
@@ -159,31 +142,35 @@ export function GrannyChat() {
           ))}
         </div>
 
-        {/* Step-by-step preview card */}
+        {/* Step-by-step preview card — compact */}
         <div
           id="chat-step-card"
           style={{
-            margin: "8px 10px",
+            margin: "6px 10px",
             backgroundColor: "#fff8ee",
             border: "1px dashed #C8922A",
             borderRadius: "8px",
-            padding: "8px 10px",
-            flexShrink: 0,
+            padding: "6px 10px",
           }}
         >
           <p
             className="font-body"
-            style={{ fontSize: "10px", color: "#8B3A3A", fontWeight: 700, margin: "0 0 4px 0" }}
+            style={{
+              fontSize: "10px",
+              color: "#8B3A3A",
+              fontWeight: 700,
+              margin: "0 0 3px 0",
+            }}
           >
             🪜 Step by Step Example
           </p>
           <p
             className="font-body"
-            style={{ fontSize: "10px", color: "#5a3e2b", lineHeight: 1.6, margin: 0 }}
+            style={{ fontSize: "10px", color: "#5a3e2b", lineHeight: 1.5, margin: 0 }}
           >
-            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 1</span> — Gather dried elderberries and water
+            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 1</span> — Gather elderberries and water
             <br />
-            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 2</span> — Simmer with cinnamon 45 minutes
+            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 2</span> — Simmer with cinnamon 45 min
             <br />
             <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 3</span> — Strain and stir in raw honey
             <br />
@@ -193,28 +180,18 @@ export function GrannyChat() {
           </p>
         </div>
 
-        {/* Messages area */}
+        {/* Messages */}
         <div
           id="chat-messages"
-          style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "10px 12px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "10px",
-          }}
+          className="flex-1 space-y-3 overflow-y-auto px-3 py-3"
         />
 
         {/* Input area */}
         <div
+          className="flex shrink-0 items-center gap-2 px-3 py-3"
           style={{
-            borderTop: "1px solid #C8922A",
             backgroundColor: "#F5ECD7",
-            padding: "10px 12px",
-            display: "flex",
-            gap: "8px",
-            flexShrink: 0,
+            borderTop: "1px solid #C8922A",
           }}
         >
           <input
@@ -222,34 +199,14 @@ export function GrannyChat() {
             type="text"
             placeholder="Ask Granny Dovie anything..."
             aria-label="Ask Granny Dovie anything"
-            className="font-body"
-            style={{
-              flex: 1,
-              minWidth: 0,
-              borderRadius: "6px",
-              border: "1px solid #C8922A",
-              backgroundColor: "#F5ECD7",
-              padding: "8px 12px",
-              fontSize: "13px",
-              color: "#2c1a0e",
-              outline: "none",
-            }}
+            className="min-w-0 flex-1 rounded-md border px-3 py-2 font-body text-sm text-ink placeholder:text-ink/40 focus:outline-none focus:ring-2"
+            style={{ backgroundColor: "#F5ECD7", borderColor: "#C8922A" }}
           />
           <button
             id="chat-send"
             type="button"
-            className="font-body"
-            style={{
-              backgroundColor: "#8B3A3A",
-              color: "#F5ECD7",
-              border: "none",
-              borderRadius: "6px",
-              padding: "8px 14px",
-              fontSize: "13px",
-              fontWeight: 600,
-              cursor: "pointer",
-              flexShrink: 0,
-            }}
+            className="shrink-0 rounded-md px-4 py-2 font-body text-sm font-semibold text-parchment transition-opacity hover:opacity-90"
+            style={{ backgroundColor: "#8B3A3A", cursor: "pointer" }}
           >
             Send 🌿
           </button>
