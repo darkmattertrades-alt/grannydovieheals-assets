@@ -61,7 +61,7 @@ export default function BioPage() {
       }}
     >
       {/* Profile */}
-      <div style={{ textAlign: "center", marginBottom: "28px" }}>
+      <div style={{ textAlign: "center", marginBottom: "28px", width: "100%" }}>
         <Image
           src={`${BASE}/granny-profile.png`}
           alt="Granny Dovie"
@@ -70,8 +70,9 @@ export default function BioPage() {
           style={{
             borderRadius: "50%",
             border: "3px solid #c8922a",
-            marginBottom: "14px",
             objectFit: "cover",
+            display: "block",
+            margin: "0 auto 14px auto",
           }}
         />
         <h1
