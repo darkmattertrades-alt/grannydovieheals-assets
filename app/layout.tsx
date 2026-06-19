@@ -1,28 +1,28 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Playfair_Display, Lora, Dancing_Script } from "next/font/google"
-import "./globals.css"
-import ChatWrapper from "@/components/chat-wrapper"
+import type { Metadata } from "next";
+import { Playfair_Display, Lora, Dancing_Script } from "next/font/google";
+import "./globals.css";
+import ChatWrapper from "@/components/chat-wrapper";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
-})
+});
 
 const lora = Lora({
   subsets: ["latin"],
   variable: "--font-lora",
   display: "swap",
-})
+});
 
 const dancing = Dancing_Script({
   subsets: ["latin"],
   variable: "--font-dancing",
   display: "swap",
-})
+});
 
-const BASE = "https://raw.githubusercontent.com/darkmattertrades-alt/grannydovieheals-assets/main"
+const BASE =
+  "https://raw.githubusercontent.com/darkmattertrades-alt/grannydovieheals-assets/main";
 
 export const metadata: Metadata = {
   title: "Granny Dovie Heals — Natural Herbal Remedies & Biblical Healing",
@@ -36,177 +36,188 @@ export const metadata: Metadata = {
     type: "website",
   },
   generator: "v0.app",
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${lora.variable} ${dancing.variable} bg-parchment`}
+      className={`${playfair.variable} ${lora.variable} ${dancing.variable}`}
     >
-      <body className="font-body text-ink antialiased">
+      <body>
         {children}
 
-        {/* ── SITE FOOTER DISCLOSURE ── */}
+        {/* Site Footer */}
         <footer
           style={{
-            backgroundColor: "#2c1a0e",
-            color: "#a08060",
+            background: "#2a3d29",
+            color: "#F5ECD7",
             textAlign: "center",
-            padding: "20px 16px",
-            fontFamily: "var(--font-lora), serif",
+            padding: "18px 16px",
             fontSize: "12px",
-            lineHeight: "1.8",
-            borderTop: "2px solid #c8922a",
+            fontFamily: "Lora, serif",
           }}
         >
-          <p style={{ marginBottom: "6px", color: "#c8922a", fontSize: "13px" }}>
-            🌿 Granny Dovie Heals
+          <p style={{ marginBottom: "6px" }}>
+            Granny Dovie is an AI character created to share traditional Appalachian folk wisdom and
+            biblical plant knowledge. She is not a real person and does not provide medical advice.
           </p>
-          <p style={{ marginBottom: "4px" }}>
-            Granny Dovie is an AI-generated character created to share the
-            wisdom of Appalachian folk healing tradition.
-            The remedies are real. The love is real. 🌿
-          </p>
-          <p style={{ marginBottom: "4px" }}>
-            All content is for informational purposes only and does not
-            constitute medical advice. Always consult your healthcare provider.
-          </p>
-          <p style={{ marginTop: "8px", color: "#6b4c2a", fontSize: "11px" }}>
-            © {new Date().getFullYear()} Granny Dovie Heals. All rights reserved.
+          <p>
+            © {new Date().getFullYear()} Granny Dovie Heals. All rights reserved. | As an Amazon
+            Associate we earn from qualifying purchases.
           </p>
         </footer>
 
         <ChatWrapper />
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
 (function () {
+  var bubble = document.getElementById('chat-bubble');
+  var window_ = document.getElementById('chat-window');
+  var closeBtn = document.getElementById('chat-close');
+  var label = document.getElementById('chat-label');
+  var input = document.getElementById('chat-input');
+  var send = document.getElementById('chat-send');
+  var messages = document.getElementById('chat-messages');
+
+  if (!bubble || !window_ || !closeBtn || !input || !send || !messages) return;
+
+  // ── Toggle open/close ──────────────────────────────────────────
+  function show() {
+    window_.style.display = 'flex';
+    if (label) label.style.display = 'none';
+  }
+
+  function hide() {
+    window_.style.display = 'none';
+    if (label) label.style.display = '';
+  }
+
+  bubble.addEventListener('click', function () {
+    var isOpen = window_.style.display === 'flex';
+    if (isOpen) { hide(); } else { show(); }
+  });
+
+  closeBtn.addEventListener('click', hide);
+
+  // ── Suggestion pills — NEVER hide them ────────────────────────
+  var pills = document.querySelectorAll('.chat-suggestion-pill');
+  pills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var q = pill.getAttribute('data-question');
+      if (q) {
+        input.value = q;
+        sendMessage();
+      }
+    });
+  });
+
+  // ── Format reply ───────────────────────────────────────────────
   function formatReply(text) {
+    // Step formatting
     var formatted = text.replace(
-      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
-      function(match, name, url) {
-        return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
+      /(Step\\s+\\d+\\s*[\\u2014\\-]\\s*[^\\n<]+)/gi,
+      function (match) {
+        return (
+          '<br/><span style="display:block;margin-top:6px;margin-bottom:2px;' +
+          'font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>'
+        );
       }
     );
+
+    // Legacy SHOP_LINK tokens
+    formatted = formatted.replace(
+      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
+      function (match, name, url) {
+        return (
+          '<br/><br/>' +
+          '<a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" ' +
+          'style="display:block;background:#8B3A3A;color:#F5ECD7;' +
+          'padding:10px 18px;border-radius:8px;text-decoration:none;' +
+          'font-family:Lora,serif;font-size:13px;font-weight:600;' +
+          'margin-top:6px;margin-bottom:6px;text-align:center;">' +
+          '🛒 Buy on Amazon — ' + name.trim() +
+          '</a><br/><br/>'
+        );
+      }
+    );
+
+    // Newlines
     formatted = formatted.replace(/\\n/g, '<br/>');
     return formatted;
   }
 
-  function init() {
-    var bubble = document.getElementById('chat-bubble');
-    var win = document.getElementById('chat-window');
-    var label = document.getElementById('chat-label');
-    var closeBtn = document.getElementById('chat-close');
+  // ── Send message ───────────────────────────────────────────────
+  function sendMessage() {
+    var text = input.value.trim();
+    if (!text) return;
+    input.value = '';
 
-    if (!bubble || !win) { return; }
-    if (bubble.getAttribute('data-bound') === '1') { return; }
-    bubble.setAttribute('data-bound', '1');
+    // User bubble
+    var userMsg = document.createElement('div');
+    userMsg.style.cssText =
+      'align-self:flex-end;background:#3B5E3A;color:#F5ECD7;' +
+      'padding:8px 12px;border-radius:12px 12px 2px 12px;' +
+      'max-width:80%;font-size:13px;font-family:Lora,serif;';
+    userMsg.textContent = text;
+    messages.appendChild(userMsg);
+    messages.scrollTop = messages.scrollHeight;
 
-    var chatMessages = document.getElementById('chat-messages');
+    // Loading bubble
+    var loading = document.createElement('div');
+    loading.style.cssText =
+      'align-self:flex-start;background:#fff8ee;border:1px solid #C8922A55;' +
+      'color:#3B5E3A;padding:8px 12px;border-radius:12px 12px 12px 2px;' +
+      'max-width:85%;font-size:13px;font-family:Lora,serif;font-style:italic;';
+    loading.textContent = 'Granny Dovie is thinking... 🌿';
+    messages.appendChild(loading);
+    messages.scrollTop = messages.scrollHeight;
 
-    function show() {
-      win.style.display = 'flex';
-      win.style.flexDirection = 'column';
-      if (label) { label.style.display = 'none'; }
-    }
-    function hide() {
-      win.style.display = 'none';
-      if (label) { label.style.display = 'block'; }
-    }
-
-    bubble.onclick = function () {
-      if (win.style.display === 'none' || win.style.display === '') {
-        show();
-      } else {
-        hide();
-      }
-    };
-
-    if (closeBtn) { closeBtn.onclick = hide; }
-
-    var sendBtn = document.getElementById('chat-send');
-    var chatInput = document.getElementById('chat-input');
-
-    function sendMessage() {
-      if (!chatInput || !chatMessages) { return; }
-      var message = chatInput.value.trim();
-      if (!message) { return; }
-
-      var userMsg = document.createElement('div');
-      userMsg.className = 'user-message';
-      userMsg.textContent = message;
-      chatMessages.appendChild(userMsg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-      chatInput.value = '';
-
-      var loading = document.createElement('div');
-      loading.className = 'granny-message';
-      loading.textContent = 'Granny Dovie is thinking... \uD83C\uDF3F';
-      loading.id = 'loading-msg';
-      chatMessages.appendChild(loading);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-
-      fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message })
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text }),
+    })
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        messages.removeChild(loading);
+        var grannyMsg = document.createElement('div');
+        grannyMsg.style.cssText =
+          'align-self:flex-start;background:#fff8ee;border:1px solid #C8922A55;' +
+          'color:#3C1A0E;padding:10px 14px;border-radius:12px 12px 12px 2px;' +
+          'max-width:85%;font-size:13px;font-family:Lora,serif;line-height:1.6;';
+        grannyMsg.innerHTML = formatReply(data.reply || 'Granny Dovie is resting right now honey. Try again in a moment. 🌿');
+        messages.appendChild(grannyMsg);
+        messages.scrollTop = messages.scrollHeight;
       })
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-          var loadingEl = document.getElementById('loading-msg');
-          if (loadingEl) { loadingEl.remove(); }
-
-          var grannyMsg = document.createElement('div');
-          grannyMsg.className = 'granny-message';
-          grannyMsg.innerHTML = formatReply(data.reply);
-          chatMessages.appendChild(grannyMsg);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        })
-        .catch(function () {
-          var loadingEl = document.getElementById('loading-msg');
-          if (loadingEl) { loadingEl.remove(); }
-
-          var errMsg = document.createElement('div');
-          errMsg.className = 'granny-message';
-          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
-          chatMessages.appendChild(errMsg);
-          chatMessages.scrollTop = chatMessages.scrollHeight;
-        });
-    }
-
-    if (sendBtn) {
-      sendBtn.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        sendMessage();
-      };
-    }
-
-    if (chatInput) {
-      chatInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          sendMessage();
-        }
+      .catch(function () {
+        messages.removeChild(loading);
+        var errMsg = document.createElement('div');
+        errMsg.style.cssText =
+          'align-self:flex-start;background:#fff8ee;border:1px solid #C8922A55;' +
+          'color:#3C1A0E;padding:10px 14px;border-radius:12px 12px 12px 2px;' +
+          'max-width:85%;font-size:13px;font-family:Lora,serif;';
+        errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. 🌿';
+        messages.appendChild(errMsg);
+        messages.scrollTop = messages.scrollHeight;
       });
-    }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  send.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') sendMessage();
+  });
 })();
-`,
+            `,
           }}
         />
       </body>
     </html>
-  )
+  );
 }
