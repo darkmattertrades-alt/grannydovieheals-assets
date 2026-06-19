@@ -83,7 +83,7 @@ export function GrannyChat() {
           </button>
         </div>
 
-        {/* Suggestion pills — visible before first message, hidden after */}
+        {/* Suggestion pills — always visible */}
         <div
           id="chat-suggestions"
           style={{
@@ -133,7 +133,7 @@ export function GrannyChat() {
           ))}
         </div>
 
-        {/* Step-by-step example card — visible before first message, hidden after */}
+        {/* Step-by-step example card — always visible */}
         <div
           id="chat-step-card"
           style={{
@@ -198,24 +198,24 @@ export function GrannyChat() {
           __html: `
 (function () {
   var PRODUCTS = [
-    { keys: ["turmeric"],                     name: "Garden of Life Turmeric",          url: "https://www.amazon.com/dp/B07G2LBQ1G" },
-    { keys: ["ashwagandha"],                  name: "Gaia Herbs Ashwagandha",           url: "https://www.amazon.com/dp/B003HD9H0G" },
-    { keys: ["elderberry syrup","elderberry"],name: "Gaia Herbs Elderberry Syrup",      url: "https://www.amazon.com/dp/B0036THLPE" },
-    { keys: ["magnesium"],                    name: "Doctor's Best Magnesium",          url: "https://www.amazon.com/dp/B000BD0RT0" },
-    { keys: ["vitamin k2","k2","d3"],         name: "Doctor's Best Vitamin K2 + D3",   url: "https://www.amazon.com/dp/B017JXZPPU" },
-    { keys: ["quick defense","echinacea"],    name: "Gaia Herbs Quick Defense",         url: "https://www.amazon.com/dp/B0036THLRW" },
-    { keys: ["apple cider vinegar","bragg"],  name: "Bragg Apple Cider Vinegar",        url: "https://www.amazon.com/dp/B001I7MVG0" },
-    { keys: ["ginger"],                       name: "Nature's Way Ginger Root",         url: "https://www.amazon.com/dp/B001E10C9I" },
-    { keys: ["peppermint spearmint"],         name: "Bigelow Peppermint Spearmint Tea", url: "https://www.amazon.com/dp/B073TJ18JY" },
-    { keys: ["peppermint"],                   name: "Bigelow Peppermint Tea",           url: "https://www.amazon.com/dp/B000GG5IZK" },
-    { keys: ["trilogy","rosehip oil"],        name: "Trilogy Organic Rosehip Oil",      url: "https://www.amazon.com/dp/B001NJNV12" },
-    { keys: ["cliganic"],                     name: "Cliganic Organic Rosehip Oil",     url: "https://www.amazon.com/dp/B07G14PWZN" },
-    { keys: ["shea butter"],                  name: "Pure Unrefined Shea Butter",       url: "https://www.amazon.com/dp/B00D9NV2D4" },
-    { keys: ["castor oil"],                   name: "Sky Organics Castor Oil",          url: "https://www.amazon.com/dp/B0186U9736" },
-    { keys: ["jojoba"],                       name: "Leven Rose Jojoba Oil",            url: "https://www.amazon.com/dp/B00GJX58PE" },
-    { keys: ["ra cosmetics"],                 name: "RA Cosmetics Shea Butter",         url: "https://www.amazon.com/dp/B00987FWHW" },
-    { keys: ["the ordinary"],                 name: "The Ordinary Rosehip Oil",         url: "https://www.amazon.com/dp/B09Q2X99XG" },
-    { keys: ["palmer","cocoa butter"],        name: "Palmer's Cocoa Butter Lotion",     url: "https://www.amazon.com/dp/B0009F3O8Q" },
+    { keys: ["turmeric"],                      name: "Garden of Life Turmeric",          url: "https://www.amazon.com/dp/B07G2LBQ1G" },
+    { keys: ["ashwagandha"],                   name: "Gaia Herbs Ashwagandha",           url: "https://www.amazon.com/dp/B003HD9H0G" },
+    { keys: ["elderberry syrup","elderberry"], name: "Gaia Herbs Elderberry Syrup",      url: "https://www.amazon.com/dp/B0036THLPE" },
+    { keys: ["magnesium"],                     name: "Doctor's Best Magnesium",          url: "https://www.amazon.com/dp/B000BD0RT0" },
+    { keys: ["vitamin k2","k2","d3"],          name: "Doctor's Best Vitamin K2 + D3",    url: "https://www.amazon.com/dp/B017JXZPPU" },
+    { keys: ["quick defense","echinacea"],     name: "Gaia Herbs Quick Defense",         url: "https://www.amazon.com/dp/B0036THLRW" },
+    { keys: ["apple cider vinegar","bragg"],   name: "Bragg Apple Cider Vinegar",        url: "https://www.amazon.com/dp/B001I7MVG0" },
+    { keys: ["ginger"],                        name: "Nature's Way Ginger Root",         url: "https://www.amazon.com/dp/B001E10C9I" },
+    { keys: ["peppermint spearmint"],          name: "Bigelow Peppermint Spearmint Tea", url: "https://www.amazon.com/dp/B073TJ18JY" },
+    { keys: ["peppermint"],                    name: "Bigelow Peppermint Tea",           url: "https://www.amazon.com/dp/B000GG5IZK" },
+    { keys: ["trilogy","rosehip oil"],         name: "Trilogy Organic Rosehip Oil",      url: "https://www.amazon.com/dp/B001NJNV12" },
+    { keys: ["cliganic"],                      name: "Cliganic Organic Rosehip Oil",     url: "https://www.amazon.com/dp/B07G14PWZN" },
+    { keys: ["shea butter"],                   name: "Pure Unrefined Shea Butter",       url: "https://www.amazon.com/dp/B00D9NV2D4" },
+    { keys: ["castor oil"],                    name: "Sky Organics Castor Oil",          url: "https://www.amazon.com/dp/B0186U9736" },
+    { keys: ["jojoba"],                        name: "Leven Rose Jojoba Oil",            url: "https://www.amazon.com/dp/B00GJX58PE" },
+    { keys: ["ra cosmetics"],                  name: "RA Cosmetics Shea Butter",         url: "https://www.amazon.com/dp/B00987FWHW" },
+    { keys: ["the ordinary"],                  name: "The Ordinary Rosehip Oil",         url: "https://www.amazon.com/dp/B09Q2X99XG" },
+    { keys: ["palmer","cocoa butter"],         name: "Palmer's Cocoa Butter Lotion",     url: "https://www.amazon.com/dp/B0009F3O8Q" },
   ];
 
   function makeButton(name, url) {
@@ -225,15 +225,8 @@ export function GrannyChat() {
       'padding:10px 18px;border-radius:8px;text-decoration:none;' +
       'font-family:Lora,serif;font-size:13px;font-weight:600;' +
       'margin-top:8px;margin-bottom:8px;">' +
-      '&#128722; ' + name + ' &#8594; Buy Now on Amazon</a><br/>'
+      '&#128722; ' + name + ' &#8594; Buy on Amazon</a><br/>'
     );
-  }
-
-  function hideSuggestions() {
-    var s = document.getElementById("chat-suggestions");
-    var c = document.getElementById("chat-step-card");
-    if (s) s.style.display = "none";
-    if (c) c.style.display = "none";
   }
 
   function wireSuggestionPills() {
@@ -242,7 +235,6 @@ export function GrannyChat() {
       pill.addEventListener("click", function () {
         var q = pill.getAttribute("data-question");
         if (q) {
-          hideSuggestions();
           var input = document.getElementById("chat-input");
           if (input) {
             input.value = q;
@@ -333,26 +325,9 @@ export function GrannyChat() {
     };
   }
 
-  function hideOnFirstUserMessage() {
-    var hidden = false;
-    var sendBtn = document.getElementById("chat-send");
-    if (sendBtn) {
-      sendBtn.addEventListener("click", function () {
-        if (!hidden) { hideSuggestions(); hidden = true; }
-      });
-    }
-    var input = document.getElementById("chat-input");
-    if (input) {
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" && !hidden) { hideSuggestions(); hidden = true; }
-      });
-    }
-  }
-
   document.addEventListener("DOMContentLoaded", function () {
     wireSuggestionPills();
     patchFormatReply();
-    hideOnFirstUserMessage();
   });
 })();
           `,
