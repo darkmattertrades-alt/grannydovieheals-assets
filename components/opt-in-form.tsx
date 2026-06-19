@@ -49,18 +49,91 @@ export function OptInForm({
 
   if (status === "success") {
     return (
-      <div className="rounded-lg border-2 border-gold/50 bg-parchment/80 p-6 text-center">
-        <p className="font-body text-2xl font-bold text-cta">
+      <div
+        style={{
+          borderRadius: "12px",
+          border: "2px solid #c8922a",
+          backgroundColor: "rgba(245,236,215,0.12)",
+          padding: "32px 24px",
+          textAlign: "center",
+          boxShadow:
+            "0 0 24px rgba(200,146,42,0.2), inset 0 1px 0 rgba(245,236,215,0.08)",
+        }}
+      >
+        {/* Botanical ornament */}
+        <div style={{ marginBottom: "12px" }}>
+          <svg
+            width="36"
+            height="36"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="#c8922a"
+            strokeWidth="1.3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ margin: "0 auto" }}
+          >
+            <path d="M9 2c0 0-5 5-5 9a5 5 0 0 0 10 0C14 7 9 2 9 2z" />
+            <path d="M6 11a3 3 0 0 0 3 2" />
+          </svg>
+        </div>
+
+        <p
+          style={{
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "22px",
+            fontWeight: "700",
+            color: "#f5ecd7",
+            marginBottom: "10px",
+          }}
+        >
           Your guide is ready honey! 🌿
         </p>
-        <p className="mt-3 text-pretty font-body text-base leading-relaxed text-heading">
+
+        <p
+          style={{
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "15px",
+            lineHeight: "1.7",
+            color: "rgba(245,236,215,0.85)",
+            marginBottom: "20px",
+          }}
+        >
           Click the button below to download your free copy now.
         </p>
+
         <a
           href={GUIDE_DOWNLOAD_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-5 inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#8B3A3A",
+            color: "#f5ecd7",
+            padding: "14px 28px",
+            borderRadius: "10px",
+            border: "2px solid #c8922a",
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "15px",
+            fontWeight: "700",
+            textDecoration: "none",
+            letterSpacing: "0.4px",
+            boxShadow:
+              "0 0 12px rgba(200,146,42,0.45), 0 0 28px rgba(200,146,42,0.2)",
+            transition: "box-shadow 0.2s ease, transform 0.1s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow =
+              "0 0 20px rgba(200,146,42,0.65), 0 0 40px rgba(200,146,42,0.3)"
+            e.currentTarget.style.transform = "translateY(-1px)"
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow =
+              "0 0 12px rgba(200,146,42,0.45), 0 0 28px rgba(200,146,42,0.2)"
+            e.currentTarget.style.transform = "translateY(0)"
+          }}
         >
           Download Your Free Guide →
         </a>
@@ -71,12 +144,22 @@ export function OptInForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex w-full flex-col gap-3 ${compact ? "" : "sm:flex-row sm:items-end"}`}
+      className={`flex w-full flex-col gap-5 ${compact ? "" : "sm:flex-row sm:items-end"}`}
     >
+      {/* ── First Name ── */}
       <div className="flex-1">
         <label
           htmlFor="firstName"
-          className="mb-1 block font-body text-sm font-medium text-heading"
+          style={{
+            display: "block",
+            color: "#c8922a",
+            fontSize: "11px",
+            fontWeight: "700",
+            letterSpacing: "1.8px",
+            textTransform: "uppercase",
+            marginBottom: "8px",
+            fontFamily: "var(--font-lora), serif",
+          }}
         >
           First Name
         </label>
@@ -87,13 +170,44 @@ export function OptInForm({
           onChange={(e) => setFirstName(e.target.value)}
           required
           placeholder="Your first name"
-          className="w-full rounded-md border border-gold/50 bg-parchment px-4 py-3 font-body text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
+          style={{
+            width: "100%",
+            backgroundColor: "#fdf8f0",
+            border: "1.5px solid rgba(200,146,42,0.4)",
+            borderRadius: "8px",
+            padding: "13px 16px",
+            fontSize: "15px",
+            color: "#2c1a0e",
+            fontFamily: "var(--font-lora), serif",
+            outline: "none",
+            boxSizing: "border-box",
+            transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = "#c8922a"
+            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(200,146,42,0.18)"
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "rgba(200,146,42,0.4)"
+            e.currentTarget.style.boxShadow = "none"
+          }}
         />
       </div>
+
+      {/* ── Email Address ── */}
       <div className="flex-1">
         <label
           htmlFor="email"
-          className="mb-1 block font-body text-sm font-medium text-heading"
+          style={{
+            display: "block",
+            color: "#c8922a",
+            fontSize: "11px",
+            fontWeight: "700",
+            letterSpacing: "1.8px",
+            textTransform: "uppercase",
+            marginBottom: "8px",
+            fontFamily: "var(--font-lora), serif",
+          }}
         >
           Email Address
         </label>
@@ -104,19 +218,99 @@ export function OptInForm({
           onChange={(e) => setEmail(e.target.value)}
           required
           placeholder={emailPlaceholder}
-          className="w-full rounded-md border border-gold/50 bg-parchment px-4 py-3 font-body text-ink placeholder:text-ink/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/40"
+          style={{
+            width: "100%",
+            backgroundColor: "#fdf8f0",
+            border: "1.5px solid rgba(200,146,42,0.4)",
+            borderRadius: "8px",
+            padding: "13px 16px",
+            fontSize: "15px",
+            color: "#2c1a0e",
+            fontFamily: "var(--font-lora), serif",
+            outline: "none",
+            boxSizing: "border-box",
+            transition: "border-color 0.2s ease, box-shadow 0.2s ease",
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.borderColor = "#c8922a"
+            e.currentTarget.style.boxShadow = "0 0 0 3px rgba(200,146,42,0.18)"
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.borderColor = "rgba(200,146,42,0.4)"
+            e.currentTarget.style.boxShadow = "none"
+          }}
         />
       </div>
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="rounded-md bg-cta px-6 py-3 font-serif text-base font-semibold text-parchment shadow-md transition-all hover:bg-cta/90 disabled:opacity-60 sm:shrink-0"
+
+      {/* ── CTA Button + Trust line wrapper ── */}
+      <div
+        className="sm:shrink-0"
+        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
       >
-        {status === "loading" ? "Sending…" : buttonLabel}
-      </button>
+        <button
+          type="submit"
+          disabled={status === "loading"}
+          style={{
+            width: "100%",
+            backgroundColor: status === "loading" ? "rgba(139,58,58,0.6)" : "#8B3A3A",
+            color: "#f5ecd7",
+            padding: "14px 24px",
+            borderRadius: "10px",
+            border: "2px solid #c8922a",
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "15px",
+            fontWeight: "700",
+            letterSpacing: "0.4px",
+            cursor: status === "loading" ? "not-allowed" : "pointer",
+            boxShadow:
+              "0 0 12px rgba(200,146,42,0.45), 0 0 28px rgba(200,146,42,0.2), inset 0 1px 0 rgba(245,236,215,0.08)",
+            transition: "box-shadow 0.2s ease, transform 0.1s ease",
+          }}
+          onMouseEnter={(e) => {
+            if (status !== "loading") {
+              e.currentTarget.style.boxShadow =
+                "0 0 20px rgba(200,146,42,0.65), 0 0 40px rgba(200,146,42,0.3), inset 0 1px 0 rgba(245,236,215,0.08)"
+              e.currentTarget.style.transform = "translateY(-1px)"
+            }
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow =
+              "0 0 12px rgba(200,146,42,0.45), 0 0 28px rgba(200,146,42,0.2), inset 0 1px 0 rgba(245,236,215,0.08)"
+            e.currentTarget.style.transform = "translateY(0)"
+          }}
+        >
+          {status === "loading" ? "Sending…" : buttonLabel}
+        </button>
+
+        {/* ── Trust line ── */}
+        <p
+          style={{
+            color: "rgba(245,236,215,0.55)",
+            fontSize: "11px",
+            fontStyle: "italic",
+            fontFamily: "var(--font-lora), serif",
+            letterSpacing: "0.3px",
+            textAlign: "center",
+            margin: "0",
+          }}
+        >
+          No spam. No nonsense. Just old mountain wisdom. 🌿
+        </p>
+      </div>
+
+      {/* ── Error message ── */}
       {status === "error" && (
-        <p className="font-body text-sm text-cta sm:w-full">
-          Something went awry. Please try again, dear.
+        <p
+          style={{
+            fontFamily: "var(--font-lora), serif",
+            fontSize: "13px",
+            fontStyle: "italic",
+            color: "#c8922a",
+            textAlign: "center",
+            marginTop: "4px",
+          }}
+        >
+          Something went awry. Please try again, dear. 🌿
         </p>
       )}
     </form>
