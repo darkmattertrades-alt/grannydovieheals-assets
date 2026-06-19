@@ -60,52 +60,95 @@ export default function BioPage() {
         fontFamily: "var(--font-lora), serif",
       }}
     >
-      {/* Profile */}
-      <div style={{ textAlign: "center", marginBottom: "28px", width: "100%" }}>
-        <Image
-          src={`${BASE}/granny-profile.png`}
-          alt="Granny Dovie"
-          width={110}
-          height={110}
+      {/* ── Profile ── */}
+      <div style={{ textAlign: "center", marginBottom: "10px", width: "100%" }}>
+
+        {/* Profile image with gold glow ring */}
+        <div
           style={{
+            display: "inline-block",
             borderRadius: "50%",
-            border: "3px solid #c8922a",
-            objectFit: "cover",
-            display: "block",
-            margin: "0 auto 14px auto",
+            padding: "3px",
+            background: "linear-gradient(135deg, #c8922a, #f5ecd7, #c8922a)",
+            boxShadow: "0 0 18px rgba(200,146,42,0.55), 0 0 36px rgba(200,146,42,0.25)",
+            marginBottom: "16px",
           }}
-        />
+        >
+          <Image
+            src={`${BASE}/granny-profile.png`}
+            alt="Granny Dovie"
+            width={112}
+            height={112}
+            style={{
+              borderRadius: "50%",
+              objectFit: "cover",
+              display: "block",
+              border: "3px solid #2c1a0e",
+            }}
+          />
+        </div>
+
         <h1
           style={{
             color: "#f5ecd7",
-            fontSize: "22px",
+            fontSize: "23px",
             fontWeight: "700",
             marginBottom: "6px",
-            letterSpacing: "0.3px",
+            letterSpacing: "0.4px",
           }}
         >
           Granny Dovie Heals
         </h1>
+
         <p
           style={{
             color: "#c8922a",
             fontSize: "14px",
             marginBottom: "4px",
+            fontStyle: "italic",
           }}
         >
           Real Remedies. Old Ways. God&apos;s Design. 🌿
         </p>
+
         <p
           style={{
             color: "#a08060",
             fontSize: "13px",
+            marginBottom: "18px",
+            fontStyle: "italic",
           }}
         >
-          Ancient folk healing rooted in ✝️ Scripture
+          Ancient folk healing rooted in Scripture ✝️
+        </p>
+
+        {/* Trust line */}
+        <p
+          style={{
+            color: "#c8922a",
+            fontSize: "12px",
+            fontStyle: "italic",
+            letterSpacing: "0.4px",
+            opacity: 0.85,
+            marginBottom: "0px",
+          }}
+        >
+          ✦ Trusted by natural health seekers across America ✦
         </p>
       </div>
 
-      {/* Buttons */}
+      {/* Thin gold divider below profile */}
+      <div
+        style={{
+          width: "60%",
+          maxWidth: "260px",
+          height: "1px",
+          background: "linear-gradient(to right, transparent, #c8922a, transparent)",
+          margin: "18px auto 24px auto",
+        }}
+      />
+
+      {/* ── Buttons ── */}
       <div
         style={{
           display: "flex",
@@ -115,7 +158,8 @@ export default function BioPage() {
           maxWidth: "380px",
         }}
       >
-        {/* Free Gift */}
+
+        {/* ── Hero CTA — Free Gift ── */}
         <a
           href="/free-gift"
           style={{
@@ -123,19 +167,58 @@ export default function BioPage() {
             backgroundColor: "#8B3A3A",
             color: "#f5ecd7",
             textAlign: "center",
-            padding: "14px 20px",
+            padding: "17px 20px",
             borderRadius: "10px",
             textDecoration: "none",
             fontSize: "15px",
-            fontWeight: "600",
-            border: "1px solid #c8922a",
-            letterSpacing: "0.3px",
+            fontWeight: "700",
+            border: "2px solid #c8922a",
+            letterSpacing: "0.4px",
+            boxShadow:
+              "0 0 12px rgba(200,146,42,0.45), 0 0 28px rgba(200,146,42,0.2), inset 0 1px 0 rgba(245,236,215,0.08)",
           }}
         >
           🌿 Free 15 Secret Remedies Guide
         </a>
 
-        {/* Supplements Accordion */}
+        {/* ── Section label — Shop ── */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            marginTop: "6px",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "linear-gradient(to right, transparent, #c8922a)",
+            }}
+          />
+          <span
+            style={{
+              color: "#c8922a",
+              fontSize: "10px",
+              fontWeight: "700",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+            }}
+          >
+            🛒 Shop Granny&apos;s Picks
+          </span>
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "linear-gradient(to left, transparent, #c8922a)",
+            }}
+          />
+        </div>
+
+        {/* ── Supplements Accordion ── */}
         <div>
           <button
             onClick={() => toggle("supplements")}
@@ -225,7 +308,7 @@ export default function BioPage() {
           )}
         </div>
 
-        {/* Skincare Accordion */}
+        {/* ── Skincare Accordion ── */}
         <div>
           <button
             onClick={() => toggle("skincare")}
@@ -315,7 +398,44 @@ export default function BioPage() {
           )}
         </div>
 
-        {/* Chat with Granny Dovie */}
+        {/* ── Section label — Connect ── */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            marginTop: "6px",
+          }}
+        >
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "linear-gradient(to right, transparent, #c8922a)",
+            }}
+          />
+          <span
+            style={{
+              color: "#c8922a",
+              fontSize: "10px",
+              fontWeight: "700",
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+            }}
+          >
+            💬 Connect With Granny
+          </span>
+          <div
+            style={{
+              flex: 1,
+              height: "1px",
+              background: "linear-gradient(to left, transparent, #c8922a)",
+            }}
+          />
+        </div>
+
+        {/* ── Chat with Granny Dovie ── */}
         <a
           href="/"
           style={{
@@ -336,7 +456,18 @@ export default function BioPage() {
         </a>
       </div>
 
-      {/* Affiliate Disclaimer */}
+      {/* ── Botanical Divider above disclaimers ── */}
+      <div
+        style={{
+          width: "80%",
+          maxWidth: "320px",
+          height: "1px",
+          background: "linear-gradient(to right, transparent, #c8922a, transparent)",
+          margin: "32px auto 20px auto",
+        }}
+      />
+
+      {/* ── Affiliate Disclaimer ── */}
       <p
         style={{
           color: "#6b4c2a",
@@ -344,7 +475,8 @@ export default function BioPage() {
           textAlign: "center",
           maxWidth: "320px",
           lineHeight: "1.7",
-          marginTop: "28px",
+          fontStyle: "italic",
+          marginBottom: "0px",
         }}
       >
         This page contains affiliate links. Product recommendations are from
@@ -352,18 +484,18 @@ export default function BioPage() {
         earned at no extra cost to you. 🌿
       </p>
 
-      {/* Botanical Divider */}
+      {/* ── Thin divider between disclaimers ── */}
       <div
         style={{
-          width: "80%",
-          maxWidth: "320px",
+          width: "40%",
+          maxWidth: "160px",
           height: "1px",
-          background: "linear-gradient(to right, transparent, #c8922a, transparent)",
-          margin: "20px auto",
+          background: "linear-gradient(to right, transparent, #6b4c2a, transparent)",
+          margin: "16px auto",
         }}
       />
 
-      {/* Footer Disclosure */}
+      {/* ── Footer Disclosure ── */}
       <p
         style={{
           color: "#6b4c2a",
@@ -371,6 +503,7 @@ export default function BioPage() {
           textAlign: "center",
           maxWidth: "320px",
           lineHeight: "1.7",
+          fontStyle: "italic",
         }}
       >
         ✨ Granny Dovie is an AI-generated character. The remedies are real.
