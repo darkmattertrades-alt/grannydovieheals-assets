@@ -3,64 +3,70 @@ import { ProductCard, type Product } from "@/components/product-card"
 
 const topTier: Product[] = [
   {
-    name: "Trilogy Certified Organic Rosehip Oil",
-    price: "$35 — $55",
-    quote: "God put rosehip on this earth long before serums ever existed, honey.",
-    href: "https://www.amazon.com/dp/B001NJNV12",
-  },
-  {
-    name: "Cliganic USDA Organic Rosehip Seed Oil",
-    price: "$20 — $35",
-    quote: "Pure, cold pressed, and honest. Just the way healing should be.",
-    href: "https://www.amazon.com/dp/B07G14PWZN",
-  },
-  {
-    name: "Better Shea Butter 100% Pure Unrefined African Shea Butter",
-    price: "$20 — $35",
-    quote: "Your grandmother moisturized with this. So did her grandmother.",
-    href: "https://www.amazon.com/dp/B00D9NV2D4",
+    name: "54 Thrones African Beauty Butter Collection",
+    price: "$80",
+    quote: "Rooted in the beauty rituals of 54 African nations. Shea butter the way God intended it, honey.",
+    href: "https://amzn.to/43IvxwP",
   },
 ]
 
 const midTier: Product[] = [
   {
-    name: "Sky Organics USDA Organic Castor Oil",
-    price: "$15 — $20",
+    name: "Trilogy Certified Organic Rosehip Oil",
+    price: "$20",
+    quote: "God put rosehip on this earth long before serums ever existed, honey.",
+    href: "https://amzn.to/4uJu4RN",
+  },
+  {
+    name: "Cliganic Organic Rosehip Seed Oil",
+    price: "$9 — $27",
+    quote: "Pure, cold pressed, and honest. Just the way healing should be.",
+    href: "https://amzn.to/4eAQHBQ",
+  },
+  {
+    name: "Raw Shea Butter 100% Pure Unrefined African Shea Butter",
+    price: "$17 — $25",
+    quote: "Your grandmother moisturized with this. So did her grandmother.",
+    href: "https://amzn.to/4oOVMeD",
+  },
+  {
+    name: "Sky Organics Castor Oil Organic",
+    price: "$16 — $32",
     quote: "For hair, for skin, for lashes — one bottle does it all, honey.",
-    href: "https://www.amazon.com/dp/B0186U9736",
+    href: "https://amzn.to/4oCOPgN",
   },
   {
-    name: "Leven Rose Pure Organic Jojoba Oil",
-    price: "$15 — $20",
+    name: "Leven Rose Jojoba Oil Organic",
+    price: "$9 — $30",
     quote: "Your skin drinks this up like a dry garden drinks in the rain.",
-    href: "https://www.amazon.com/dp/B00GJX58PE",
+    href: "https://amzn.to/4uRMAY9",
   },
   {
-    name: "RA Cosmetics Raw Unrefined African Shea Butter",
-    price: "$15 — $20",
+    name: "RA Cosmetics African Shea Butter Raw Unrefined from Ghana",
+    price: "$10",
     quote: "Faithful to what God planted. Nothing added. Nothing taken away.",
-    href: "https://www.amazon.com/dp/B00987FWHW",
+    href: "https://amzn.to/4uSnKYr",
   },
 ]
 
 const lowTier: Product[] = [
   {
-    name: "The Ordinary Cold Pressed Rosehip Seed Oil",
-    price: "Under $15",
+    name: "Good Molecules Pure Cold-Pressed Rosehip Seed Oil",
+    price: "$10",
     quote: "Simple ingredients. Real results. No fancy labels needed, child.",
-    href: "https://www.amazon.com/dp/B09Q2X99XG",
+    href: "https://amzn.to/4xEFVmZ",
   },
   {
-    name: "Palmer's Cocoa Butter Formula Daily Skin Therapy Lotion",
-    price: "Under $15",
-    quote: "Been on grandmothers nightstands for generations for good reason.",
-    href: "https://www.amazon.com/dp/B0009F3O8Q",
+    name: "Palmer's Cocoa Butter Formula Daily Skin Therapy",
+    price: "$4 — $20",
+    quote: "Been on grandmothers' nightstands for generations for good reason.",
+    href: "https://amzn.to/4ejRCIa",
   },
   {
-    name: "Bigelow Benefits Peppermint and Spearmint Herbal Tea",
-    price: "Under $10",
+    name: "Bigelow Tea Purely Peppermint Tea",
+    price: "$28",
     quote: "Sip this every evening honey. Your skin starts from the inside out.",
-    href: "https://www.amazon.com/dp/B073TJ18JY",
+    href: "https://amzn.to/4xG6iJg",
   },
 ]
 
@@ -128,8 +134,8 @@ function Tier({
 export function SkincareTopTier() {
   return (
     <Tier
-      label="Granny's Best Pick"
-      heading="The Ones I Trust Most"
+      label="⭐ Granny's Top Pick"
+      heading="African Luxury — The One I Recommend Most"
       products={topTier}
       variant="cream"
     />
