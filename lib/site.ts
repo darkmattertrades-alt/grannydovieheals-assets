@@ -32,6 +32,7 @@ export const navLinks = [
   { href: "/supplements", label: "God's Pharmacy" },
   { href: "/skincare", label: "Honor the Temple" },
   { href: "/quiz", label: "Find My Remedy 🌿" },
+  { href: "/blog", label: "Blog" },
   { href: "/free-gift", label: "Free Gift" },
   { href: "/about", label: "About Granny" },
 ]
