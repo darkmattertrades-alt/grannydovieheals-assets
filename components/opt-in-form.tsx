@@ -144,10 +144,10 @@ export function OptInForm({
   return (
     <form
       onSubmit={handleSubmit}
-      className={`flex w-full flex-col gap-5 ${compact ? "" : "sm:flex-row sm:items-end"}`}
+      className="flex w-full flex-col gap-5"
     >
       {/* ── First Name ── */}
-      <div className="flex-1">
+      <div>
         <label
           htmlFor="firstName"
           style={{
@@ -195,7 +195,7 @@ export function OptInForm({
       </div>
 
       {/* ── Email Address ── */}
-      <div className="flex-1">
+      <div>
         <label
           htmlFor="email"
           style={{
@@ -243,10 +243,7 @@ export function OptInForm({
       </div>
 
       {/* ── CTA Button + Trust line wrapper ── */}
-      <div
-        className="sm:shrink-0"
-        style={{ display: "flex", flexDirection: "column", gap: "10px" }}
-      >
+      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
         <button
           type="submit"
           disabled={status === "loading"}
@@ -285,7 +282,7 @@ export function OptInForm({
         {/* ── Trust line ── */}
         <p
           style={{
-            color: "rgba(245,236,215,0.55)",
+            color: "rgba(44,26,14,0.5)",
             fontSize: "11px",
             fontStyle: "italic",
             fontFamily: "var(--font-lora), serif",
