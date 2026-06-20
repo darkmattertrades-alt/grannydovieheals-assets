@@ -37,7 +37,6 @@ export default function CategoryPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Header */}
       <section className="bg-green-50 border-b border-green-100 px-4 py-14 text-center">
         <p className="text-4xl mb-3">{category.emoji}</p>
         <h1 className="font-serif text-4xl sm:text-5xl font-bold text-gray-900 leading-tight max-w-2xl mx-auto">
@@ -48,7 +47,6 @@ export default function CategoryPage({ params }: Props) {
         </p>
       </section>
 
-      {/* Category Filter */}
       <section className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex flex-wrap gap-2 justify-center">
           <Link
@@ -60,7 +58,7 @@ export default function CategoryPage({ params }: Props) {
           {Object.values(CATEGORIES).map((cat) => (
             <Link
               key={cat.slug}
-              href={`/blog/${cat.slug}`}
+              href={`/blog/category/${cat.slug}`}
               className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
                 cat.slug === params.category
                   ? "border-green-700 bg-green-700 text-white"
@@ -73,7 +71,6 @@ export default function CategoryPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Posts Grid */}
       <section className="max-w-5xl mx-auto px-4 pb-16">
         {posts.length === 0 ? (
           <div className="text-center py-20">
@@ -94,7 +91,6 @@ export default function CategoryPage({ params }: Props) {
         )}
       </section>
 
-      {/* Bottom CTA */}
       <section className="bg-green-700 px-4 py-12 text-center text-white">
         <p className="text-2xl mb-3">🌿</p>
         <h2 className="font-serif text-2xl font-bold mb-2">
@@ -114,4 +110,3 @@ export default function CategoryPage({ params }: Props) {
     </main>
   )
 }
-r
