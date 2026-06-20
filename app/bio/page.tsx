@@ -6,38 +6,137 @@ import Image from "next/image"
 const BASE = "https://raw.githubusercontent.com/darkmattertrades-alt/grannydovieheals-assets/main"
 
 const supplements = [
+  // ── PREMIUM ──
   {
-    name: "Garden of Life Extra Strength Turmeric",
-    price: "$38 — $45",
-    href: "https://www.amazon.com/dp/B07G2LBQ1G",
+    name: "Dose Organic Milk Thistle Liver Cleanse 6-Bottle Supply",
+    price: "$180",
+    href: "https://amzn.to/43MUCXw",
   },
   {
-    name: "Gaia Herbs Ashwagandha Root Liquid Phyto Capsules",
-    price: "$26 — $39",
-    href: "https://www.amazon.com/dp/B003HD9H0G",
+    name: "Resilia Black Seed Oil + Oregano Capsules 300ct",
+    price: "$119",
+    href: "https://amzn.to/3SCbdL4",
+  },
+  {
+    name: "JUNG KWAN JANG Korean Red Ginseng Concentrated Extract 120g",
+    price: "$119",
+    href: "https://amzn.to/4uJGhG3",
+  },
+  {
+    name: "JUNG KWAN JANG Korean Red Panax Ginseng Extra Strength",
+    price: "$219",
+    href: "https://amzn.to/3QTrBGz",
+  },
+  {
+    name: "American BioSciences ImmPower AHCC 6-Pack",
+    price: "$186",
+    href: "https://amzn.to/4uRSaKm",
+  },
+  {
+    name: "Terry Naturally CuraMed 750mg 120 Softgels 3-Pack",
+    price: "$102",
+    href: "https://amzn.to/3Szuw7O",
+  },
+  // ── TRUSTED ──
+  {
+    name: "Garden of Life Organics Extra Strength Turmeric 60 Tablets",
+    price: "$23 — $38",
+    href: "https://amzn.to/4gg9Xaz",
+  },
+  {
+    name: "Gaia Herbs Ashwagandha Root 350mg",
+    price: "$25 — $48",
+    href: "https://amzn.to/4xGZI5d",
   },
   {
     name: "Gaia Herbs Black Elderberry Syrup",
-    price: "$25 — $45",
-    href: "https://www.amazon.com/dp/B0036THLPE",
+    price: "$22 — $33",
+    href: "https://amzn.to/3SRwvEy",
+  },
+  {
+    name: "Doctor's Best High Absorption Magnesium Glycinate Lysinate",
+    price: "$12 — $20",
+    href: "https://amzn.to/4oDV8Ax",
+  },
+  {
+    name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3",
+    price: "$24",
+    href: "https://amzn.to/4xEiL03",
+  },
+  {
+    name: "Gaia Herbs Quick Defense Fast-Acting",
+    price: "$25 — $66",
+    href: "https://amzn.to/43NXcwf",
+  },
+  {
+    name: "Bragg Organic Raw Apple Cider Vinegar",
+    price: "$4 — $6",
+    href: "https://amzn.to/4uQyyX4",
+  },
+  {
+    name: "Nature's Way Premium Ginger Root 550mg",
+    price: "$29",
+    href: "https://amzn.to/43Ia3jH",
+  },
+  {
+    name: "Bigelow Tea Peppermint Herbal Tea",
+    price: "$20",
+    href: "https://amzn.to/3SaCX9H",
   },
 ]
 
 const skincare = [
+  // ── TOP PICK ──
+  {
+    name: "⭐ TOP PICK — 54 Thrones African Beauty Butter Collection",
+    price: "$80",
+    href: "https://amzn.to/43IvxwP",
+  },
+  // ── TRUSTED ──
   {
     name: "Trilogy Certified Organic Rosehip Oil",
-    price: "$35 — $55",
-    href: "https://www.amazon.com/dp/B001NJNV12",
+    price: "$20",
+    href: "https://amzn.to/4uJu4RN",
   },
   {
-    name: "Cliganic USDA Organic Rosehip Seed Oil",
-    price: "$20 — $35",
-    href: "https://www.amazon.com/dp/B07G14PWZN",
+    name: "Cliganic Organic Rosehip Seed Oil",
+    price: "$9 — $27",
+    href: "https://amzn.to/4eAQHBQ",
   },
   {
-    name: "Better Shea Butter 100% Pure Unrefined African Shea Butter",
-    price: "$20 — $35",
-    href: "https://www.amazon.com/dp/B00D9NV2D4",
+    name: "Raw Shea Butter 100% Pure Unrefined African",
+    price: "$17 — $25",
+    href: "https://amzn.to/4oOVMeD",
+  },
+  {
+    name: "Sky Organics Castor Oil Organic",
+    price: "$16 — $32",
+    href: "https://amzn.to/4oCOPgN",
+  },
+  {
+    name: "Leven Rose Jojoba Oil Organic",
+    price: "$9 — $30",
+    href: "https://amzn.to/4uRMAY9",
+  },
+  {
+    name: "RA Cosmetics African Shea Butter Raw Unrefined from Ghana",
+    price: "$10",
+    href: "https://amzn.to/4uSnKYr",
+  },
+  {
+    name: "Good Molecules Pure Cold-Pressed Rosehip Seed Oil",
+    price: "$10",
+    href: "https://amzn.to/4xEFVmZ",
+  },
+  {
+    name: "Palmer's Cocoa Butter Formula Daily Skin Therapy",
+    price: "$4 — $20",
+    href: "https://amzn.to/4ejRCIa",
+  },
+  {
+    name: "Bigelow Tea Purely Peppermint Tea",
+    price: "$28",
+    href: "https://amzn.to/4xG6iJg",
   },
 ]
 
@@ -382,7 +481,7 @@ export default function BioPage() {
                   <a
                     href={item.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer sponsored"
                     style={{
                       display: "block",
                       backgroundColor: "#8B3A3A",
@@ -472,7 +571,7 @@ export default function BioPage() {
                   <a
                     href={item.href}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer sponsored"
                     style={{
                       display: "block",
                       backgroundColor: "#8B3A3A",
