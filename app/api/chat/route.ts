@@ -8,45 +8,65 @@ const groq = createGroq({
 })
 
 const PRODUCT_MAP: Record<string, { name: string; url: string }> = {
-  "B07G2LBQ1G": { name: "Garden of Life Turmeric",          url: "https://www.amazon.com/dp/B07G2LBQ1G" },
-  "B003HD9H0G": { name: "Gaia Herbs Ashwagandha",           url: "https://www.amazon.com/dp/B003HD9H0G" },
-  "B0036THLPE": { name: "Gaia Herbs Elderberry Syrup",      url: "https://www.amazon.com/dp/B0036THLPE" },
-  "B000BD0RT0": { name: "Doctor's Best Magnesium",          url: "https://www.amazon.com/dp/B000BD0RT0" },
-  "B017JXZPPU": { name: "Doctor's Best Vitamin K2 + D3",   url: "https://www.amazon.com/dp/B017JXZPPU" },
-  "B0036THLRW": { name: "Gaia Herbs Quick Defense",         url: "https://www.amazon.com/dp/B0036THLRW" },
-  "B001I7MVG0": { name: "Bragg Apple Cider Vinegar",        url: "https://www.amazon.com/dp/B001I7MVG0" },
-  "B001E10C9I": { name: "Nature's Way Ginger Root",         url: "https://www.amazon.com/dp/B001E10C9I" },
-  "B000GG5IZK": { name: "Bigelow Peppermint Tea",           url: "https://www.amazon.com/dp/B000GG5IZK" },
-  "B001NJNV12": { name: "Trilogy Organic Rosehip Oil",      url: "https://www.amazon.com/dp/B001NJNV12" },
-  "B07G14PWZN": { name: "Cliganic Organic Rosehip Oil",     url: "https://www.amazon.com/dp/B07G14PWZN" },
-  "B00D9NV2D4": { name: "Pure Unrefined Shea Butter",       url: "https://www.amazon.com/dp/B00D9NV2D4" },
-  "B0186U9736": { name: "Sky Organics Castor Oil",          url: "https://www.amazon.com/dp/B0186U9736" },
-  "B00GJX58PE": { name: "Leven Rose Jojoba Oil",            url: "https://www.amazon.com/dp/B00GJX58PE" },
-  "B00987FWHW": { name: "RA Cosmetics Shea Butter",         url: "https://www.amazon.com/dp/B00987FWHW" },
-  "B09Q2X99XG": { name: "The Ordinary Rosehip Oil",         url: "https://www.amazon.com/dp/B09Q2X99XG" },
-  "B0009F3O8Q": { name: "Palmer's Cocoa Butter Lotion",     url: "https://www.amazon.com/dp/B0009F3O8Q" },
-  "B073TJ18JY": { name: "Bigelow Peppermint Spearmint Tea", url: "https://www.amazon.com/dp/B073TJ18JY" },
+  // ── PREMIUM SUPPLEMENTS ──
+  "43MUCXw": { name: "Dose Organic Milk Thistle Liver Cleanse",        url: "https://amzn.to/43MUCXw" },
+  "3SCbdL4": { name: "Resilia Black Seed Oil + Oregano Capsules",      url: "https://amzn.to/3SCbdL4" },
+  "4uJGhG3": { name: "JUNG KWAN JANG Korean Red Ginseng Extract 120g", url: "https://amzn.to/4uJGhG3" },
+  "3QTrBGz": { name: "JUNG KWAN JANG Korean Red Panax Ginseng",        url: "https://amzn.to/3QTrBGz" },
+  "4uRSaKm": { name: "American BioSciences ImmPower AHCC 6-Pack",      url: "https://amzn.to/4uRSaKm" },
+  "3Szuw7O": { name: "Terry Naturally CuraMed 750mg 3-Pack",           url: "https://amzn.to/3Szuw7O" },
+  // ── SUPPLEMENTS ──
+  "4gg9Xaz": { name: "Garden of Life Organics Extra Strength Turmeric", url: "https://amzn.to/4gg9Xaz" },
+  "4xGZI5d": { name: "Gaia Herbs Ashwagandha Root 350mg",              url: "https://amzn.to/4xGZI5d" },
+  "3SRwvEy": { name: "Gaia Herbs Black Elderberry Syrup",              url: "https://amzn.to/3SRwvEy" },
+  "4oDV8Ax": { name: "Doctor's Best High Absorption Magnesium",        url: "https://amzn.to/4oDV8Ax" },
+  "4xEiL03": { name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3", url: "https://amzn.to/4xEiL03" },
+  "43NXcwf": { name: "Gaia Herbs Quick Defense Fast-Acting",           url: "https://amzn.to/43NXcwf" },
+  "4uQyyX4": { name: "Bragg Organic Raw Apple Cider Vinegar",          url: "https://amzn.to/4uQyyX4" },
+  "43Ia3jH": { name: "Nature's Way Premium Ginger Root 550mg",        url: "https://amzn.to/43Ia3jH" },
+  "3SaCX9H": { name: "Bigelow Tea Peppermint Herbal Tea",              url: "https://amzn.to/3SaCX9H" },
+  // ── SKINCARE ──
+  "43IvxwP": { name: "54 Thrones African Beauty Butter Collection",    url: "https://amzn.to/43IvxwP" },
+  "4uJu4RN": { name: "Trilogy Certified Organic Rosehip Oil",          url: "https://amzn.to/4uJu4RN" },
+  "4eAQHBQ": { name: "Cliganic Organic Rosehip Seed Oil",              url: "https://amzn.to/4eAQHBQ" },
+  "4oOVMeD": { name: "Raw Shea Butter 100% Pure Unrefined African",    url: "https://amzn.to/4oOVMeD" },
+  "4oCOPgN": { name: "Sky Organics Castor Oil Organic",                url: "https://amzn.to/4oCOPgN" },
+  "4uRMAY9": { name: "Leven Rose Jojoba Oil Organic",                  url: "https://amzn.to/4uRMAY9" },
+  "4uSnKYr": { name: "RA Cosmetics African Shea Butter Raw Ghana",     url: "https://amzn.to/4uSnKYr" },
+  "4xEFVmZ": { name: "Good Molecules Pure Cold-Pressed Rosehip Oil",   url: "https://amzn.to/4xEFVmZ" },
+  "4ejRCIa": { name: "Palmer's Cocoa Butter Formula Daily Skin Therapy", url: "https://amzn.to/4ejRCIa" },
+  "4xG6iJg": { name: "Bigelow Tea Purely Peppermint Tea",              url: "https://amzn.to/4xG6iJg" },
 }
 
-const KEYWORD_MAP: { keys: string[]; asin: string }[] = [
-  { keys: ["turmeric"],                     asin: "B07G2LBQ1G" },
-  { keys: ["ashwagandha"],                  asin: "B003HD9H0G" },
-  { keys: ["elderberry syrup","elderberry"],asin: "B0036THLPE" },
-  { keys: ["magnesium"],                    asin: "B000BD0RT0" },
-  { keys: ["vitamin k2","k2","d3"],         asin: "B017JXZPPU" },
-  { keys: ["quick defense","echinacea"],    asin: "B0036THLRW" },
-  { keys: ["apple cider vinegar","bragg"],  asin: "B001I7MVG0" },
-  { keys: ["ginger"],                       asin: "B001E10C9I" },
-  { keys: ["peppermint spearmint"],         asin: "B073TJ18JY" },
-  { keys: ["peppermint"],                   asin: "B000GG5IZK" },
-  { keys: ["trilogy","rosehip oil"],        asin: "B001NJNV12" },
-  { keys: ["cliganic"],                     asin: "B07G14PWZN" },
-  { keys: ["shea butter"],                  asin: "B00D9NV2D4" },
-  { keys: ["castor oil"],                   asin: "B0186U9736" },
-  { keys: ["jojoba"],                       asin: "B00GJX58PE" },
-  { keys: ["ra cosmetics"],                 asin: "B00987FWHW" },
-  { keys: ["the ordinary"],                 asin: "B09Q2X99XG" },
-  { keys: ["palmer","cocoa butter"],        asin: "B0009F3O8Q" },
+const KEYWORD_MAP: { keys: string[]; slug: string }[] = [
+  // ── PREMIUM SUPPLEMENTS ──
+  { keys: ["milk thistle", "liver cleanse", "liver"],           slug: "43MUCXw" },
+  { keys: ["black seed oil", "oregano capsules", "black seed"], slug: "3SCbdL4" },
+  { keys: ["korean red ginseng", "ginseng extract"],            slug: "4uJGhG3" },
+  { keys: ["panax ginseng", "extra strength ginseng"],          slug: "3QTrBGz" },
+  { keys: ["ahcc", "immpower", "immune power"],                 slug: "4uRSaKm" },
+  { keys: ["curamed", "curcumin", "terry naturally"],           slug: "3Szuw7O" },
+  // ── SUPPLEMENTS ──
+  { keys: ["turmeric"],                                         slug: "4gg9Xaz" },
+  { keys: ["ashwagandha"],                                      slug: "4xGZI5d" },
+  { keys: ["elderberry syrup", "elderberry"],                   slug: "3SRwvEy" },
+  { keys: ["magnesium"],                                        slug: "4oDV8Ax" },
+  { keys: ["vitamin k2", "k2", "d3", "vitamin d"],             slug: "4xEiL03" },
+  { keys: ["quick defense", "echinacea"],                       slug: "43NXcwf" },
+  { keys: ["apple cider vinegar", "bragg"],                     slug: "4uQyyX4" },
+  { keys: ["ginger"],                                           slug: "43Ia3jH" },
+  { keys: ["peppermint tea", "peppermint"],                     slug: "3SaCX9H" },
+  // ── SKINCARE ──
+  { keys: ["54 thrones", "african beauty butter", "shea butter collection"], slug: "43IvxwP" },
+  { keys: ["trilogy", "rosehip oil"],                           slug: "4uJu4RN" },
+  { keys: ["cliganic", "rosehip seed"],                         slug: "4eAQHBQ" },
+  { keys: ["raw shea butter", "unrefined shea", "shea butter"], slug: "4oOVMeD" },
+  { keys: ["castor oil"],                                       slug: "4oCOPgN" },
+  { keys: ["jojoba"],                                           slug: "4uRMAY9" },
+  { keys: ["ra cosmetics"],                                     slug: "4uSnKYr" },
+  { keys: ["good molecules", "cold pressed rosehip"],           slug: "4xEFVmZ" },
+  { keys: ["palmer", "cocoa butter"],                           slug: "4ejRCIa" },
+  { keys: ["purely peppermint", "bigelow purely"],              slug: "4xG6iJg" },
 ]
 
 function makeBuyButton(name: string, url: string): string {
@@ -62,8 +82,18 @@ function makeBuyButton(name: string, url: string): string {
 }
 
 function processBuyLinks(text: string): string {
-  // Handle BUY_LINK: with full Amazon URL
+  // Handle BUY_LINK: with amzn.to short URLs
   let result = text.replace(
+    /BUY_LINK:\s*(https?:\/\/amzn\.to\/([A-Za-z0-9]+)[^\s\n]*)/gi,
+    (_match, url, slug) => {
+      const product = PRODUCT_MAP[slug]
+      if (product) return makeBuyButton(product.name, product.url)
+      return makeBuyButton("Granny Dovie's Pick", url)
+    }
+  )
+
+  // Handle BUY_LINK: with full Amazon URLs (legacy fallback)
+  result = result.replace(
     /BUY_LINK:\s*(https?:\/\/(?:www\.)?amazon\.com\/dp\/([A-Z0-9]+)[^\s\n]*)/gi,
     (_match, url, asin) => {
       const product = PRODUCT_MAP[asin]
@@ -72,16 +102,16 @@ function processBuyLinks(text: string): string {
     }
   )
 
-  // Handle BUY_LINK: with product name instead of URL
+  // Handle BUY_LINK: with product name keyword fallback
   result = result.replace(
     /BUY_LINK:\s*([^\n<]{3,80})/gi,
     (_match, productText) => {
-      if (productText.includes("amazon.com")) return _match
+      if (productText.includes("amazon.com") || productText.includes("amzn.to")) return _match
       const lower = productText.toLowerCase().trim()
       for (const entry of KEYWORD_MAP) {
         for (const key of entry.keys) {
           if (lower.includes(key)) {
-            const product = PRODUCT_MAP[entry.asin]
+            const product = PRODUCT_MAP[entry.slug]
             if (product) return makeBuyButton(product.name, product.url)
           }
         }
@@ -124,34 +154,47 @@ Continue until all steps are complete. Still speak in Granny Dovie's warm voice 
 PRODUCT RECOMMENDATION RULE — this is critical:
 At the end of your response, you MUST include a product recommendation.
 You MUST output it on its own line in EXACTLY this format with no variation:
-BUY_LINK: https://www.amazon.com/dp/ASIN
+BUY_LINK: https://amzn.to/SLUG
 
-Replace ASIN with the correct code from this list — choose the single best match:
-- Joint Pain: BUY_LINK: https://www.amazon.com/dp/B07G2LBQ1G
-- Stress and Fatigue: BUY_LINK: https://www.amazon.com/dp/B003HD9H0G
-- Immune Support: BUY_LINK: https://www.amazon.com/dp/B0036THLPE
-- Sleep and Nerves: BUY_LINK: https://www.amazon.com/dp/B000BD0RT0
-- Bone Support: BUY_LINK: https://www.amazon.com/dp/B017JXZPPU
-- Cold and Immunity: BUY_LINK: https://www.amazon.com/dp/B0036THLRW
-- Digestion and Gut: BUY_LINK: https://www.amazon.com/dp/B001I7MVG0
-- Stomach and Joints: BUY_LINK: https://www.amazon.com/dp/B001E10C9I
-- Digestion and Calm: BUY_LINK: https://www.amazon.com/dp/B000GG5IZK
-- Anti Aging and Scars: BUY_LINK: https://www.amazon.com/dp/B001NJNV12
-- Brightening and Glow: BUY_LINK: https://www.amazon.com/dp/B07G14PWZN
-- Deep Moisture Dry Skin: BUY_LINK: https://www.amazon.com/dp/B00D9NV2D4
-- Hair Skin and Lashes: BUY_LINK: https://www.amazon.com/dp/B0186U9736
-- Face and Body Hydration: BUY_LINK: https://www.amazon.com/dp/B00GJX58PE
-- Body Butter and Moisture: BUY_LINK: https://www.amazon.com/dp/B00987FWHW
-- Simple Skin Oil: BUY_LINK: https://www.amazon.com/dp/B09Q2X99XG
-- Body Lotion: BUY_LINK: https://www.amazon.com/dp/B0009F3O8Q
-- Skin from Inside: BUY_LINK: https://www.amazon.com/dp/B073TJ18JY
+Replace SLUG with the correct code from this list — choose the single best match:
+
+— PREMIUM SUPPLEMENTS —
+- Liver Cleanse and Detox: BUY_LINK: https://amzn.to/43MUCXw
+- Black Seed Oil and Immunity: BUY_LINK: https://amzn.to/3SCbdL4
+- Energy and Vitality Ginseng: BUY_LINK: https://amzn.to/4uJGhG3
+- Extra Strength Ginseng: BUY_LINK: https://amzn.to/3QTrBGz
+- Immune Power AHCC: BUY_LINK: https://amzn.to/4uRSaKm
+- Inflammation and Joints Premium: BUY_LINK: https://amzn.to/3Szuw7O
+
+— SUPPLEMENTS —
+- Joint Pain and Inflammation: BUY_LINK: https://amzn.to/4gg9Xaz
+- Stress and Fatigue: BUY_LINK: https://amzn.to/4xGZI5d
+- Immune Support: BUY_LINK: https://amzn.to/3SRwvEy
+- Sleep and Nerves: BUY_LINK: https://amzn.to/4oDV8Ax
+- Bone Support: BUY_LINK: https://amzn.to/4xEiL03
+- Cold and Immunity: BUY_LINK: https://amzn.to/43NXcwf
+- Digestion and Gut: BUY_LINK: https://amzn.to/4uQyyX4
+- Stomach and Joints: BUY_LINK: https://amzn.to/43Ia3jH
+- Digestion and Calm Tea: BUY_LINK: https://amzn.to/3SaCX9H
+
+— SKINCARE —
+- African Luxury Butter and Body: BUY_LINK: https://amzn.to/43IvxwP
+- Anti Aging and Scars: BUY_LINK: https://amzn.to/4uJu4RN
+- Brightening and Glow: BUY_LINK: https://amzn.to/4eAQHBQ
+- Deep Moisture Dry Skin: BUY_LINK: https://amzn.to/4oOVMeD
+- Hair Skin and Lashes: BUY_LINK: https://amzn.to/4oCOPgN
+- Face and Body Hydration: BUY_LINK: https://amzn.to/4uRMAY9
+- Body Butter and Moisture: BUY_LINK: https://amzn.to/4uSnKYr
+- Simple Skin Oil: BUY_LINK: https://amzn.to/4xEFVmZ
+- Body Lotion: BUY_LINK: https://amzn.to/4ejRCIa
+- Skin from Inside Tea: BUY_LINK: https://amzn.to/4xG6iJg
 
 RULES:
 - Never claim to cure or treat disease.
 - Never use the words diagnose or prescribe.
 - Never use section headers or emoji labels.
 - Always include a Bible verse naturally woven into your response.
-- Always output BUY_LINK: followed by the full Amazon URL on its own line.
+- Always output BUY_LINK: followed by the full amzn.to URL on its own line.
 - Always end with exactly: "But honey, this is old wisdom passed down through generations — not medical advice. Always check with your doctor too. 🌿"
 - If asked anything outside natural health say exactly: "Now honey, that is a little outside of Granny Dovie's garden. Let us get back to what I know best — what is troubling your body today?"`
 
