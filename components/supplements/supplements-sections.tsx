@@ -1,66 +1,105 @@
 import { images } from "@/lib/site"
 import { ProductCard, type Product } from "@/components/product-card"
 
-const topTier: Product[] = [
+const premiumTier: Product[] = [
   {
-    name: "Garden of Life Extra Strength Turmeric",
-    price: "$38 — $45",
-    quote: "This is the first thing I reach for when the joints start achin', honey.",
-    href: "https://www.amazon.com/dp/B07G2LBQ1G",
+    name: "Dose Organic Milk Thistle Liver Cleanse 6-Bottle Supply",
+    price: "$180",
+    quote: "When you want to cleanse from the inside out — this is the one I trust, honey.",
+    href: "https://amzn.to/43MUCXw",
   },
   {
-    name: "Gaia Herbs Ashwagandha Root Liquid Phyto Capsules",
-    price: "$26 — $39",
+    name: "Resilia Black Seed Oil + Oregano Capsules 300ct",
+    price: "$119",
+    quote: "Black seed oil — the remedy the Prophet himself spoke of. God's medicine, child.",
+    href: "https://amzn.to/3SCbdL4",
+  },
+  {
+    name: "JUNG KWAN JANG Korean Red Ginseng Concentrated Extract 120g",
+    price: "$119",
+    quote: "Six years in the ground before it is harvested. Real patience. Real healing.",
+    href: "https://amzn.to/4uJGhG3",
+  },
+  {
+    name: "JUNG KWAN JANG Korean Red Panax Ginseng Extra Strength",
+    price: "$219",
+    quote: "The strongest ginseng God's earth can give. For when you need real strength, honey.",
+    href: "https://amzn.to/3QTrBGz",
+  },
+  {
+    name: "American BioSciences ImmPower AHCC 6-Pack",
+    price: "$186",
+    quote: "Your immune system works day and night for you. Give it something worthy in return.",
+    href: "https://amzn.to/4uRSaKm",
+  },
+  {
+    name: "Terry Naturally CuraMed 750mg 120 Softgels 3-Pack",
+    price: "$102",
+    quote: "Turmeric so potent it puts the ordinary kind to shame. Worth every penny, honey.",
+    href: "https://amzn.to/3Szuw7O",
+  },
+]
+
+const topTier: Product[] = [
+  {
+    name: "Garden of Life Organics Extra Strength Turmeric 60 Tablets",
+    price: "$23 — $38",
+    quote: "This is the first thing I reach for when the joints start achin', honey.",
+    href: "https://amzn.to/4gg9Xaz",
+  },
+  {
+    name: "Gaia Herbs Ashwagandha Root 350mg",
+    price: "$25 — $48",
     quote: "When your spirit is weary and your body is worn — this is God's answer.",
-    href: "https://www.amazon.com/dp/B003HD9H0G",
+    href: "https://amzn.to/4xGZI5d",
   },
   {
     name: "Gaia Herbs Black Elderberry Syrup",
-    price: "$25 — $45",
+    price: "$22 — $33",
     quote: "God put elderberry here before any pharmacy ever opened, child.",
-    href: "https://www.amazon.com/dp/B0036THLPE",
+    href: "https://amzn.to/3SRwvEy",
   },
 ]
 
 const midTier: Product[] = [
   {
-    name: "Doctor's Best High Absorption Magnesium Glycinate",
-    price: "$20 — $30",
+    name: "Doctor's Best High Absorption Magnesium Glycinate Lysinate",
+    price: "$12 — $20",
     quote: "For sleep, for nerves, for tired muscles — magnesium does quiet work.",
-    href: "https://www.amazon.com/dp/B000BD0RT0",
+    href: "https://amzn.to/4oDV8Ax",
   },
   {
     name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3",
-    price: "$20 — $35",
+    price: "$24",
     quote: "The good Lord gave us sunlight for a reason — this is sunshine in a bottle.",
-    href: "https://www.amazon.com/dp/B017JXZPPU",
+    href: "https://amzn.to/4xEiL03",
   },
   {
-    name: "Gaia Herbs Quick Defense Echinacea & Elderberry",
-    price: "$20 — $30",
+    name: "Gaia Herbs Quick Defense Fast-Acting",
+    price: "$25 — $66",
     quote: "First sign of a cold coming — reach for echinacea before anything else.",
-    href: "https://www.amazon.com/dp/B0036THLRW",
+    href: "https://amzn.to/43NXcwf",
   },
 ]
 
 const lowTier: Product[] = [
   {
-    name: "Bragg Organic Raw Apple Cider Vinegar 32oz",
-    price: "Under $15",
+    name: "Bragg Organic Raw Apple Cider Vinegar",
+    price: "$4 — $6",
     quote: "One tablespoon every morning. Simple as that. Been doing it 40 years.",
-    href: "https://www.amazon.com/dp/B001I7MVG0",
+    href: "https://amzn.to/4uQyyX4",
   },
   {
-    name: "Nature's Way Ginger Root Capsules 550mg",
-    price: "Under $15",
+    name: "Nature's Way Premium Ginger Root 550mg",
+    price: "$29",
     quote: "Ginger has been healin' stomachs and joints since Bible times, honey.",
-    href: "https://www.amazon.com/dp/B001E10C9I",
+    href: "https://amzn.to/43Ia3jH",
   },
   {
-    name: "Bigelow Peppermint Herbal Tea 120 Bags",
-    price: "Under $10",
+    name: "Bigelow Tea Peppermint Herbal Tea",
+    price: "$20",
     quote: "A cup of peppermint tea can settle more than just your stomach, honey.",
-    href: "https://www.amazon.com/dp/B000GG5IZK",
+    href: "https://amzn.to/3SaCX9H",
   },
 ]
 
@@ -101,7 +140,9 @@ function Tier({
     <section className={isForest ? "bg-forest py-16" : "bg-parchment py-16"}>
       <div className="mx-auto max-w-6xl px-4">
         <div className="text-center">
-          <p className="font-body text-lg font-semibold uppercase tracking-wide text-gold">{label}</p>
+          <p className="font-body text-lg font-semibold uppercase tracking-wide text-gold">
+            {label}
+          </p>
           <h2
             className={`mt-1 text-balance font-serif text-3xl font-bold sm:text-4xl ${
               isForest ? "text-parchment" : "text-heading"
@@ -117,6 +158,17 @@ function Tier({
         </div>
       </div>
     </section>
+  )
+}
+
+export function SupplementsPremiumTier() {
+  return (
+    <Tier
+      label="⭐ Granny's Premium Pick"
+      heading="The Strongest Remedies I Know"
+      products={premiumTier}
+      variant="forest"
+    />
   )
 }
 
