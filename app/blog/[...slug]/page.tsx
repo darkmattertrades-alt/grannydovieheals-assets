@@ -27,7 +27,7 @@ const components = {
 }
 
 type Props = {
-  params: { slug: string[] }
+  params: Promise<{ slug: string[] }>
 }
 
 export async function generateStaticParams() {
@@ -40,9 +40,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.slug[0]
+  const { slug } = await params
+  const slugStr = slug[0]
 
-  const category = CATEGORIES[slug as BlogCategory]
+  const category = CATEGORIES[slugStr as BlogCategory]
   if (category) {
     return {
       title: `${category.label} Remedies — Granny Dovie Heals`,
@@ -50,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
 
-  const post = getPostBySlug(slug)
+  const post = getPostBySlug(slugStr)
   if (!post) return {}
 
   return {
@@ -68,12 +69,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function BlogSlugPage({ params }: Props) {
-  const slug = params.slug[0]
+export default async function BlogSlugPage({ params }: Props) {
+  const { slug } = await params
+  const slugStr = slug[0]
 
-  const category = CATEGORIES[slug as BlogCategory]
+  const category = CATEGORIES[slugStr as BlogCategory]
   if (category) {
-    const posts = getPostsByCategory(slug as BlogCategory)
+    const posts = getPostsByCategory(slugStr as BlogCategory)
     return (
       <main className="min-h-screen bg-white">
         <section className="bg-green-50 border-b border-green-100 px-4 py-14 text-center">
@@ -99,7 +101,7 @@ export default function BlogSlugPage({ params }: Props) {
                 key={cat.slug}
                 href={`/blog/${cat.slug}`}
                 className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
-                  cat.slug === slug
+                  cat.slug === slugStr
                     ? "border-green-700 bg-green-700 text-white"
                     : "border-green-200 text-green-700 hover:bg-green-50"
                 }`}
@@ -150,7 +152,7 @@ export default function BlogSlugPage({ params }: Props) {
     )
   }
 
-  const post = getPostBySlug(slug)
+  const post = getPostBySlug(slugStr)
   if (!post) notFound()
 
   const relatedPosts = getRelatedPosts(post.slug, post.relatedSlugs ?? [])
