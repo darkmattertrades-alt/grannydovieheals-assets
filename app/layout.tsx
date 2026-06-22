@@ -198,9 +198,9 @@ export default function RootLayout({
     // 4. Convert remaining newlines to <br/>
     formatted = formatted.replace(/\n/g, '<br/>');
 
-    // 5. Bold and color Step headings
+    // 5. Bold and color Step headings — fixed regex to capture full step text
     formatted = formatted.replace(
-      /(Step\s+\d+\s*[\u2014\-]+[^<]+)/gi,
+      /(Step\s+\d+\s*[\u2014\-]+[^<br>][^<]*)/gi,
       function(match) {
         return '<span style="display:block;margin-top:8px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>';
       }
