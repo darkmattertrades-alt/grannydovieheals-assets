@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export function GrannyChat() {
   return (
     <>
@@ -40,7 +42,7 @@ export function GrannyChat() {
         <span aria-hidden>🌿</span>
       </button>
 
-      {/* Chat window — no display property; JS in layout.tsx controls show/hide */}
+      {/* Chat window */}
       <div
         id="chat-window"
         role="dialog"
@@ -65,10 +67,16 @@ export function GrannyChat() {
           style={{ backgroundColor: "#3B5E3A" }}
         >
           <div>
-            <h2 className="font-serif text-lg font-bold leading-tight" style={{ color: "#F5ECD7" }}>
+            <h2
+              className="font-serif text-lg font-bold leading-tight"
+              style={{ color: "#F5ECD7" }}
+            >
               Chat with Granny Dovie 🌿
             </h2>
-            <p className="font-body text-xs leading-tight" style={{ color: "#C8922A" }}>
+            <p
+              className="font-body text-xs leading-tight"
+              style={{ color: "#C8922A" }}
+            >
               Real Remedies. Old Ways. God&apos;s Design.
             </p>
           </div>
@@ -83,7 +91,7 @@ export function GrannyChat() {
           </button>
         </div>
 
-        {/* Suggestion pills — always visible */}
+        {/* Suggestion pills */}
         <div
           id="chat-suggestions"
           style={{
@@ -98,18 +106,43 @@ export function GrannyChat() {
         >
           <p
             className="font-body w-full"
-            style={{ fontSize: "11px", color: "#8B3A3A", marginBottom: "4px", fontStyle: "italic" }}
+            style={{
+              fontSize: "11px",
+              color: "#8B3A3A",
+              marginBottom: "4px",
+              fontStyle: "italic",
+            }}
           >
             Ask Granny something, honey 🌿
           </p>
 
           {[
-            { label: "🫐 Make elderberry syrup?", question: "How do I make elderberry syrup from scratch?" },
-            { label: "🌿 What helps joint pain?", question: "What is a good natural remedy for joint pain?" },
-            { label: "😴 Help me sleep naturally", question: "What are some natural remedies to help me sleep?" },
-            { label: "🤒 I feel a cold coming on", question: "I feel a cold coming on, what should I do?" },
-            { label: "🧴 Natural skin remedies", question: "What natural remedies are good for dry or aging skin?" },
-            { label: "🪜 Show me step by step", question: "Can you walk me through how to make a natural home remedy step by step?" },
+            {
+              label: "🫐 Make elderberry syrup?",
+              question: "How do I make elderberry syrup from scratch?",
+            },
+            {
+              label: "🌿 What helps joint pain?",
+              question: "What is a good natural remedy for joint pain?",
+            },
+            {
+              label: "😴 Help me sleep naturally",
+              question: "What are some natural remedies to help me sleep?",
+            },
+            {
+              label: "🤒 I feel a cold coming on",
+              question: "I feel a cold coming on, what should I do?",
+            },
+            {
+              label: "🧴 Natural skin remedies",
+              question:
+                "What natural remedies are good for dry or aging skin?",
+            },
+            {
+              label: "🪜 Show me step by step",
+              question:
+                "Can you walk me through how to make a natural home remedy step by step?",
+            },
           ].map(({ label, question }) => (
             <button
               key={label}
@@ -133,7 +166,7 @@ export function GrannyChat() {
           ))}
         </div>
 
-        {/* Step-by-step example card — always visible */}
+        {/* Step-by-step example card */}
         <div
           id="chat-step-card"
           style={{
@@ -147,16 +180,37 @@ export function GrannyChat() {
         >
           <p
             className="font-body"
-            style={{ fontSize: "11px", color: "#8B3A3A", fontWeight: 700, marginBottom: "6px" }}
+            style={{
+              fontSize: "11px",
+              color: "#8B3A3A",
+              fontWeight: 700,
+              marginBottom: "6px",
+            }}
           >
             🪜 Example — Step by Step Response
           </p>
-          <p className="font-body" style={{ fontSize: "11px", color: "#5a3e2b", lineHeight: "1.6" }}>
-            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 1</span> — Gather your dried elderberries and filtered water<br />
-            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 2</span> — Simmer with cinnamon and cloves for 45 minutes<br />
-            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 3</span> — Strain and stir in raw honey once cooled<br />
-            <span style={{ fontSize: "10px", color: "#8B3A3A", fontStyle: "italic" }}>
-              Ask Granny how to make anything and she will walk you through it 🌿
+          <p
+            className="font-body"
+            style={{ fontSize: "11px", color: "#5a3e2b", lineHeight: "1.6" }}
+          >
+            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 1</span>{" "}
+            — Gather your dried elderberries and filtered water
+            <br />
+            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 2</span>{" "}
+            — Simmer with cinnamon and cloves for 45 minutes
+            <br />
+            <span style={{ color: "#3B5E3A", fontWeight: 700 }}>Step 3</span>{" "}
+            — Strain and stir in raw honey once cooled
+            <br />
+            <span
+              style={{
+                fontSize: "10px",
+                color: "#8B3A3A",
+                fontStyle: "italic",
+              }}
+            >
+              Ask Granny how to make anything and she will walk you through it
+              🌿
             </span>
           </p>
         </div>
@@ -192,43 +246,214 @@ export function GrannyChat() {
         </div>
       </div>
 
-      {/* Inline script */}
+      {/* ── INLINE SCRIPT ── */}
       <script
         dangerouslySetInnerHTML={{
           __html: `
 (function () {
+
+  // ── ALL 26 AMAZON PRODUCTS — amzn.to affiliate links ──────────────────
   var PRODUCTS = [
-    { keys: ["turmeric"],                      name: "Garden of Life Turmeric",          url: "https://www.amazon.com/dp/B07G2LBQ1G" },
-    { keys: ["ashwagandha"],                   name: "Gaia Herbs Ashwagandha",           url: "https://www.amazon.com/dp/B003HD9H0G" },
-    { keys: ["elderberry syrup","elderberry"], name: "Gaia Herbs Elderberry Syrup",      url: "https://www.amazon.com/dp/B0036THLPE" },
-    { keys: ["magnesium"],                     name: "Doctor's Best Magnesium",          url: "https://www.amazon.com/dp/B000BD0RT0" },
-    { keys: ["vitamin k2","k2","d3"],          name: "Doctor's Best Vitamin K2 + D3",    url: "https://www.amazon.com/dp/B017JXZPPU" },
-    { keys: ["quick defense","echinacea"],     name: "Gaia Herbs Quick Defense",         url: "https://www.amazon.com/dp/B0036THLRW" },
-    { keys: ["apple cider vinegar","bragg"],   name: "Bragg Apple Cider Vinegar",        url: "https://www.amazon.com/dp/B001I7MVG0" },
-    { keys: ["ginger"],                        name: "Nature's Way Ginger Root",         url: "https://www.amazon.com/dp/B001E10C9I" },
-    { keys: ["peppermint spearmint"],          name: "Bigelow Peppermint Spearmint Tea", url: "https://www.amazon.com/dp/B073TJ18JY" },
-    { keys: ["peppermint"],                    name: "Bigelow Peppermint Tea",           url: "https://www.amazon.com/dp/B000GG5IZK" },
-    { keys: ["trilogy","rosehip oil"],         name: "Trilogy Organic Rosehip Oil",      url: "https://www.amazon.com/dp/B001NJNV12" },
-    { keys: ["cliganic"],                      name: "Cliganic Organic Rosehip Oil",     url: "https://www.amazon.com/dp/B07G14PWZN" },
-    { keys: ["shea butter"],                   name: "Pure Unrefined Shea Butter",       url: "https://www.amazon.com/dp/B00D9NV2D4" },
-    { keys: ["castor oil"],                    name: "Sky Organics Castor Oil",          url: "https://www.amazon.com/dp/B0186U9736" },
-    { keys: ["jojoba"],                        name: "Leven Rose Jojoba Oil",            url: "https://www.amazon.com/dp/B00GJX58PE" },
-    { keys: ["ra cosmetics"],                  name: "RA Cosmetics Shea Butter",         url: "https://www.amazon.com/dp/B00987FWHW" },
-    { keys: ["the ordinary"],                  name: "The Ordinary Rosehip Oil",         url: "https://www.amazon.com/dp/B09Q2X99XG" },
-    { keys: ["palmer","cocoa butter"],         name: "Palmer's Cocoa Butter Lotion",     url: "https://www.amazon.com/dp/B0009F3O8Q" },
+
+    // SUPPLEMENTS — PREMIUM TIER
+    { keys: ["milk thistle","dose milk thistle"],
+      name: "Dose Organic Milk Thistle Liver Cleanse 6-Bottle Supply",
+      url:  "https://amzn.to/43MUCXw" },
+
+    { keys: ["black seed oil","resilia"],
+      name: "Resilia Black Seed Oil + Oregano Capsules 300ct",
+      url:  "https://amzn.to/3SCbdL4" },
+
+    { keys: ["red ginseng extract","jung kwan jang extract"],
+      name: "JUNG KWAN JANG Korean Red Ginseng Concentrated Extract",
+      url:  "https://amzn.to/4uJGhG3" },
+
+    { keys: ["red panax ginseng","jung kwan jang extra strength","ginseng extra strength"],
+      name: "JUNG KWAN JANG Korean Red Panax Ginseng Extra Strength",
+      url:  "https://amzn.to/3QTrBGz" },
+
+    { keys: ["ahcc","immpower"],
+      name: "American BioSciences ImmPower AHCC 6-Pack",
+      url:  "https://amzn.to/4uRSaKm" },
+
+    { keys: ["curamed","terry naturally"],
+      name: "Terry Naturally CuraMed 750mg 120 Softgels 3-Pack",
+      url:  "https://amzn.to/3Szuw7O" },
+
+    // SUPPLEMENTS — TRUSTED TIER
+    { keys: ["turmeric","garden of life turmeric"],
+      name: "Garden of Life Organics Extra Strength Turmeric",
+      url:  "https://amzn.to/4gg9Xaz" },
+
+    { keys: ["ashwagandha","gaia ashwagandha"],
+      name: "Gaia Herbs Ashwagandha Root 350mg",
+      url:  "https://amzn.to/4xGZI5d" },
+
+    { keys: ["elderberry syrup","elderberry","gaia elderberry"],
+      name: "Gaia Herbs Black Elderberry Syrup",
+      url:  "https://amzn.to/3SRwvEy" },
+
+    { keys: ["magnesium","magnesium glycinate","doctor's best magnesium"],
+      name: "Doctor's Best High Absorption Magnesium Glycinate",
+      url:  "https://amzn.to/4oDV8Ax" },
+
+    { keys: ["vitamin k2","k2 d3","vitamin k2 d3","doctor's best k2"],
+      name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3",
+      url:  "https://amzn.to/4xEiL03" },
+
+    { keys: ["quick defense","gaia quick defense"],
+      name: "Gaia Herbs Quick Defense Fast-Acting",
+      url:  "https://amzn.to/43NXcwf" },
+
+    { keys: ["apple cider vinegar","bragg","bragg acv","acv"],
+      name: "Bragg Organic Raw Apple Cider Vinegar",
+      url:  "https://amzn.to/4uQyyX4" },
+
+    { keys: ["ginger root","nature's way ginger","ginger capsules"],
+      name: "Nature's Way Premium Ginger Root 550mg",
+      url:  "https://amzn.to/43Ia3jH" },
+
+    { keys: ["peppermint herbal tea","bigelow peppermint herbal"],
+      name: "Bigelow Tea Peppermint Herbal Tea",
+      url:  "https://amzn.to/3SaCX9H" },
+
+    { keys: ["soursop","soursop bitters"],
+      name: "Soursop Bitters Liquid Digestive Support",
+      url:  "https://amzn.to/4vVRDYz" },
+
+    // SKINCARE
+    { keys: ["54 thrones","african beauty butter"],
+      name: "54 Thrones African Beauty Butter Collection",
+      url:  "https://amzn.to/43IvxwP" },
+
+    { keys: ["trilogy rosehip","trilogy certified"],
+      name: "Trilogy Certified Organic Rosehip Oil",
+      url:  "https://amzn.to/4uJu4RN" },
+
+    { keys: ["cliganic rosehip","cliganic"],
+      name: "Cliganic Organic Rosehip Seed Oil",
+      url:  "https://amzn.to/4eAQHBQ" },
+
+    { keys: ["shea butter","raw shea butter","unrefined shea"],
+      name: "Raw Shea Butter 100% Pure Unrefined African",
+      url:  "https://amzn.to/4oOVMeD" },
+
+    { keys: ["castor oil","sky organics castor"],
+      name: "Sky Organics Castor Oil Organic",
+      url:  "https://amzn.to/4oCOPgN" },
+
+    { keys: ["jojoba oil","leven rose jojoba"],
+      name: "Leven Rose Jojoba Oil Organic",
+      url:  "https://amzn.to/4uRMAY9" },
+
+    { keys: ["ra cosmetics","ra shea butter","african shea ghana"],
+      name: "RA Cosmetics African Shea Butter Raw Unrefined from Ghana",
+      url:  "https://amzn.to/4uSnKYr" },
+
+    { keys: ["good molecules rosehip","good molecules"],
+      name: "Good Molecules Pure Cold-Pressed Rosehip Seed Oil",
+      url:  "https://amzn.to/4xEFVmZ" },
+
+    { keys: ["cocoa butter","palmer","palmer's cocoa"],
+      name: "Palmer's Cocoa Butter Formula Daily Skin Therapy",
+      url:  "https://amzn.to/4ejRCIa" },
+
+    { keys: ["purely peppermint","bigelow purely peppermint"],
+      name: "Bigelow Tea Purely Peppermint Tea",
+      url:  "https://amzn.to/4xG6iJg" },
   ];
 
-  function makeButton(name, url) {
+  // ── ALL 10 CLICKBANK PRODUCTS ──────────────────────────────────────────
+  var CLICKBANK = [
+    {
+      keys: ["bloating","digestion","gut health","stomach","constipation","gas","acv","apple cider vinegar"],
+      label: "GutVita",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
+    },
+    {
+      keys: ["leaky gut","gut bacteria","ibs","bowel","microbiome","vivogut"],
+      label: "VivoGut",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut",
+    },
+    {
+      keys: ["immune","sick","cold","flu","virus","infection","immunity","elderberry"],
+      label: "VisiFlora",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
+    },
+    {
+      keys: ["joint pain","knee pain","arthritis","stiffness","inflammation","joint","turmeric"],
+      label: "Balmorex",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain",
+    },
+    {
+      keys: ["nerve pain","neuropathy","tingling","numbness","burning feet","nerve"],
+      label: "Nerve Armor",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main",
+    },
+    {
+      keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar cravings","gluco"],
+      label: "Gluco6",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6",
+    },
+    {
+      keys: ["energy crash","sugar crash","carb cravings","afternoon slump","sweet tooth","sugar defender"],
+      label: "Sugar Defender",
+      url:   "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new",
+    },
+    {
+      keys: ["prediabetes","metabolic","belly fat","blood glucose","insuleaf"],
+      label: "InsuLeaf",
+      url:   "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals",
+    },
+    {
+      keys: ["sleep","insomnia","restless","can't sleep","wake up","tired","exhausted","magnesium"],
+      label: "Sleep Revive",
+      url:   "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
+    },
+    {
+      keys: ["skin","wrinkles","sagging","collagen","dark spots","aging skin","stress","cortisol","hormones","ashwagandha"],
+      label: "Synevra UltraLift",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=synevra",
+    },
+  ];
+
+  // ── BUILD AMAZON BUTTON ────────────────────────────────────────────────
+  function makeAmazonButton(name, url) {
     return (
-      '<br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
+      '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
       'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
       'padding:10px 18px;border-radius:8px;text-decoration:none;' +
       'font-family:Lora,serif;font-size:13px;font-weight:600;' +
-      'margin-top:8px;margin-bottom:8px;">' +
-      '&#128722; ' + name + ' &#8594; Buy on Amazon</a><br/>'
+      'margin-top:8px;margin-bottom:4px;">' +
+      '&#128722; ' + name + ' &rarr; Buy on Amazon</a><br/>'
     );
   }
 
+  // ── BUILD CLICKBANK BUTTON ─────────────────────────────────────────────
+  function makeClickbankButton(label, url) {
+    return (
+      '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
+      'style="display:inline-block;background:#C8922A;color:#fff;' +
+      'padding:10px 18px;border-radius:8px;text-decoration:none;' +
+      'font-family:Lora,serif;font-size:13px;font-weight:600;' +
+      'margin-top:4px;margin-bottom:8px;">' +
+      '&#127807; ' + label + ' &rarr; Learn More</a><br/>'
+    );
+  }
+
+  // ── MATCH PRODUCT KEYS AGAINST MESSAGE ────────────────────────────────
+  function matchProduct(lower, list) {
+    for (var i = 0; i < list.length; i++) {
+      var p = list[i];
+      var keyArr = p.keys || [];
+      for (var j = 0; j < keyArr.length; j++) {
+        if (lower.indexOf(keyArr[j]) !== -1) return p;
+      }
+    }
+    return null;
+  }
+
+  // ── WIRE SUGGESTION PILLS ─────────────────────────────────────────────
   function wireSuggestionPills() {
     var pills = document.querySelectorAll(".chat-suggestion-pill");
     pills.forEach(function (pill) {
@@ -254,6 +479,7 @@ export function GrannyChat() {
     });
   }
 
+  // ── PATCH formatReply ─────────────────────────────────────────────────
   function patchFormatReply() {
     if (typeof window.__grannyFormatReplyPatched !== "undefined") return;
     window.__grannyFormatReplyPatched = true;
@@ -263,54 +489,40 @@ export function GrannyChat() {
     window.formatReply = function (text) {
       var html = originalFormatReply ? originalFormatReply(text) : text;
 
-      // 1. BUY_LINK: with full Amazon URL
+      // 1. Replace BUY_LINK: placeholders with Amazon buttons
       html = html.replace(
-        /BUY_LINK:\\s*(https?:\\/\\/(?:www\\.)?amazon\\.com\\/dp\\/([A-Z0-9]+)[^\\s<]*)/gi,
-        function (_, url, asin) {
-          var nameMap = {
-            "B07G2LBQ1G": "Garden of Life Turmeric",
-            "B003HD9H0G": "Gaia Herbs Ashwagandha",
-            "B0036THLPE": "Gaia Herbs Elderberry Syrup",
-            "B000BD0RT0": "Doctor's Best Magnesium",
-            "B017JXZPPU": "Doctor's Best Vitamin K2 + D3",
-            "B0036THLRW": "Gaia Herbs Quick Defense",
-            "B001I7MVG0": "Bragg Apple Cider Vinegar",
-            "B001E10C9I": "Nature's Way Ginger Root",
-            "B000GG5IZK": "Bigelow Peppermint Tea",
-            "B001NJNV12": "Trilogy Organic Rosehip Oil",
-            "B07G14PWZN": "Cliganic Organic Rosehip Oil",
-            "B00D9NV2D4": "Pure Unrefined Shea Butter",
-            "B0186U9736": "Sky Organics Castor Oil",
-            "B00GJX58PE": "Leven Rose Jojoba Oil",
-            "B00987FWHW": "RA Cosmetics Shea Butter",
-            "B09Q2X99XG": "The Ordinary Rosehip Oil",
-            "B0009F3O8Q": "Palmer's Cocoa Butter Lotion",
-            "B073TJ18JY": "Bigelow Peppermint Spearmint Tea",
-          };
-          var name = nameMap[asin] || "Granny Dovie's Pick";
-          return makeButton(name, url);
+        /BUY_LINK:\\s*(https?:\\/\\/amzn\\.to\\/[A-Za-z0-9]+)/gi,
+        function (_, url) {
+          // Match url back to product name
+          var matched = null;
+          for (var i = 0; i < PRODUCTS.length; i++) {
+            if (PRODUCTS[i].url === url) { matched = PRODUCTS[i]; break; }
+          }
+          var name = matched ? matched.name : "Granny Dovie's Pick";
+          return makeAmazonButton(name, url);
         }
       );
 
-      // 2. BUY_LINK: with product name instead of URL — keyword match fallback
+      // 2. BUY_LINK: with keyword text fallback
       html = html.replace(
         /BUY_LINK:\\s*([^\\n<]{3,80})/gi,
         function (match, productText) {
-          if (productText.indexOf("amazon.com") !== -1) return match;
+          if (productText.indexOf("amzn.to") !== -1) return match;
           var lower = productText.toLowerCase().trim();
-          for (var i = 0; i < PRODUCTS.length; i++) {
-            var p = PRODUCTS[i];
-            for (var j = 0; j < p.keys.length; j++) {
-              if (lower.indexOf(p.keys[j]) !== -1) {
-                return makeButton(p.name, p.url);
-              }
-            }
-          }
+          var p = matchProduct(lower, PRODUCTS);
+          if (p) return makeAmazonButton(p.name, p.url);
           return "";
         }
       );
 
-      // 3. Step formatting — bold green
+      // 3. Inject Clickbank button based on full reply content
+      var lowerHtml = html.toLowerCase();
+      var cb = matchProduct(lowerHtml, CLICKBANK);
+      if (cb) {
+        html += makeClickbankButton(cb.label, cb.url);
+      }
+
+      // 4. Bold and color Step headings
       html = html.replace(
         /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
         function (match) {
@@ -329,6 +541,7 @@ export function GrannyChat() {
     wireSuggestionPills();
     patchFormatReply();
   });
+
 })();
           `,
         }}
