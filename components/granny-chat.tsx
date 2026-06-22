@@ -192,11 +192,50 @@ export function GrannyChat() {
         </div>
       </div>
 
-      {/* Inline script — suggestion pills only, no formatReply override */}
+      {/* Inline script */}
       <script
         dangerouslySetInnerHTML={{
           __html: `
 (function () {
+  var PRODUCTS = [
+    { keys: ["milk thistle","liver"],          name: "Dose Organic Milk Thistle Liver Cleanse",        url: "https://amzn.to/43MUCXw" },
+    { keys: ["black seed oil","black seed"],   name: "Resilia Black Seed Oil + Oregano Capsules",      url: "https://amzn.to/3SCbdL4" },
+    { keys: ["korean red ginseng","ginseng extract"], name: "JUNG KWAN JANG Korean Red Ginseng Extract", url: "https://amzn.to/4uJGhG3" },
+    { keys: ["panax ginseng","extra strength ginseng"], name: "JUNG KWAN JANG Korean Red Panax Ginseng", url: "https://amzn.to/3QTrBGz" },
+    { keys: ["ahcc","immpower"],               name: "American BioSciences ImmPower AHCC 6-Pack",      url: "https://amzn.to/4uRSaKm" },
+    { keys: ["curamed","curcumin"],            name: "Terry Naturally CuraMed 750mg 3-Pack",           url: "https://amzn.to/3Szuw7O" },
+    { keys: ["turmeric"],                      name: "Garden of Life Organics Extra Strength Turmeric", url: "https://amzn.to/4gg9Xaz" },
+    { keys: ["ashwagandha"],                   name: "Gaia Herbs Ashwagandha Root 350mg",              url: "https://amzn.to/4xGZI5d" },
+    { keys: ["elderberry syrup","elderberry"], name: "Gaia Herbs Black Elderberry Syrup",              url: "https://amzn.to/3SRwvEy" },
+    { keys: ["magnesium"],                     name: "Doctor's Best High Absorption Magnesium",        url: "https://amzn.to/4oDV8Ax" },
+    { keys: ["vitamin k2","k2","d3"],          name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3", url: "https://amzn.to/4xEiL03" },
+    { keys: ["quick defense","echinacea"],     name: "Gaia Herbs Quick Defense Fast-Acting",           url: "https://amzn.to/43NXcwf" },
+    { keys: ["apple cider vinegar","bragg"],   name: "Bragg Organic Raw Apple Cider Vinegar",          url: "https://amzn.to/4uQyyX4" },
+    { keys: ["ginger"],                        name: "Nature's Way Premium Ginger Root 550mg",         url: "https://amzn.to/43Ia3jH" },
+    { keys: ["peppermint spearmint"],          name: "Bigelow Tea Peppermint Herbal Tea",              url: "https://amzn.to/3SaCX9H" },
+    { keys: ["peppermint"],                    name: "Bigelow Tea Purely Peppermint Tea",              url: "https://amzn.to/4xG6iJg" },
+    { keys: ["54 thrones","african beauty butter"], name: "54 Thrones African Beauty Butter Collection", url: "https://amzn.to/43IvxwP" },
+    { keys: ["trilogy","rosehip oil"],         name: "Trilogy Certified Organic Rosehip Oil",          url: "https://amzn.to/4uJu4RN" },
+    { keys: ["cliganic"],                      name: "Cliganic Organic Rosehip Seed Oil",              url: "https://amzn.to/4eAQHBQ" },
+    { keys: ["shea butter"],                   name: "Raw Shea Butter 100% Pure Unrefined African",    url: "https://amzn.to/4oOVMeD" },
+    { keys: ["castor oil"],                    name: "Sky Organics Castor Oil Organic",                url: "https://amzn.to/4oCOPgN" },
+    { keys: ["jojoba"],                        name: "Leven Rose Jojoba Oil Organic",                  url: "https://amzn.to/4uRMAY9" },
+    { keys: ["ra cosmetics"],                  name: "RA Cosmetics African Shea Butter Raw Ghana",     url: "https://amzn.to/4uSnKYr" },
+    { keys: ["good molecules"],                name: "Good Molecules Pure Cold-Pressed Rosehip Oil",   url: "https://amzn.to/4xEFVmZ" },
+    { keys: ["palmer","cocoa butter"],         name: "Palmer's Cocoa Butter Formula Daily Skin Therapy", url: "https://amzn.to/4ejRCIa" },
+  ];
+
+  function makeButton(name, url) {
+    return (
+      '<br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
+      'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
+      'padding:10px 18px;border-radius:8px;text-decoration:none;' +
+      'font-family:Lora,serif;font-size:13px;font-weight:600;' +
+      'margin-top:8px;margin-bottom:8px;">' +
+      '&#128722; ' + name + ' &#8594; Buy on Amazon</a><br/>'
+    );
+  }
+
   function wireSuggestionPills() {
     var pills = document.querySelectorAll(".chat-suggestion-pill");
     pills.forEach(function (pill) {
@@ -222,11 +261,88 @@ export function GrannyChat() {
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", wireSuggestionPills);
-  } else {
-    wireSuggestionPills();
+  function patchFormatReply() {
+    if (typeof window.__grannyFormatReplyPatched !== "undefined") return;
+    window.__grannyFormatReplyPatched = true;
+
+    var originalFormatReply = window.formatReply;
+
+    window.formatReply = function (text) {
+      var html = originalFormatReply ? originalFormatReply(text) : text;
+
+      // 1. BUY_LINK: with amzn.to short URLs
+      html = html.replace(
+        /BUY_LINK:\\s*(https?:\\/\\/amzn\\.to\\/([A-Za-z0-9]+)[^\\s<]*)/gi,
+        function (_, url, slug) {
+          var nameMap = {
+            "43MUCXw": "Dose Organic Milk Thistle Liver Cleanse",
+            "3SCbdL4": "Resilia Black Seed Oil + Oregano Capsules",
+            "4uJGhG3": "JUNG KWAN JANG Korean Red Ginseng Extract",
+            "3QTrBGz": "JUNG KWAN JANG Korean Red Panax Ginseng",
+            "4uRSaKm": "American BioSciences ImmPower AHCC 6-Pack",
+            "3Szuw7O": "Terry Naturally CuraMed 750mg 3-Pack",
+            "4gg9Xaz": "Garden of Life Organics Extra Strength Turmeric",
+            "4xGZI5d": "Gaia Herbs Ashwagandha Root 350mg",
+            "3SRwvEy": "Gaia Herbs Black Elderberry Syrup",
+            "4oDV8Ax": "Doctor's Best High Absorption Magnesium",
+            "4xEiL03": "Doctor's Best Natural Vitamin K2 MK-7 Plus D3",
+            "43NXcwf": "Gaia Herbs Quick Defense Fast-Acting",
+            "4uQyyX4": "Bragg Organic Raw Apple Cider Vinegar",
+            "43Ia3jH": "Nature's Way Premium Ginger Root 550mg",
+            "3SaCX9H": "Bigelow Tea Peppermint Herbal Tea",
+            "43IvxwP": "54 Thrones African Beauty Butter Collection",
+            "4uJu4RN": "Trilogy Certified Organic Rosehip Oil",
+            "4eAQHBQ": "Cliganic Organic Rosehip Seed Oil",
+            "4oOVMeD": "Raw Shea Butter 100% Pure Unrefined African",
+            "4oCOPgN": "Sky Organics Castor Oil Organic",
+            "4uRMAY9": "Leven Rose Jojoba Oil Organic",
+            "4uSnKYr": "RA Cosmetics African Shea Butter Raw Ghana",
+            "4xEFVmZ": "Good Molecules Pure Cold-Pressed Rosehip Oil",
+            "4ejRCIa": "Palmer's Cocoa Butter Formula Daily Skin Therapy",
+            "4xG6iJg": "Bigelow Tea Purely Peppermint Tea",
+          };
+          var name = nameMap[slug] || "Granny Dovie's Pick";
+          return makeButton(name, url);
+        }
+      );
+
+      // 2. BUY_LINK: with product name instead of URL — keyword match fallback
+      html = html.replace(
+        /BUY_LINK:\\s*([^\\n<]{3,80})/gi,
+        function (match, productText) {
+          if (productText.indexOf("amzn.to") !== -1) return match;
+          var lower = productText.toLowerCase().trim();
+          for (var i = 0; i < PRODUCTS.length; i++) {
+            var p = PRODUCTS[i];
+            for (var j = 0; j < p.keys.length; j++) {
+              if (lower.indexOf(p.keys[j]) !== -1) {
+                return makeButton(p.name, p.url);
+              }
+            }
+          }
+          return "";
+        }
+      );
+
+      // 3. Step formatting — bold green
+      html = html.replace(
+        /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
+        function (match) {
+          return (
+            '<span style="display:block;margin-top:6px;margin-bottom:2px;' +
+            'font-weight:700;color:#3B5E3A;">' + match.trim() + "</span>"
+          );
+        }
+      );
+
+      return html;
+    };
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    wireSuggestionPills();
+    patchFormatReply();
+  });
 })();
           `,
         }}
