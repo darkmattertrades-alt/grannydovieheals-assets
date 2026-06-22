@@ -52,6 +52,20 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${lora.variable} ${dancing.variable} bg-parchment`}
     >
+      <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2QFEE5BM92"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-2QFEE5BM92');
+            `,
+          }}
+        />
+      </head>
       <body className="font-body text-ink antialiased">
         {children}
 
