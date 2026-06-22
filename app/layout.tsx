@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   },
   other: {
     "msvalidate.01": "39073F4A58ED1A8191ED75AEE1429F09",
+    "google-site-verification": "cKm6wvZM7ZKH2Ef5MqWix-SG3AS0Sj5D55HXIYNdwF8",
   },
   generator: "v0.app",
 }
