@@ -15,6 +15,7 @@ import { ProductRecommendation } from "@/components/blog/product-recommendation"
 import { BlogCta } from "@/components/blog/blog-cta"
 import { RelatedPosts } from "@/components/blog/related-posts"
 import { BlogCard } from "@/components/blog/blog-card"
+import { ClickbankCta } from "@/components/blog/clickbank-cta"
 import { CATEGORIES } from "@/content/blog/_categories"
 import { articleSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
@@ -24,6 +25,7 @@ const components = {
   ScriptureBlock,
   ProductRecommendation,
   BlogCta,
+  ClickbankCta,
 }
 
 type Props = {
