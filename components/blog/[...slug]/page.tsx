@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { MDXRemote } from "next-mdx-remote/rsc"
+import { compileMDX } from "next-mdx-remote/rsc"
 import {
   getPostBySlug,
   getAllPostSlugs,
@@ -65,15 +65,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogSlugPage({ params }: Props) {
   const slug = params.slug[0]
 
-  const components = {
-    GrannyQuote,
-    ScriptureBlock,
-    ProductRecommendation,
-    BlogCta,
-    ClickbankCta,
-  }
-
-  // Check if it is a category page
   const category = CATEGORIES[slug as BlogCategory]
   if (category) {
     const posts = getPostsByCategory(slug as BlogCategory)
@@ -153,9 +144,22 @@ export default async function BlogSlugPage({ params }: Props) {
     )
   }
 
-  // Blog post page
   const post = getPostBySlug(slug)
   if (!post) notFound()
+
+  const { content } = await compileMDX({
+    source: post.content,
+    components: {
+      GrannyQuote,
+      ScriptureBlock,
+      ProductRecommendation,
+      BlogCta,
+      ClickbankCta,
+    },
+    options: {
+      parseFrontmatter: false,
+    },
+  })
 
   const relatedPosts = getRelatedPosts(post.slug, post.relatedSlugs ?? [])
   const article = articleSchema(post)
@@ -176,7 +180,7 @@ export default async function BlogSlugPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
       <BlogPostLayout post={post}>
-        <MDXRemote source={post.content} components={components} />
+        {content}
         {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
       </BlogPostLayout>
     </>
