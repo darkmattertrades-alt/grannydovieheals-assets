@@ -104,7 +104,6 @@ export default function RootLayout({
             __html: `
 (function () {
 
-  // ── ALL 10 CLICKBANK PRODUCTS ────────────────────────────────────────
   var CLICKBANK = [
     {
       keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"],
@@ -181,13 +180,9 @@ export default function RootLayout({
   }
 
   function formatReply(text) {
-    // 1. Normalize line endings
     var normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-
-    // 2. Rejoin words broken across lines (e.g. "Pou\nr" becomes "Pour")
     normalized = normalized.replace(/([a-zA-Z])\n([a-zA-Z])/g, '$1$2');
 
-    // 3. Handle legacy SHOP_LINK format
     var formatted = normalized.replace(
       /SHOP_LINK\[([^|\]]+)\|([^\]]+)\]/g,
       function(match, name, url) {
@@ -195,10 +190,8 @@ export default function RootLayout({
       }
     );
 
-    // 4. Convert remaining newlines to <br/>
     formatted = formatted.replace(/\n/g, '<br/>');
 
-    // 5. Bold and color Step headings — fixed regex to capture full step text
     formatted = formatted.replace(
       /(Step\s+\d+\s*[\u2014\-]+[^<br>][^<]*)/gi,
       function(match) {
@@ -206,7 +199,6 @@ export default function RootLayout({
       }
     );
 
-    // 6. Append Clickbank button based on reply keyword match
     var lower = formatted.toLowerCase();
     var cb = matchClickbank(lower);
     if (cb) {
