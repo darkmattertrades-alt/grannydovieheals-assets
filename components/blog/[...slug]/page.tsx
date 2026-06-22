@@ -1,12 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { MDXRemote } from "next-mdx-remote/rsc"
-import {
-  getPostBySlug,
-  getAllPostSlugs,
-  getRelatedPosts,
-  getPostsByCategory,
-} from "@/lib/blog"
+import { getPostBySlug, getAllPostSlugs, getRelatedPosts, getPostsByCategory } from "@/lib/blog"
 import type { BlogCategory } from "@/lib/blog"
 import { BlogPostLayout } from "@/components/blog/blog-post-layout"
 import { GrannyQuote } from "@/components/blog/granny-quote"
@@ -73,7 +68,6 @@ export default function BlogSlugPage({ params }: Props) {
     ClickbankCta,
   }
 
-  // Check if it is a category page
   const category = CATEGORIES[slug as BlogCategory]
   if (category) {
     const posts = getPostsByCategory(slug as BlogCategory)
@@ -88,72 +82,36 @@ export default function BlogSlugPage({ params }: Props) {
             {category.description}
           </p>
         </section>
-
-        <section className="max-w-5xl mx-auto px-4 py-8">
-          <div className="flex flex-wrap gap-2 justify-center">
-            <Link
-              href="/blog"
-              className="rounded-full border border-green-200 px-4 py-1.5 text-xs font-semibold text-green-700 hover:bg-green-50 transition-colors"
-            >
-              All Posts
-            </Link>
-            {Object.values(CATEGORIES).map((cat) => (
+        <section className="max-w-6xl mx-auto px-4 py-12">
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            {Object.entries(CATEGORIES).map(([key, cat]) => (
               <Link
-                key={cat.slug}
-                href={`/blog/${cat.slug}`}
-                className={`rounded-full border px-4 py-1.5 text-xs font-semibold transition-colors ${
-                  cat.slug === slug
-                    ? "border-green-700 bg-green-700 text-white"
-                    : "border-green-200 text-green-700 hover:bg-green-50"
+                key={key}
+                href={`/blog/${key}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition-colors ${
+                  key === slug
+                    ? "bg-green-700 text-white border-green-700"
+                    : "bg-white text-green-700 border-green-300 hover:bg-green-50"
                 }`}
               >
                 {cat.emoji} {cat.label}
               </Link>
             ))}
           </div>
-        </section>
-
-        <section className="max-w-5xl mx-auto px-4 pb-16">
           {posts.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-4xl mb-4">{category.emoji}</p>
-              <p className="font-serif text-xl text-gray-600">
-                Granny Dovie is working on something good.
-              </p>
-              <p className="mt-2 text-sm text-gray-400">
-                Check back soon, honey.
-              </p>
-            </div>
+            <p className="text-center text-gray-500 py-20">No posts in this category yet.</p>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}
             </div>
           )}
         </section>
-
-        <section className="bg-green-700 px-4 py-12 text-center text-white">
-          <p className="text-2xl mb-3">🌿</p>
-          <h2 className="font-serif text-2xl font-bold mb-2">
-            Not Sure Which Remedy Is Right for You?
-          </h2>
-          <p className="text-sm text-green-100 mb-6 max-w-md mx-auto leading-relaxed">
-            Answer five simple questions and Granny Dovie will point you
-            to the right remedy for your body, honey.
-          </p>
-          <Link
-            href="/quiz"
-            className="inline-block rounded-full bg-white px-7 py-3 text-sm font-bold text-green-800 hover:bg-green-50 transition-colors"
-          >
-            Take the Remedy Finder Quiz →
-          </Link>
-        </section>
       </main>
     )
   }
 
-  // Blog post page
   const post = getPostBySlug(slug)
   if (!post) notFound()
 
