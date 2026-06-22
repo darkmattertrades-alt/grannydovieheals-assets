@@ -275,7 +275,7 @@ export default function RootLayout({
 
           var grannyMsg = document.createElement('div');
           grannyMsg.className = 'granny-message';
-          grannyMsg.innerHTML = formatReply(data.reply);
+          grannyMsg.innerHTML = window.formatReply ? window.formatReply(data.reply) : data.reply;
           chatMessages.appendChild(grannyMsg);
           grannyMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         })
