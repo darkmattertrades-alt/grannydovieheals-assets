@@ -252,131 +252,22 @@ export function GrannyChat() {
           __html: `
 (function () {
 
-  // ── ALL 26 AMAZON PRODUCTS — amzn.to affiliate links ──────────────────
-  var PRODUCTS = [
-
-    // SUPPLEMENTS — PREMIUM TIER
-    { keys: ["milk thistle","dose milk thistle"],
-      name: "Dose Organic Milk Thistle Liver Cleanse 6-Bottle Supply",
-      url:  "https://amzn.to/43MUCXw" },
-
-    { keys: ["black seed oil","resilia"],
-      name: "Resilia Black Seed Oil + Oregano Capsules 300ct",
-      url:  "https://amzn.to/3SCbdL4" },
-
-    { keys: ["red ginseng extract","jung kwan jang extract"],
-      name: "JUNG KWAN JANG Korean Red Ginseng Concentrated Extract",
-      url:  "https://amzn.to/4uJGhG3" },
-
-    { keys: ["red panax ginseng","jung kwan jang extra strength","ginseng extra strength"],
-      name: "JUNG KWAN JANG Korean Red Panax Ginseng Extra Strength",
-      url:  "https://amzn.to/3QTrBGz" },
-
-    { keys: ["ahcc","immpower"],
-      name: "American BioSciences ImmPower AHCC 6-Pack",
-      url:  "https://amzn.to/4uRSaKm" },
-
-    { keys: ["curamed","terry naturally"],
-      name: "Terry Naturally CuraMed 750mg 120 Softgels 3-Pack",
-      url:  "https://amzn.to/3Szuw7O" },
-
-    // SUPPLEMENTS — TRUSTED TIER
-    { keys: ["turmeric","garden of life turmeric"],
-      name: "Garden of Life Organics Extra Strength Turmeric",
-      url:  "https://amzn.to/4gg9Xaz" },
-
-    { keys: ["ashwagandha","gaia ashwagandha"],
-      name: "Gaia Herbs Ashwagandha Root 350mg",
-      url:  "https://amzn.to/4xGZI5d" },
-
-    { keys: ["elderberry syrup","elderberry","gaia elderberry"],
-      name: "Gaia Herbs Black Elderberry Syrup",
-      url:  "https://amzn.to/3SRwvEy" },
-
-    { keys: ["magnesium","magnesium glycinate","doctor's best magnesium"],
-      name: "Doctor's Best High Absorption Magnesium Glycinate",
-      url:  "https://amzn.to/4oDV8Ax" },
-
-    { keys: ["vitamin k2","k2 d3","vitamin k2 d3","doctor's best k2"],
-      name: "Doctor's Best Natural Vitamin K2 MK-7 Plus D3",
-      url:  "https://amzn.to/4xEiL03" },
-
-    { keys: ["quick defense","gaia quick defense"],
-      name: "Gaia Herbs Quick Defense Fast-Acting",
-      url:  "https://amzn.to/43NXcwf" },
-
-    { keys: ["apple cider vinegar","bragg","bragg acv","acv"],
-      name: "Bragg Organic Raw Apple Cider Vinegar",
-      url:  "https://amzn.to/4uQyyX4" },
-
-    { keys: ["ginger root","nature's way ginger","ginger capsules"],
-      name: "Nature's Way Premium Ginger Root 550mg",
-      url:  "https://amzn.to/43Ia3jH" },
-
-    { keys: ["peppermint herbal tea","bigelow peppermint herbal"],
-      name: "Bigelow Tea Peppermint Herbal Tea",
-      url:  "https://amzn.to/3SaCX9H" },
-
-    { keys: ["soursop","soursop bitters"],
-      name: "Soursop Bitters Liquid Digestive Support",
-      url:  "https://amzn.to/4vVRDYz" },
-
-    // SKINCARE
-    { keys: ["54 thrones","african beauty butter"],
-      name: "54 Thrones African Beauty Butter Collection",
-      url:  "https://amzn.to/43IvxwP" },
-
-    { keys: ["trilogy rosehip","trilogy certified"],
-      name: "Trilogy Certified Organic Rosehip Oil",
-      url:  "https://amzn.to/4uJu4RN" },
-
-    { keys: ["cliganic rosehip","cliganic"],
-      name: "Cliganic Organic Rosehip Seed Oil",
-      url:  "https://amzn.to/4eAQHBQ" },
-
-    { keys: ["shea butter","raw shea butter","unrefined shea"],
-      name: "Raw Shea Butter 100% Pure Unrefined African",
-      url:  "https://amzn.to/4oOVMeD" },
-
-    { keys: ["castor oil","sky organics castor"],
-      name: "Sky Organics Castor Oil Organic",
-      url:  "https://amzn.to/4oCOPgN" },
-
-    { keys: ["jojoba oil","leven rose jojoba"],
-      name: "Leven Rose Jojoba Oil Organic",
-      url:  "https://amzn.to/4uRMAY9" },
-
-    { keys: ["ra cosmetics","ra shea butter","african shea ghana"],
-      name: "RA Cosmetics African Shea Butter Raw Unrefined from Ghana",
-      url:  "https://amzn.to/4uSnKYr" },
-
-    { keys: ["good molecules rosehip","good molecules"],
-      name: "Good Molecules Pure Cold-Pressed Rosehip Seed Oil",
-      url:  "https://amzn.to/4xEFVmZ" },
-
-    { keys: ["cocoa butter","palmer","palmer's cocoa"],
-      name: "Palmer's Cocoa Butter Formula Daily Skin Therapy",
-      url:  "https://amzn.to/4ejRCIa" },
-
-    { keys: ["purely peppermint","bigelow purely peppermint"],
-      name: "Bigelow Tea Purely Peppermint Tea",
-      url:  "https://amzn.to/4xG6iJg" },
-  ];
-
-  // ── ALL 10 CLICKBANK PRODUCTS ──────────────────────────────────────────
+  // ── ALL 10 CLICKBANK PRODUCTS ────────────────────────────────────────
+  // Injected client-side based on keyword matching against the reply text.
+  // Amazon BUY_LINK buttons are already handled server-side by the API.
   var CLICKBANK = [
     {
-      keys: ["bloating","digestion","gut health","stomach","constipation","gas","acv","apple cider vinegar"],
+      keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"],
       label: "GutVita",
       url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
     },
     {
-      keys: ["leaky gut","gut bacteria","ibs","bowel","microbiome","vivogut"],
+      keys: ["leaky gut","gut bacteria","ibs","irritable bowel","microbiome","vivogut"],
       label: "VivoGut",
       url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut",
     },
     {
-      keys: ["immune","sick","cold","flu","virus","infection","immunity","elderberry"],
+      keys: ["immune","immunity","sick","cold","flu","virus","infection","elderberry"],
       label: "VisiFlora",
       url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
     },
@@ -391,12 +282,12 @@ export function GrannyChat() {
       url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main",
     },
     {
-      keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar cravings","gluco"],
+      keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar craving"],
       label: "Gluco6",
       url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6",
     },
     {
-      keys: ["energy crash","sugar crash","carb cravings","afternoon slump","sweet tooth","sugar defender"],
+      keys: ["energy crash","sugar crash","carb craving","afternoon slump","sweet tooth"],
       label: "Sugar Defender",
       url:   "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new",
     },
@@ -406,7 +297,7 @@ export function GrannyChat() {
       url:   "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals",
     },
     {
-      keys: ["sleep","insomnia","restless","can't sleep","wake up","tired","exhausted","magnesium"],
+      keys: ["sleep","insomnia","restless","can't sleep","wake up","exhausted","magnesium"],
       label: "Sleep Revive",
       url:   "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
     },
@@ -417,43 +308,31 @@ export function GrannyChat() {
     },
   ];
 
-  // ── BUILD AMAZON BUTTON ────────────────────────────────────────────────
-  function makeAmazonButton(name, url) {
-    return (
-      '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
-      'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
-      'padding:10px 18px;border-radius:8px;text-decoration:none;' +
-      'font-family:Lora,serif;font-size:13px;font-weight:600;' +
-      'margin-top:8px;margin-bottom:4px;">' +
-      '&#128722; ' + name + ' &rarr; Buy on Amazon</a><br/>'
-    );
-  }
-
-  // ── BUILD CLICKBANK BUTTON ─────────────────────────────────────────────
+  // ── BUILD CLICKBANK BUTTON ───────────────────────────────────────────
   function makeClickbankButton(label, url) {
     return (
       '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
-      'style="display:inline-block;background:#C8922A;color:#fff;' +
-      'padding:10px 18px;border-radius:8px;text-decoration:none;' +
-      'font-family:Lora,serif;font-size:13px;font-weight:600;' +
-      'margin-top:4px;margin-bottom:8px;">' +
+      'style="display:block;background-color:#C8922A;color:#fff;' +
+      'text-align:center;padding:9px 14px;border-radius:6px;' +
+      'text-decoration:none;font-size:13px;font-weight:600;' +
+      'border:1px solid #8B3A3A;margin-top:6px;margin-bottom:6px;' +
+      'font-family:var(--font-lora),serif;">' +
       '&#127807; ' + label + ' &rarr; Learn More</a><br/>'
     );
   }
 
-  // ── MATCH PRODUCT KEYS AGAINST MESSAGE ────────────────────────────────
-  function matchProduct(lower, list) {
-    for (var i = 0; i < list.length; i++) {
-      var p = list[i];
-      var keyArr = p.keys || [];
-      for (var j = 0; j < keyArr.length; j++) {
-        if (lower.indexOf(keyArr[j]) !== -1) return p;
+  // ── MATCH KEYWORDS AGAINST TEXT ─────────────────────────────────────
+  function matchClickbank(lower) {
+    for (var i = 0; i < CLICKBANK.length; i++) {
+      var p = CLICKBANK[i];
+      for (var j = 0; j < p.keys.length; j++) {
+        if (lower.indexOf(p.keys[j]) !== -1) return p;
       }
     }
     return null;
   }
 
-  // ── WIRE SUGGESTION PILLS ─────────────────────────────────────────────
+  // ── WIRE SUGGESTION PILLS ────────────────────────────────────────────
   function wireSuggestionPills() {
     var pills = document.querySelectorAll(".chat-suggestion-pill");
     pills.forEach(function (pill) {
@@ -479,7 +358,11 @@ export function GrannyChat() {
     });
   }
 
-  // ── PATCH formatReply ─────────────────────────────────────────────────
+  // ── PATCH formatReply ────────────────────────────────────────────────
+  // The API already converts BUY_LINK: placeholders to HTML server-side.
+  // This patch only needs to:
+  // 1. Bold and color Step headings
+  // 2. Append a Clickbank button based on reply content keywords
   function patchFormatReply() {
     if (typeof window.__grannyFormatReplyPatched !== "undefined") return;
     window.__grannyFormatReplyPatched = true;
@@ -487,42 +370,10 @@ export function GrannyChat() {
     var originalFormatReply = window.formatReply;
 
     window.formatReply = function (text) {
+      // Pass through original formatter first (handles newlines etc)
       var html = originalFormatReply ? originalFormatReply(text) : text;
 
-      // 1. Replace BUY_LINK: placeholders with Amazon buttons
-      html = html.replace(
-        /BUY_LINK:\\s*(https?:\\/\\/amzn\\.to\\/[A-Za-z0-9]+)/gi,
-        function (_, url) {
-          // Match url back to product name
-          var matched = null;
-          for (var i = 0; i < PRODUCTS.length; i++) {
-            if (PRODUCTS[i].url === url) { matched = PRODUCTS[i]; break; }
-          }
-          var name = matched ? matched.name : "Granny Dovie's Pick";
-          return makeAmazonButton(name, url);
-        }
-      );
-
-      // 2. BUY_LINK: with keyword text fallback
-      html = html.replace(
-        /BUY_LINK:\\s*([^\\n<]{3,80})/gi,
-        function (match, productText) {
-          if (productText.indexOf("amzn.to") !== -1) return match;
-          var lower = productText.toLowerCase().trim();
-          var p = matchProduct(lower, PRODUCTS);
-          if (p) return makeAmazonButton(p.name, p.url);
-          return "";
-        }
-      );
-
-      // 3. Inject Clickbank button based on full reply content
-      var lowerHtml = html.toLowerCase();
-      var cb = matchProduct(lowerHtml, CLICKBANK);
-      if (cb) {
-        html += makeClickbankButton(cb.label, cb.url);
-      }
-
-      // 4. Bold and color Step headings
+      // 1. Bold and color Step headings
       html = html.replace(
         /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
         function (match) {
@@ -532,6 +383,13 @@ export function GrannyChat() {
           );
         }
       );
+
+      // 2. Append Clickbank button based on reply keyword match
+      var lower = html.toLowerCase();
+      var cb = matchClickbank(lower);
+      if (cb) {
+        html += makeClickbankButton(cb.label, cb.url);
+      }
 
       return html;
     };
