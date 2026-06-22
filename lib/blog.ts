@@ -12,13 +12,31 @@ export type BlogCategory =
   | "natural-skincare"
   | "faith-healing"
 
-export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, string> = {
-  "gut-health": "gut-vita",
-  "joints-inflammation": "balmorex",
-  "immunity": "visiflora",
-  "stress-sleep": "sleep-revive",
-  "natural-skincare": "synevra",
-  "faith-healing": "gut-vita",
+export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: string }> = {
+  "gut-health": {
+    slug: "gut-vita",
+    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
+  },
+  "joints-inflammation": {
+    slug: "balmorex",
+    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain",
+  },
+  "immunity": {
+    slug: "visiflora",
+    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
+  },
+  "stress-sleep": {
+    slug: "sleep-revive",
+    href: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
+  },
+  "natural-skincare": {
+    slug: "synevra",
+    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=ashwagandha-women-50",
+  },
+  "faith-healing": {
+    slug: "gut-vita",
+    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=faith-healing",
+  },
 }
 
 export type BlogPost = {
@@ -32,7 +50,7 @@ export type BlogPost = {
   targetKeyword: string
   featuredImage: string
   excerpt: string
-  readTime: number
+  readTime: string
   content: string
   relatedSlugs?: string[]
   affiliateProduct?: {
@@ -44,10 +62,10 @@ export type BlogPost = {
 
 export type BlogPostMeta = Omit<BlogPost, "content">
 
-function calculateReadTime(content: string): number {
-  const wordsPerMinute = 130
-  const wordCount = content.trim().split(/\s+/).length
-  return Math.ceil(wordCount / wordsPerMinute)
+export function calculateReadTime(content: string): string {
+  const words = content.trim().split(/\s+/).length
+  const minutes = Math.ceil(words / 105)
+  return `${minutes} min read`
 }
 
 export function getAllPostSlugs(): string[] {
@@ -72,30 +90,31 @@ export function getPostBySlug(slug: string): BlogPost | null {
     publishDate: data.publishDate ?? "",
     lastUpdated: data.lastUpdated ?? data.publishDate ?? "",
     author: data.author ?? "Granny Dovie",
-    category: data.category ?? "faith-healing",
+    category: data.category ?? "gut-health",
     targetKeyword: data.targetKeyword ?? "",
     featuredImage: data.featuredImage ?? "",
-    excerpt: data.excerpt ?? content.slice(0, 160),
-    readTime: calculateReadTime(content),
-    relatedSlugs: data.relatedSlugs ?? [],
-    affiliateProduct: data.affiliateProduct ?? null,
+    excerpt: data.excerpt ?? "",
+    readTime: data.readTime ?? calculateReadTime(content),
     content,
+    relatedSlugs: data.relatedSlugs ?? [],
+    affiliateProduct: data.affiliateProduct ?? undefined,
   }
 }
 
 export function getAllPosts(): BlogPostMeta[] {
-  return getAllPostSlugs()
+  const slugs = getAllPostSlugs()
+  return slugs
     .map((slug) => {
       const post = getPostBySlug(slug)
       if (!post) return null
       const { content, ...meta } = post
       return meta
     })
-    .filter((post): post is BlogPostMeta => post !== null)
+    .filter(Boolean)
     .sort(
       (a, b) =>
-        new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-    )
+        new Date(b!.publishDate).getTime() - new Date(a!.publishDate).getTime()
+    ) as BlogPostMeta[]
 }
 
 export function getPostsByCategory(category: BlogCategory): BlogPostMeta[] {
@@ -107,11 +126,12 @@ export function getRelatedPosts(
   relatedSlugs: string[]
 ): BlogPostMeta[] {
   return relatedSlugs
+    .filter((slug) => slug !== currentSlug)
     .map((slug) => {
       const post = getPostBySlug(slug)
       if (!post) return null
       const { content, ...meta } = post
       return meta
     })
-    .filter((post): post is BlogPostMeta => post !== null)
+    .filter(Boolean) as BlogPostMeta[]
 }
