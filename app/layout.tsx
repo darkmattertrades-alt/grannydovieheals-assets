@@ -105,19 +105,18 @@ export default function RootLayout({
 (function () {
 
   window.formatReply = function(text) {
-    // Step 1 — normalize line endings
     var normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
-    // Step 2 — rejoin words split across lines
     normalized = normalized.replace(/([a-zA-Z])\n([a-zA-Z])/g, '$1$2');
-    // Step 3 — convert legacy SHOP_LINK format
+
     var formatted = normalized.replace(
       /SHOP_LINK\[([^|\]]+)\|([^\]]+)\]/g,
       function(match, name, url) {
         return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
       }
     );
-    // Step 4 — convert newlines to <br/>
+
     formatted = formatted.replace(/\n/g, '<br/>');
+
     return formatted;
   };
 

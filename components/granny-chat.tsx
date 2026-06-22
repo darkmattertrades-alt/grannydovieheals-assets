@@ -40,7 +40,7 @@ export function GrannyChat() {
         <span aria-hidden>🌿</span>
       </button>
 
-      {/* Chat window */}
+      {/* Chat window — no display property; JS controls show/hide */}
       <div
         id="chat-window"
         role="dialog"
@@ -57,7 +57,6 @@ export function GrannyChat() {
           borderRadius: "12px",
           boxShadow: "0 12px 40px rgba(60, 26, 14, 0.35)",
           zIndex: 9998,
-          display: "none",
         }}
       >
         {/* Header */}
@@ -84,7 +83,7 @@ export function GrannyChat() {
           </button>
         </div>
 
-        {/* Suggestion pills */}
+        {/* Suggestion pills — always visible */}
         <div
           id="chat-suggestions"
           style={{
@@ -134,7 +133,7 @@ export function GrannyChat() {
           ))}
         </div>
 
-        {/* Step-by-step example card */}
+        {/* Step-by-step example card — always visible */}
         <div
           id="chat-step-card"
           style={{
@@ -228,15 +227,15 @@ export function GrannyChat() {
   ];
 
   var CLICKBANK = [
-    { keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"], label: "GutVita",         url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine" },
-    { keys: ["leaky gut","gut bacteria","ibs","irritable bowel","microbiome"],                                        label: "VivoGut",         url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut" },
-    { keys: ["immune","immunity","sick","cold","flu","virus","infection","elderberry"],                                label: "VisiFlora",       url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup" },
-    { keys: ["joint pain","knee pain","arthritis","stiffness","inflammation","joint","turmeric"],                     label: "Balmorex",        url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain" },
-    { keys: ["nerve pain","neuropathy","tingling","numbness","burning feet","nerve"],                                 label: "Nerve Armor",     url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main" },
-    { keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar craving"],                                     label: "Gluco6",          url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6" },
-    { keys: ["energy crash","sugar crash","carb craving","afternoon slump","sweet tooth"],                            label: "Sugar Defender",  url: "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new" },
-    { keys: ["prediabetes","metabolic","belly fat","blood glucose","insuleaf"],                                       label: "InsuLeaf",        url: "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals" },
-    { keys: ["sleep","insomnia","restless","can't sleep","wake up","exhausted","magnesium"],                          label: "Sleep Revive",    url: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy" },
+    { keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"], label: "GutVita",          url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine" },
+    { keys: ["leaky gut","gut bacteria","ibs","irritable bowel","microbiome"],                                        label: "VivoGut",          url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut" },
+    { keys: ["immune","immunity","sick","cold","flu","virus","infection","elderberry"],                                label: "VisiFlora",        url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup" },
+    { keys: ["joint pain","knee pain","arthritis","stiffness","inflammation","joint","turmeric"],                     label: "Balmorex",         url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain" },
+    { keys: ["nerve pain","neuropathy","tingling","numbness","burning feet","nerve"],                                 label: "Nerve Armor",      url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main" },
+    { keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar craving"],                                     label: "Gluco6",           url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6" },
+    { keys: ["energy crash","sugar crash","carb craving","afternoon slump","sweet tooth"],                            label: "Sugar Defender",   url: "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new" },
+    { keys: ["prediabetes","metabolic","belly fat","blood glucose","insuleaf"],                                       label: "InsuLeaf",         url: "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals" },
+    { keys: ["sleep","insomnia","restless","can't sleep","wake up","exhausted","magnesium"],                          label: "Sleep Revive",     url: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy" },
     { keys: ["skin","wrinkles","sagging","collagen","dark spots","aging skin","stress","cortisol","hormones","ashwagandha"], label: "Synevra UltraLift", url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=synevra" },
   ];
 
@@ -302,13 +301,11 @@ export function GrannyChat() {
     if (typeof window.__grannyFormatReplyPatched !== "undefined") return;
     window.__grannyFormatReplyPatched = true;
 
-    var base = window.formatReply;
+    var originalFormatReply = window.formatReply;
 
     window.formatReply = function (text) {
-      // Run base first — normalizes lines, rejoins split words, converts \n to <br/>
-      var html = base ? base(text) : text.replace(/\r\n/g,'\n').replace(/\r/g,'\n').replace(/\n/g,'<br/>');
+      var html = originalFormatReply ? originalFormatReply(text) : text;
 
-      // 1 — Replace BUY_LINK: https://amzn.to/SLUG with Amazon button
       html = html.replace(
         /BUY_LINK:\s*(https?:\/\/amzn\.to\/([A-Za-z0-9]+)[^\s<]*)/gi,
         function (_, url, slug) {
@@ -344,7 +341,6 @@ export function GrannyChat() {
         }
       );
 
-      // 2 — Replace BUY_LINK: plain product name with keyword-matched Amazon button
       html = html.replace(
         /BUY_LINK:\s*([^\n<]{3,80})/gi,
         function (match, productText) {
@@ -362,17 +358,18 @@ export function GrannyChat() {
         }
       );
 
-      // 3 — Style step headings (runs AFTER <br/> conversion so we stop at <br/>)
+      // Fixed step regex — stops at <br/> not at any <
       html = html.replace(
-        /Step\s+(\d+)\s*[\u2014\-]+\s*([^<]+)/gi,
+        /Step\s+(\d+)\s*[\u2014\-]+\s*([^<]*?)(?=<br\/>|$)/gi,
         function (match, num, stepText) {
-          return '<span style="display:block;margin-top:8px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">Step ' + num + ' \u2014 ' + stepText.trim() + '</span>';
+          if (!stepText.trim()) return match;
+          return '<span style="display:block;margin-top:6px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">Step ' + num + ' \u2014 ' + stepText.trim() + '</span>';
         }
       );
 
-      // 4 — Append ClickBank button based on full reply keyword match
-      var lower = html.replace(/<[^>]+>/g, ' ').toLowerCase();
-      var cb = matchClickbank(lower);
+      // ClickBank button — strip HTML tags before keyword matching
+      var plainText = html.replace(/<[^>]+>/g, ' ').toLowerCase();
+      var cb = matchClickbank(plainText);
       if (cb) {
         html += makeClickbankButton(cb.label, cb.url);
       }
@@ -383,8 +380,8 @@ export function GrannyChat() {
 
   function init() {
     var bubble = document.getElementById('chat-bubble');
-    var win    = document.getElementById('chat-window');
-    var label  = document.getElementById('chat-label');
+    var win = document.getElementById('chat-window');
+    var label = document.getElementById('chat-label');
     var closeBtn = document.getElementById('chat-close');
 
     if (!bubble || !win) { return; }
@@ -413,7 +410,7 @@ export function GrannyChat() {
 
     if (closeBtn) { closeBtn.onclick = hide; }
 
-    var sendBtn   = document.getElementById('chat-send');
+    var sendBtn = document.getElementById('chat-send');
     var chatInput = document.getElementById('chat-input');
 
     function sendMessage() {
