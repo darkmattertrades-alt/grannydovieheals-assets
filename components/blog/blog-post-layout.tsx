@@ -101,7 +101,9 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
           prose-blockquote:bg-green-50
           prose-blockquote:rounded-xl
           prose-blockquote:px-5
-          prose-blockquote:py-3">
+          prose-blockquote:py-3
+          [&_.not-prose]:!mt-10
+          [&_.not-prose]:!mb-10">
           {children}
         </div>
       </div>
