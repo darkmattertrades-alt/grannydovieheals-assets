@@ -20,14 +20,6 @@ import { CATEGORIES } from "@/content/blog/_categories"
 import { articleSchema, breadcrumbSchema } from "@/lib/schema"
 import Link from "next/link"
 
-const components = {
-  GrannyQuote,
-  ScriptureBlock,
-  ProductRecommendation,
-  BlogCta,
-  ClickbankCta,
-}
-
 type Props = {
   params: { slug: string[] }
 }
@@ -72,6 +64,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function BlogSlugPage({ params }: Props) {
   const slug = params.slug[0]
+
+  const components = {
+    GrannyQuote,
+    ScriptureBlock,
+    ProductRecommendation,
+    BlogCta,
+    ClickbankCta,
+  }
 
   // Check if it is a category page
   const category = CATEGORIES[slug as BlogCategory]
