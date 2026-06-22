@@ -40,7 +40,7 @@ export function GrannyChat() {
         <span aria-hidden>🌿</span>
       </button>
 
-      {/* Chat window — no display property; JS in layout.tsx controls show/hide */}
+      {/* Chat window — no display property; JS controls show/hide */}
       <div
         id="chat-window"
         role="dialog"
@@ -270,7 +270,6 @@ export function GrannyChat() {
     window.formatReply = function (text) {
       var html = originalFormatReply ? originalFormatReply(text) : text;
 
-      // 1. BUY_LINK: with amzn.to short URLs
       html = html.replace(
         /BUY_LINK:\\s*(https?:\\/\\/amzn\\.to\\/([A-Za-z0-9]+)[^\\s<]*)/gi,
         function (_, url, slug) {
@@ -306,7 +305,6 @@ export function GrannyChat() {
         }
       );
 
-      // 2. BUY_LINK: with product name instead of URL — keyword match fallback
       html = html.replace(
         /BUY_LINK:\\s*([^\\n<]{3,80})/gi,
         function (match, productText) {
@@ -324,7 +322,6 @@ export function GrannyChat() {
         }
       );
 
-      // 3. Step formatting — bold green
       html = html.replace(
         /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
         function (match) {
@@ -339,10 +336,111 @@ export function GrannyChat() {
     };
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    wireSuggestionPills();
-    patchFormatReply();
-  });
+  function init() {
+    var bubble = document.getElementById('chat-bubble');
+    var win = document.getElementById('chat-window');
+    var label = document.getElementById('chat-label');
+    var closeBtn = document.getElementById('chat-close');
+
+    if (!bubble || !win) { return; }
+    if (bubble.getAttribute('data-bound') === '1') { return; }
+    bubble.setAttribute('data-bound', '1');
+
+    var chatMessages = document.getElementById('chat-messages');
+
+    function show() {
+      win.style.display = 'flex';
+      win.style.flexDirection = 'column';
+      if (label) { label.style.display = 'none'; }
+    }
+    function hide() {
+      win.style.display = 'none';
+      if (label) { label.style.display = 'block'; }
+    }
+
+    bubble.onclick = function () {
+      if (win.style.display === 'none' || win.style.display === '') {
+        show();
+      } else {
+        hide();
+      }
+    };
+
+    if (closeBtn) { closeBtn.onclick = hide; }
+
+    var sendBtn = document.getElementById('chat-send');
+    var chatInput = document.getElementById('chat-input');
+
+    function sendMessage() {
+      if (!chatInput || !chatMessages) { return; }
+      var message = chatInput.value.trim();
+      if (!message) { return; }
+
+      var userMsg = document.createElement('div');
+      userMsg.className = 'user-message';
+      userMsg.textContent = message;
+      chatMessages.appendChild(userMsg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      chatInput.value = '';
+
+      var loading = document.createElement('div');
+      loading.className = 'granny-message';
+      loading.textContent = 'Granny Dovie is thinking... \uD83C\uDF3F';
+      loading.id = 'loading-msg';
+      chatMessages.appendChild(loading);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: message })
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var loadingEl = document.getElementById('loading-msg');
+          if (loadingEl) { loadingEl.remove(); }
+
+          var grannyMsg = document.createElement('div');
+          grannyMsg.className = 'granny-message';
+          grannyMsg.innerHTML = window.formatReply ? window.formatReply(data.reply) : data.reply;
+          chatMessages.appendChild(grannyMsg);
+          grannyMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+        .catch(function () {
+          var loadingEl = document.getElementById('loading-msg');
+          if (loadingEl) { loadingEl.remove(); }
+
+          var errMsg = document.createElement('div');
+          errMsg.className = 'granny-message';
+          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
+          chatMessages.appendChild(errMsg);
+          errMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    }
+
+    if (sendBtn) {
+      sendBtn.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        sendMessage();
+      };
+    }
+
+    if (chatInput) {
+      chatInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+    }
+  }
+
+  wireSuggestionPills();
+  patchFormatReply();
+  init();
+
 })();
           `,
         }}
