@@ -309,12 +309,26 @@ export default function RootLayout({
     }
   }
 
+  function waitForBubble() {
+    var bubble = document.getElementById('chat-bubble');
+    if (bubble) {
+      init();
+      return;
+    }
+    var observer = new MutationObserver(function(mutations, obs) {
+      var bubble = document.getElementById('chat-bubble');
+      if (bubble) {
+        obs.disconnect();
+        init();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else if (document.readyState === 'interactive') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', waitForBubble);
   } else {
-    setTimeout(init, 1000);
+    waitForBubble();
   }
 
 })();
