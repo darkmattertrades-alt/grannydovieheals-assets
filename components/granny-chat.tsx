@@ -192,43 +192,11 @@ export function GrannyChat() {
         </div>
       </div>
 
-      {/* Inline script */}
+      {/* Inline script — suggestion pills only, no formatReply override */}
       <script
         dangerouslySetInnerHTML={{
           __html: `
 (function () {
-  var PRODUCTS = [
-    { keys: ["turmeric"],                      name: "Garden of Life Turmeric",          url: "https://www.amazon.com/dp/B07G2LBQ1G" },
-    { keys: ["ashwagandha"],                   name: "Gaia Herbs Ashwagandha",           url: "https://www.amazon.com/dp/B003HD9H0G" },
-    { keys: ["elderberry syrup","elderberry"], name: "Gaia Herbs Elderberry Syrup",      url: "https://www.amazon.com/dp/B0036THLPE" },
-    { keys: ["magnesium"],                     name: "Doctor's Best Magnesium",          url: "https://www.amazon.com/dp/B000BD0RT0" },
-    { keys: ["vitamin k2","k2","d3"],          name: "Doctor's Best Vitamin K2 + D3",    url: "https://www.amazon.com/dp/B017JXZPPU" },
-    { keys: ["quick defense","echinacea"],     name: "Gaia Herbs Quick Defense",         url: "https://www.amazon.com/dp/B0036THLRW" },
-    { keys: ["apple cider vinegar","bragg"],   name: "Bragg Apple Cider Vinegar",        url: "https://www.amazon.com/dp/B001I7MVG0" },
-    { keys: ["ginger"],                        name: "Nature's Way Ginger Root",         url: "https://www.amazon.com/dp/B001E10C9I" },
-    { keys: ["peppermint spearmint"],          name: "Bigelow Peppermint Spearmint Tea", url: "https://www.amazon.com/dp/B073TJ18JY" },
-    { keys: ["peppermint"],                    name: "Bigelow Peppermint Tea",           url: "https://www.amazon.com/dp/B000GG5IZK" },
-    { keys: ["trilogy","rosehip oil"],         name: "Trilogy Organic Rosehip Oil",      url: "https://www.amazon.com/dp/B001NJNV12" },
-    { keys: ["cliganic"],                      name: "Cliganic Organic Rosehip Oil",     url: "https://www.amazon.com/dp/B07G14PWZN" },
-    { keys: ["shea butter"],                   name: "Pure Unrefined Shea Butter",       url: "https://www.amazon.com/dp/B00D9NV2D4" },
-    { keys: ["castor oil"],                    name: "Sky Organics Castor Oil",          url: "https://www.amazon.com/dp/B0186U9736" },
-    { keys: ["jojoba"],                        name: "Leven Rose Jojoba Oil",            url: "https://www.amazon.com/dp/B00GJX58PE" },
-    { keys: ["ra cosmetics"],                  name: "RA Cosmetics Shea Butter",         url: "https://www.amazon.com/dp/B00987FWHW" },
-    { keys: ["the ordinary"],                  name: "The Ordinary Rosehip Oil",         url: "https://www.amazon.com/dp/B09Q2X99XG" },
-    { keys: ["palmer","cocoa butter"],         name: "Palmer's Cocoa Butter Lotion",     url: "https://www.amazon.com/dp/B0009F3O8Q" },
-  ];
-
-  function makeButton(name, url) {
-    return (
-      '<br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
-      'style="display:inline-block;background:#8B3A3A;color:#F5ECD7;' +
-      'padding:10px 18px;border-radius:8px;text-decoration:none;' +
-      'font-family:Lora,serif;font-size:13px;font-weight:600;' +
-      'margin-top:8px;margin-bottom:8px;">' +
-      '&#128722; ' + name + ' &#8594; Buy on Amazon</a><br/>'
-    );
-  }
-
   function wireSuggestionPills() {
     var pills = document.querySelectorAll(".chat-suggestion-pill");
     pills.forEach(function (pill) {
@@ -254,81 +222,11 @@ export function GrannyChat() {
     });
   }
 
-  function patchFormatReply() {
-    if (typeof window.__grannyFormatReplyPatched !== "undefined") return;
-    window.__grannyFormatReplyPatched = true;
-
-    var originalFormatReply = window.formatReply;
-
-    window.formatReply = function (text) {
-      var html = originalFormatReply ? originalFormatReply(text) : text;
-
-      // 1. BUY_LINK: with full Amazon URL
-      html = html.replace(
-        /BUY_LINK:\\s*(https?:\\/\\/(?:www\\.)?amazon\\.com\\/dp\\/([A-Z0-9]+)[^\\s<]*)/gi,
-        function (_, url, asin) {
-          var nameMap = {
-            "B07G2LBQ1G": "Garden of Life Turmeric",
-            "B003HD9H0G": "Gaia Herbs Ashwagandha",
-            "B0036THLPE": "Gaia Herbs Elderberry Syrup",
-            "B000BD0RT0": "Doctor's Best Magnesium",
-            "B017JXZPPU": "Doctor's Best Vitamin K2 + D3",
-            "B0036THLRW": "Gaia Herbs Quick Defense",
-            "B001I7MVG0": "Bragg Apple Cider Vinegar",
-            "B001E10C9I": "Nature's Way Ginger Root",
-            "B000GG5IZK": "Bigelow Peppermint Tea",
-            "B001NJNV12": "Trilogy Organic Rosehip Oil",
-            "B07G14PWZN": "Cliganic Organic Rosehip Oil",
-            "B00D9NV2D4": "Pure Unrefined Shea Butter",
-            "B0186U9736": "Sky Organics Castor Oil",
-            "B00GJX58PE": "Leven Rose Jojoba Oil",
-            "B00987FWHW": "RA Cosmetics Shea Butter",
-            "B09Q2X99XG": "The Ordinary Rosehip Oil",
-            "B0009F3O8Q": "Palmer's Cocoa Butter Lotion",
-            "B073TJ18JY": "Bigelow Peppermint Spearmint Tea",
-          };
-          var name = nameMap[asin] || "Granny Dovie's Pick";
-          return makeButton(name, url);
-        }
-      );
-
-      // 2. BUY_LINK: with product name instead of URL — keyword match fallback
-      html = html.replace(
-        /BUY_LINK:\\s*([^\\n<]{3,80})/gi,
-        function (match, productText) {
-          if (productText.indexOf("amazon.com") !== -1) return match;
-          var lower = productText.toLowerCase().trim();
-          for (var i = 0; i < PRODUCTS.length; i++) {
-            var p = PRODUCTS[i];
-            for (var j = 0; j < p.keys.length; j++) {
-              if (lower.indexOf(p.keys[j]) !== -1) {
-                return makeButton(p.name, p.url);
-              }
-            }
-          }
-          return "";
-        }
-      );
-
-      // 3. Step formatting — bold green
-      html = html.replace(
-        /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
-        function (match) {
-          return (
-            '<span style="display:block;margin-top:6px;margin-bottom:2px;' +
-            'font-weight:700;color:#3B5E3A;">' + match.trim() + "</span>"
-          );
-        }
-      );
-
-      return html;
-    };
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", wireSuggestionPills);
+  } else {
     wireSuggestionPills();
-    patchFormatReply();
-  });
+  }
 })();
           `,
         }}
