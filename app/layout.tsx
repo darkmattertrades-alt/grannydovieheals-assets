@@ -194,7 +194,7 @@ export default function RootLayout({
 
     // 3. Bold and color Step headings
     formatted = formatted.replace(
-      /(Step\\s+\\d+\\s*[\\u2014\\-]+[^<]+)/gi,
+      /(Step\\s+\\d+\\s*[\\u2014\\-]+[^<br>]+)/gi,
       function(match) {
         return '<span style="display:block;margin-top:6px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>';
       }
@@ -260,7 +260,7 @@ export default function RootLayout({
 
       var loading = document.createElement('div');
       loading.className = 'granny-message';
-      loading.textContent = 'Granny Dovie is thinking... \\uD83C\\uDF3F';
+      loading.textContent = 'Granny Dovie is thinking... \uD83C\uDF3F';
       loading.id = 'loading-msg';
       chatMessages.appendChild(loading);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -287,7 +287,7 @@ export default function RootLayout({
 
           var errMsg = document.createElement('div');
           errMsg.className = 'granny-message';
-          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \\uD83C\\uDF3F';
+          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
           chatMessages.appendChild(errMsg);
           errMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
