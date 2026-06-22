@@ -35,11 +35,6 @@ export const metadata: Metadata = {
     images: [`${BASE}/og-image.png`],
     type: "website",
   },
-  verification: {
-    other: {
-      "msvalidate.01": "39073F4A58ED1A8191ED75AEE1429F09",
-    },
-  },
   generator: "v0.app",
 }
 
@@ -53,6 +48,9 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${lora.variable} ${dancing.variable} bg-parchment`}
     >
+      <head>
+        <meta name="msvalidate.01" content="39073F4A58ED1A8191ED75AEE1429F09" />
+      </head>
       <body className="font-body text-ink antialiased">
         {children}
 
@@ -147,6 +145,7 @@ export default function RootLayout({
       userMsg.textContent = message;
       chatMessages.appendChild(userMsg);
       chatMessages.scrollTop = chatMessages.scrollHeight;
+
       chatInput.value = '';
 
       var loading = document.createElement('div');
