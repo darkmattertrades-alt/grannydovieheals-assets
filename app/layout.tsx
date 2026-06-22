@@ -181,26 +181,32 @@ export default function RootLayout({
   }
 
   function formatReply(text) {
-    // 1. Handle legacy SHOP_LINK format
-    var formatted = text.replace(
-      /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
+    // 1. Normalize line endings
+    var normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+
+    // 2. Rejoin words broken across lines (e.g. "Pou\nr" becomes "Pour")
+    normalized = normalized.replace(/([a-zA-Z])\n([a-zA-Z])/g, '$1$2');
+
+    // 3. Handle legacy SHOP_LINK format
+    var formatted = normalized.replace(
+      /SHOP_LINK\[([^|\]]+)\|([^\]]+)\]/g,
       function(match, name, url) {
         return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
       }
     );
 
-    // 2. Convert newlines to line breaks
-    formatted = formatted.replace(/\\n/g, '<br/>');
+    // 4. Convert remaining newlines to <br/>
+    formatted = formatted.replace(/\n/g, '<br/>');
 
-    // 3. Bold and color Step headings
+    // 5. Bold and color Step headings
     formatted = formatted.replace(
-      /(Step\\s+\\d+\\s*[\\u2014\\-]+[^<br>]+)/gi,
+      /(Step\s+\d+\s*[\u2014\-]+[^<]+)/gi,
       function(match) {
-        return '<span style="display:block;margin-top:6px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>';
+        return '<span style="display:block;margin-top:8px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>';
       }
     );
 
-    // 4. Append Clickbank button based on reply keyword match
+    // 6. Append Clickbank button based on reply keyword match
     var lower = formatted.toLowerCase();
     var cb = matchClickbank(lower);
     if (cb) {
