@@ -314,7 +314,7 @@ export default function RootLayout({
   } else if (document.readyState === 'interactive') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    setTimeout(init, 500);
+    setTimeout(init, 1000);
   }
 
 })();
