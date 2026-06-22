@@ -53,7 +53,6 @@ export default function RootLayout({
       className={`${playfair.variable} ${lora.variable} ${dancing.variable} bg-parchment`}
     >
       <head>
-        {/* Google tag (gtag.js) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-2QFEE5BM92"></script>
         <script
           dangerouslySetInnerHTML={{
@@ -104,14 +103,110 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
 (function () {
+
+  // ── ALL 10 CLICKBANK PRODUCTS ────────────────────────────────────────
+  var CLICKBANK = [
+    {
+      keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"],
+      label: "GutVita",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
+    },
+    {
+      keys: ["leaky gut","gut bacteria","ibs","irritable bowel","microbiome"],
+      label: "VivoGut",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut",
+    },
+    {
+      keys: ["immune","immunity","sick","cold","flu","virus","infection","elderberry"],
+      label: "VisiFlora",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
+    },
+    {
+      keys: ["joint pain","knee pain","arthritis","stiffness","inflammation","joint","turmeric"],
+      label: "Balmorex",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain",
+    },
+    {
+      keys: ["nerve pain","neuropathy","tingling","numbness","burning feet","nerve"],
+      label: "Nerve Armor",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main",
+    },
+    {
+      keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar craving"],
+      label: "Gluco6",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6",
+    },
+    {
+      keys: ["energy crash","sugar crash","carb craving","afternoon slump","sweet tooth"],
+      label: "Sugar Defender",
+      url:   "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new",
+    },
+    {
+      keys: ["prediabetes","metabolic","belly fat","blood glucose","insuleaf"],
+      label: "InsuLeaf",
+      url:   "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals",
+    },
+    {
+      keys: ["sleep","insomnia","restless","can't sleep","wake up","exhausted","magnesium"],
+      label: "Sleep Revive",
+      url:   "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
+    },
+    {
+      keys: ["skin","wrinkles","sagging","collagen","dark spots","aging skin","stress","cortisol","hormones","ashwagandha"],
+      label: "Synevra UltraLift",
+      url:   "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=synevra",
+    },
+  ];
+
+  function matchClickbank(lower) {
+    for (var i = 0; i < CLICKBANK.length; i++) {
+      var p = CLICKBANK[i];
+      for (var j = 0; j < p.keys.length; j++) {
+        if (lower.indexOf(p.keys[j]) !== -1) return p;
+      }
+    }
+    return null;
+  }
+
+  function makeClickbankButton(label, url) {
+    return (
+      '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
+      'style="display:block;background-color:#C8922A;color:#fff;' +
+      'text-align:center;padding:9px 14px;border-radius:6px;' +
+      'text-decoration:none;font-size:13px;font-weight:600;' +
+      'border:1px solid #8B3A3A;margin-top:6px;margin-bottom:6px;' +
+      'font-family:var(--font-lora),serif;">' +
+      '&#127807; ' + label + ' &rarr; Learn More</a><br/>'
+    );
+  }
+
   function formatReply(text) {
+    // 1. Handle legacy SHOP_LINK format
     var formatted = text.replace(
       /SHOP_LINK\\[([^|\\]]+)\\|([^\\]]+)\\]/g,
       function(match, name, url) {
         return '<br/><br/><a href="' + url.trim() + '" target="_blank" rel="noopener noreferrer" style="display:inline-block;background:#8B3A3A;color:#F5ECD7;padding:10px 18px;border-radius:8px;text-decoration:none;font-family:Lora,serif;font-size:13px;font-weight:600;margin-top:6px;margin-bottom:6px;">&#128722; ' + name.trim() + ' &#8594; Shop on Amazon</a><br/><br/>';
       }
     );
+
+    // 2. Convert newlines to line breaks
     formatted = formatted.replace(/\\n/g, '<br/>');
+
+    // 3. Bold and color Step headings
+    formatted = formatted.replace(
+      /(Step\\s+\\d+\\s*[\\u2014\\-]+[^<]+)/gi,
+      function(match) {
+        return '<span style="display:block;margin-top:6px;margin-bottom:2px;font-weight:700;color:#3B5E3A;">' + match.trim() + '</span>';
+      }
+    );
+
+    // 4. Append Clickbank button based on reply keyword match
+    var lower = formatted.toLowerCase();
+    var cb = matchClickbank(lower);
+    if (cb) {
+      formatted += makeClickbankButton(cb.label, cb.url);
+    }
+
     return formatted;
   }
 
@@ -165,7 +260,7 @@ export default function RootLayout({
 
       var loading = document.createElement('div');
       loading.className = 'granny-message';
-      loading.textContent = 'Granny Dovie is thinking... \uD83C\uDF3F';
+      loading.textContent = 'Granny Dovie is thinking... \\uD83C\\uDF3F';
       loading.id = 'loading-msg';
       chatMessages.appendChild(loading);
       chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -192,7 +287,7 @@ export default function RootLayout({
 
           var errMsg = document.createElement('div');
           errMsg.className = 'granny-message';
-          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \uD83C\uDF3F';
+          errMsg.textContent = 'Granny Dovie is resting right now honey. Try again in a moment. \\uD83C\\uDF3F';
           chatMessages.appendChild(errMsg);
           errMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
@@ -221,6 +316,7 @@ export default function RootLayout({
   } else {
     init();
   }
+
 })();
 `,
           }}
