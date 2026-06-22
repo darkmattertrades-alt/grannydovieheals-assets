@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     images: [`${BASE}/og-image.png`],
     type: "website",
   },
+  other: {
+    "msvalidate.01": "39073F4A58ED1A8191ED75AEE1429F09",
+  },
   generator: "v0.app",
 }
 
