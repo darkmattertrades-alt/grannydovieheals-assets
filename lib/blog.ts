@@ -12,6 +12,15 @@ export type BlogCategory =
   | "natural-skincare"
   | "faith-healing"
 
+export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, string> = {
+  "gut-health": "gut-vita",
+  "joints-inflammation": "balmorex",
+  "immunity": "visiflora",
+  "stress-sleep": "sleep-revive",
+  "natural-skincare": "synevra",
+  "faith-healing": "gut-vita",
+}
+
 export type BlogPost = {
   slug: string
   title: string
