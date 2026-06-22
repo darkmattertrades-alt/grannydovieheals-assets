@@ -323,7 +323,7 @@ export function GrannyChat() {
       );
 
       html = html.replace(
-        /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n<]+)/gi,
+        /(Step\\s+\\d+\\s*[\\u2014\\-]+[^\\n]+?)(?=<br\\/?>|$)/gi,
         function (match) {
           return (
             '<span style="display:block;margin-top:6px;margin-bottom:2px;' +
