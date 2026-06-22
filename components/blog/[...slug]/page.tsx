@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-export default function BlogSlugPage({ params }: Props) {
+export default async function BlogSlugPage({ params }: Props) {
   const slug = params.slug[0]
 
   const components = {
