@@ -179,7 +179,7 @@ export default function RootLayout({
     );
   }
 
-  function formatReply(text) {
+  window.formatReply = function(text) {
     var normalized = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
     normalized = normalized.replace(/([a-zA-Z])\n([a-zA-Z])/g, '$1$2');
 
@@ -206,7 +206,7 @@ export default function RootLayout({
     }
 
     return formatted;
-  }
+  };
 
   function init() {
     var bubble = document.getElementById('chat-bubble');
