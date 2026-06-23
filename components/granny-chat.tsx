@@ -225,6 +225,19 @@ export function GrannyChat() {
     { keys: ["palmer","cocoa butter"],         name: "Palmer's Cocoa Butter Formula Daily Skin Therapy", url: "https://amzn.to/4ejRCIa" },
   ];
 
+  var CLICKBANK = [
+    { keys: ["bloating","digestion","gut health","stomach","constipation","gas","apple cider vinegar","bragg","acv"], label: "GutVita",         url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine" },
+    { keys: ["leaky gut","gut bacteria","ibs","irritable bowel","microbiome"],                                        label: "VivoGut",         url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=vivogut&pid=v1&tid=vivogut" },
+    { keys: ["immune","immunity","sick","cold","flu","virus","infection","elderberry"],                                label: "VisiFlora",       url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup" },
+    { keys: ["joint pain","knee pain","arthritis","stiffness","inflammation","joint","turmeric"],                     label: "Balmorex",        url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain" },
+    { keys: ["nerve pain","neuropathy","tingling","numbness","burning feet","nerve"],                                 label: "Nerve Armor",     url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=nervearmor&w=main" },
+    { keys: ["blood sugar","glucose","diabetes","a1c","insulin","sugar craving"],                                     label: "Gluco6",          url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gluco6&pid=vsl&tid=gluco6" },
+    { keys: ["energy crash","sugar crash","carb craving","afternoon slump","sweet tooth"],                            label: "Sugar Defender",  url: "https://hop.clickbank.net/?custom=1&affiliate=dovieheals&vendor=sugardef&pid=new" },
+    { keys: ["prediabetes","metabolic","belly fat","blood glucose","insuleaf"],                                       label: "InsuLeaf",        url: "https://buyinsuleaf.com/en/funnel/main/?affiliate=dovieheals" },
+    { keys: ["sleep","insomnia","restless","can't sleep","wake up","exhausted","magnesium"],                          label: "Sleep Revive",    url: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy" },
+    { keys: ["skin","wrinkles","sagging","collagen","dark spots","aging skin","stress","cortisol","hormones","ashwagandha"], label: "Synevra UltraLift", url: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=synevra" },
+  ];
+
   function makeButton(name, url) {
     return (
       '<br/><a href="' + url + '" target="_blank" rel="noopener noreferrer" ' +
@@ -234,6 +247,28 @@ export function GrannyChat() {
       'margin-top:8px;margin-bottom:8px;">' +
       '&#128722; ' + name + ' &#8594; Buy on Amazon</a><br/>'
     );
+  }
+
+  function makeClickbankButton(label, url) {
+    return (
+      '<br/><a href="' + url + '" target="_blank" rel="sponsored noopener noreferrer" ' +
+      'style="display:block;background-color:#C8922A;color:#fff;' +
+      'text-align:center;padding:9px 14px;border-radius:6px;' +
+      'text-decoration:none;font-size:13px;font-weight:600;' +
+      'border:1px solid #8B3A3A;margin-top:6px;margin-bottom:6px;' +
+      'font-family:var(--font-lora),serif;">' +
+      '&#127807; ' + label + ' &rarr; Learn More</a><br/>'
+    );
+  }
+
+  function matchClickbank(lower) {
+    for (var i = 0; i < CLICKBANK.length; i++) {
+      var p = CLICKBANK[i];
+      for (var j = 0; j < p.keys.length; j++) {
+        if (lower.indexOf(p.keys[j]) !== -1) return p;
+      }
+    }
+    return null;
   }
 
   function wireSuggestionPills() {
@@ -331,6 +366,12 @@ export function GrannyChat() {
           );
         }
       );
+
+      var plainText = html.replace(/<[^>]+>/g, ' ').toLowerCase();
+      var cb = matchClickbank(plainText);
+      if (cb) {
+        html += makeClickbankButton(cb.label, cb.url);
+      }
 
       return html;
     };
