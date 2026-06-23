@@ -11,7 +11,7 @@ type BlogPostLayoutProps = {
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
   const category = CATEGORIES[post.category]
-  const clickbankSlug = CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]
+  const clickbankSlug = CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.slug
 
   return (
     <article className="min-h-screen bg-white">
