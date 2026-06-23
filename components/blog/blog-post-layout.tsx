@@ -11,7 +11,10 @@ type BlogPostLayoutProps = {
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
   const category = CATEGORIES[post.category]
-  const clickbankSlug = CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.slug
+  const clickbankEntry = CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.find(
+    (entry) => entry.slug === (post.slug === "natural-sleep-remedy-no-melatonin" ? "sleep-revive-magnesium" : CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.[0]?.slug)
+  )
+  const clickbankSlug = clickbankEntry?.slug
 
   return (
     <article className="min-h-screen bg-white">
