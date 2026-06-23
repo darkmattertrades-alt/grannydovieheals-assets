@@ -8,7 +8,7 @@ export const metadata = {
   robots: "noindex",
 }
 
-export default function SleepRevivePreLander() {
+export default function SleepReviveMagnesiumPreLander() {
   return (
     <main className="max-w-2xl mx-auto px-6 py-12">
       <Image
