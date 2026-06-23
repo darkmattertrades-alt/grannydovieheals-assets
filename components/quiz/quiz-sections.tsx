@@ -3,8 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 
-// ── TYPES ──────────────────────────────────────────────────────────────────
-
 type Answer = {
   label: string
   value: string
@@ -26,8 +24,6 @@ type ResultProduct = {
   grannyWord: string
   scripture: string
 }
-
-// ── QUESTIONS ──────────────────────────────────────────────────────────────
 
 const questions: Question[] = [
   {
@@ -89,15 +85,10 @@ const questions: Question[] = [
   },
 ]
 
-// ── RESULT MAP ─────────────────────────────────────────────────────────────
-// All 10 Clickbank links from Master Strategy Section 15A
-// All 26 Amazon links from Master Strategy Section 12
-
 function getResult(answers: Record<string, string>): ResultProduct {
   const concern = answers.concern ?? answers.opening ?? "digestion"
   const duration = answers.duration ?? "new"
 
-  // ── SKIN ──
   if (concern === "skin") {
     return {
       name: "54 Thrones African Beauty Butter Collection ⭐",
@@ -112,7 +103,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── JOINTS ──
   if (concern === "joints" || concern === "pain") {
     if (duration === "serious") {
       return {
@@ -140,7 +130,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── STRESS AND BURNOUT ──
   if (concern === "stress" || concern === "tired") {
     return {
       name: "Gaia Herbs Ashwagandha Root 350mg",
@@ -156,7 +145,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── IMMUNITY ──
   if (concern === "immune") {
     if (duration === "serious") {
       return {
@@ -186,7 +174,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── SLEEP ──
   if (concern === "sleep") {
     return {
       name: "Doctor's Best High Absorption Magnesium Glycinate",
@@ -201,7 +188,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── BLOOD SUGAR ──
   if (concern === "bloodsugar") {
     if (duration === "serious") {
       return {
@@ -242,7 +228,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
     }
   }
 
-  // ── DEFAULT — DIGESTION / GUT ──
   if (duration === "serious") {
     return {
       name: "Dose Organic Milk Thistle Liver Cleanse 6-Bottle Supply",
@@ -257,6 +242,7 @@ function getResult(answers: Record<string, string>): ResultProduct {
         "Ezekiel 47:12 — Their fruit will serve for food and their leaves for healing.",
     }
   }
+
   return {
     name: "Bragg Organic Raw Apple Cider Vinegar",
     price: "$4 — $6",
@@ -270,22 +256,6 @@ function getResult(answers: Record<string, string>): ResultProduct {
       "Ezekiel 47:12 — Their fruit will serve for food and their leaves for healing.",
   }
 }
-
-// ── PALETTE ────────────────────────────────────────────────────────────────
-
-const palette = {
-  bg: "bg-[#F5ECD7]",
-  card: "bg-white",
-  gold: "text-[#C8922A]",
-  goldBg: "bg-[#C8922A]",
-  green: "bg-[#3B5E3A]",
-  greenText: "text-[#3B5E3A]",
-  heading: "text-[#2C1A0E]",
-  sub: "text-[#5C4A1E]",
-  muted: "text-stone-500",
-}
-
-// ── COMPONENT ──────────────────────────────────────────────────────────────
 
 export function GrannyQuiz() {
   const [step, setStep] = useState(0)
@@ -322,18 +292,18 @@ export function GrannyQuiz() {
   const result = showResult ? getResult(answers) : null
 
   return (
-    <section className={`min-h-screen ${palette.bg} px-4 py-12`}>
-      <div className="max-w-2xl mx-auto">
+    <section className="min-h-screen bg-[#F5ECD7] px-4 py-14">
+      <div className="max-w-xl mx-auto">
 
         {/* ── HERO HEADER ── */}
         <div className="text-center mb-10">
-          <p className={`text-sm font-semibold uppercase tracking-widest ${palette.gold} mb-2`}>
+          <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-2">
             🌿 Granny Dovie&apos;s Remedy Finder
           </p>
-          <h1 className={`font-serif text-3xl sm:text-4xl font-bold ${palette.heading} mb-3`}>
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#2C1A0E] mb-3">
             Find My Natural Remedy
           </h1>
-          <p className={`text-base ${palette.sub} max-w-md mx-auto leading-relaxed`}>
+          <p className="text-base text-[#5C4A1E] max-w-sm mx-auto leading-relaxed">
             Answer five simple questions and Granny Dovie will find the exact
             remedy God planted for what is troubling you, honey.
           </p>
@@ -341,70 +311,70 @@ export function GrannyQuiz() {
 
         {/* ── RESULT SCREEN ── */}
         {showResult && result && (
-          <div className={`${palette.card} rounded-2xl shadow-lg p-8 text-center`}>
-            <p className={`text-xs font-semibold uppercase tracking-widest ${palette.gold} mb-2`}>
+          <div className="bg-[#FFFDF8] border border-amber-200 rounded-2xl shadow-lg p-8 text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-2">
               Granny Dovie&apos;s Recommendation
             </p>
-            <h2 className={`font-serif text-2xl font-bold ${palette.heading} mb-6`}>
+            <h2 className="font-serif text-2xl font-bold text-[#2C1A0E] mb-6">
               This is what your body needs, honey.
             </h2>
 
             {/* Granny's word */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 mb-6 text-left">
-              <p className={`text-base italic ${palette.sub} leading-relaxed mb-3`}>
+              <p className="text-base italic text-[#5C4A1E] leading-relaxed mb-3">
                 &ldquo;{result.grannyWord}&rdquo;
               </p>
-              <p className={`text-xs ${palette.muted}`}>{result.scripture}</p>
+              <p className="text-xs text-stone-400">{result.scripture}</p>
             </div>
 
             {/* Amazon product card */}
-            <div className="border border-stone-200 rounded-xl p-6 mb-4 text-left">
-              <p className={`text-xs font-semibold uppercase tracking-widest ${palette.gold} mb-1`}>
+            <div className="border border-stone-200 rounded-xl p-6 mb-4 text-left bg-white">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-1">
                 Amazon Pick
               </p>
-              <h3 className={`font-serif text-lg font-bold ${palette.heading} mb-1`}>
+              <h3 className="font-serif text-lg font-bold text-[#2C1A0E] mb-1">
                 {result.name}
               </h3>
-              <p className={`text-sm ${palette.muted} mb-4`}>{result.price}</p>
+              <p className="text-sm text-stone-400 mb-4">{result.price}</p>
               <Link
                 href={result.amazonHref}
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                className="inline-block w-full text-center bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200"
+                className="inline-block w-full text-center bg-[#C8922A] hover:bg-[#b57d22] text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200"
               >
-                Buy on Amazon
+                🛒 Buy on Amazon
               </Link>
             </div>
 
             {/* Clickbank card */}
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-6 text-left">
-              <p className={`text-xs font-semibold uppercase tracking-widest ${palette.gold} mb-1`}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-1">
                 When You Need Something Stronger
               </p>
-              <h3 className={`font-serif text-lg font-bold ${palette.heading} mb-1`}>
+              <h3 className="font-serif text-lg font-bold text-[#2C1A0E] mb-1">
                 {result.clickbankLabel}
               </h3>
-              <p className={`text-sm ${palette.muted} mb-4`}>
+              <p className="text-sm text-stone-500 mb-4">
                 Granny Dovie&apos;s recommended supplement for deeper, lasting support.
               </p>
               <Link
                 href={result.clickbankHref}
                 target="_blank"
                 rel="sponsored noopener noreferrer"
-                className="inline-block w-full text-center bg-[#8B3A3A] hover:bg-[#7a3030] text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200"
+                className="inline-block w-full text-center bg-[#3B5E3A] hover:bg-[#2e4a2d] text-white font-bold py-3 px-6 rounded-xl transition-colors duration-200"
               >
-                Learn More About This Product
+                🌿 Learn More About {result.clickbankLabel}
               </Link>
             </div>
 
-            {/* Quiz CTA */}
-            <div className="bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
-              <p className={`text-sm font-semibold ${palette.greenText} mb-2`}>
+            {/* Blog CTA */}
+            <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-6">
+              <p className="text-sm font-semibold text-[#3B5E3A] mb-2">
                 Want to explore more remedies?
               </p>
               <Link
                 href="/blog"
-                className={`text-sm font-bold ${palette.greenText} underline underline-offset-2 hover:opacity-80 transition-opacity`}
+                className="text-sm font-bold text-[#3B5E3A] underline underline-offset-2 hover:opacity-80 transition-opacity"
               >
                 Read Granny Dovie&apos;s remedy blog 🌿
               </Link>
@@ -420,7 +390,7 @@ export function GrannyQuiz() {
             {/* Restart */}
             <button
               onClick={handleRestart}
-              className={`text-sm font-semibold ${palette.greenText} underline underline-offset-2 hover:opacity-80 transition-opacity`}
+              className="text-sm font-semibold text-[#3B5E3A] underline underline-offset-2 hover:opacity-80 transition-opacity"
             >
               Take the Quiz Again
             </button>
@@ -445,13 +415,13 @@ export function GrannyQuiz() {
             </div>
 
             {/* Question card */}
-            <div className={`${palette.card} rounded-2xl shadow-lg p-8`}>
+            <div className="bg-[#FFFDF8] border border-amber-200 rounded-2xl shadow-md p-8">
               {currentQuestion.scripture && (
-                <p className={`text-xs italic ${palette.muted} mb-4 text-center`}>
+                <p className="text-xs italic text-stone-400 mb-5 text-center">
                   {currentQuestion.scripture}
                 </p>
               )}
-              <h2 className={`font-serif text-xl font-bold ${palette.heading} mb-6 text-center leading-snug`}>
+              <h2 className="font-serif text-xl font-bold text-[#2C1A0E] mb-6 text-center leading-snug">
                 {currentQuestion.prompt}
               </h2>
               <div className="grid gap-3">
@@ -462,8 +432,8 @@ export function GrannyQuiz() {
                     className={`w-full text-left px-5 py-4 rounded-xl border-2 text-sm font-medium transition-all duration-150
                       ${
                         selected === answer.value
-                          ? "border-[#C8922A] bg-amber-50 text-[#2C1A0E]"
-                          : "border-stone-200 bg-white text-stone-700 hover:border-amber-300 hover:bg-amber-50"
+                          ? "border-[#C8922A] bg-amber-50 text-[#2C1A0E] shadow-sm"
+                          : "border-stone-200 bg-white text-stone-700 hover:border-[#C8922A] hover:bg-amber-50"
                       }`}
                   >
                     {answer.label}
@@ -477,11 +447,11 @@ export function GrannyQuiz() {
                 className={`mt-8 w-full py-4 rounded-xl font-bold text-base transition-all duration-200
                   ${
                     selected
-                      ? "bg-[#3B5E3A] hover:bg-[#2e4a2d] text-white"
+                      ? "bg-[#3B5E3A] hover:bg-[#2e4a2d] text-white shadow-md"
                       : "bg-stone-200 text-stone-400 cursor-not-allowed"
                   }`}
               >
-                {step + 1 === totalSteps ? "Show My Remedy" : "Next Question"}
+                {step + 1 === totalSteps ? "Show My Remedy 🌿" : "Next Question →"}
               </button>
             </div>
           </>
