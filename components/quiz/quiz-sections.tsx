@@ -300,10 +300,10 @@ export function GrannyQuiz() {
           <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-2">
             🌿 Granny Dovie&apos;s Remedy Finder
           </p>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-[#2C1A0E] mb-3">
+          <h1 className="font-serif text-xl sm:text-2xl font-bold text-[#2C1A0E] mb-2">
             Find My Natural Remedy
           </h1>
-          <p className="text-base text-[#5C4A1E] max-w-sm mx-auto leading-relaxed">
+          <p className="text-sm text-[#5C4A1E] max-w-sm mx-auto leading-relaxed">
             Answer five simple questions and Granny Dovie will find the exact
             remedy God planted for what is troubling you, honey.
           </p>
