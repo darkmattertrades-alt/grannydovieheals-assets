@@ -292,11 +292,11 @@ export function GrannyQuiz() {
   const result = showResult ? getResult(answers) : null
 
   return (
-    <section className="min-h-screen bg-[#F5ECD7] px-4 py-14">
+    <section className="min-h-screen bg-[#F5ECD7] px-4 py-6">
       <div className="max-w-xl mx-auto">
 
         {/* ── HERO HEADER ── */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#C8922A] mb-2">
             🌿 Granny Dovie&apos;s Remedy Finder
           </p>
@@ -401,7 +401,7 @@ export function GrannyQuiz() {
         {!showResult && (
           <>
             {/* Progress bar */}
-            <div className="mb-6">
+            <div className="mb-4">
               <div className="flex justify-between text-xs text-stone-400 mb-2">
                 <span>Question {step + 1} of {totalSteps}</span>
                 <span>{Math.round((step / totalSteps) * 100)}% complete</span>
@@ -415,16 +415,16 @@ export function GrannyQuiz() {
             </div>
 
             {/* Question card */}
-            <div className="bg-[#FFFDF8] border border-amber-200 rounded-2xl shadow-md p-8">
+            <div className="bg-[#FFFDF8] border border-amber-200 rounded-2xl shadow-md p-6">
               {currentQuestion.scripture && (
-                <p className="text-xs italic text-stone-400 mb-5 text-center">
+                <p className="text-xs italic text-stone-400 mb-3 text-center">
                   {currentQuestion.scripture}
                 </p>
               )}
-              <h2 className="font-serif text-xl font-bold text-[#2C1A0E] mb-6 text-center leading-snug">
+              <h2 className="font-serif text-xl font-bold text-[#2C1A0E] mb-4 text-center leading-snug">
                 {currentQuestion.prompt}
               </h2>
-              <div className="grid gap-3">
+              <div className="grid gap-2">
                 {currentQuestion.answers.map((answer) => (
                   <button
                     key={answer.value + answer.label}
@@ -444,7 +444,7 @@ export function GrannyQuiz() {
               <button
                 onClick={handleNext}
                 disabled={!selected}
-                className={`mt-8 w-full py-4 rounded-xl font-bold text-base transition-all duration-200
+                className={`mt-5 w-full py-4 rounded-xl font-bold text-base transition-all duration-200
                   ${
                     selected
                       ? "bg-[#3B5E3A] hover:bg-[#2e4a2d] text-white shadow-md"
