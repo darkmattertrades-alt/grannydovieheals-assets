@@ -12,31 +12,47 @@ export type BlogCategory =
   | "natural-skincare"
   | "faith-healing"
 
-export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: string }> = {
-  "gut-health": {
-    slug: "gut-vita",
-    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
-  },
-  "joints-inflammation": {
-    slug: "balmorex",
-    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain",
-  },
-  "immunity": {
-    slug: "visiflora",
-    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
-  },
-  "stress-sleep": {
-    slug: "sleep-revive",
-    href: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
-  },
-  "natural-skincare": {
-    slug: "synevra",
-    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=ashwagandha-women-50",
-  },
-  "faith-healing": {
-    slug: "gut-vita",
-    href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=faith-healing",
-  },
+export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: string }[]> = {
+  "gut-health": [
+    {
+      slug: "gut-vita",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=acv-morning-routine",
+    },
+  ],
+  "joints-inflammation": [
+    {
+      slug: "balmorex",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=balmorex&pid=v1&tid=turmeric-joint-pain",
+    },
+  ],
+  "immunity": [
+    {
+      slug: "visiflora",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=visiflora&pid=v1&tid=elderberry-syrup",
+    },
+  ],
+  "stress-sleep": [
+    {
+      slug: "sleep-revive",
+      href: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=ashwagandha-stress-women",
+    },
+    {
+      slug: "sleep-revive-magnesium",
+      href: "https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy",
+    },
+  ],
+  "natural-skincare": [
+    {
+      slug: "synevra",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=synevra&pid=v1&tid=ashwagandha-women-50",
+    },
+  ],
+  "faith-healing": [
+    {
+      slug: "gut-vita",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=faith-healing",
+    },
+  ],
 }
 
 export type BlogPost = {
