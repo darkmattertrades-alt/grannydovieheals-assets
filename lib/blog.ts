@@ -26,6 +26,10 @@ export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: 
       slug: "gut-vita-peppermint",
       href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloating",
     },
+    {
+      slug: "gut-vita-peppermint-gas",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloating-and-gas",
+    },
   ],
   "joints-inflammation": [
     {
