@@ -83,7 +83,7 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
               year: "numeric",
             })}
           </span>
-          <span>{post.readTime} min read</span>
+          <span>{post.readTime}</span>
           {post.lastUpdated !== post.publishDate && (
             <span className="text-green-600">
               Updated{" "}
