@@ -17,6 +17,7 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "ashwagandha-stress-women-over-50": "sleep-revive",
   "natural-sleep-remedy-no-melatonin": "sleep-revive-magnesium",
   "peppermint-tea-bloating-digestion": "gut-vita-peppermint",
+  "peppermint-tea-bloating-and-gas": "gut-vita-peppermint",
 }
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
@@ -128,7 +129,10 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
               When the Old Ways Need a Little Backup
             </h3>
             <p className="text-stone-700 text-lg mb-8 leading-relaxed max-w-xl mx-auto">
-              Granny Dovie&apos;s remedies have worked for decades. But honey, sometimes your body needs something stronger. For those days when the old ways need a little backup — this is what I recommend.
+              Granny Dovie&apos;s remedies have worked for decades. But honey,
+              sometimes your body needs something stronger. For those days
+              when the old ways need a little backup — this is what I
+              recommend.
             </p>
             <Link
               href={`/recommended/${clickbankSlug}`}
