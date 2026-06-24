@@ -22,6 +22,10 @@ export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: 
       slug: "gut-vita-ginger",
       href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=ginger-root-digestion-remedy",
     },
+    {
+      slug: "gut-vita-peppermint",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloating",
+    },
   ],
   "joints-inflammation": [
     {
