@@ -31,7 +31,7 @@ export function BlogCard({ post }: BlogCardProps) {
             {category.emoji} {category.label}
           </span>
           <span className="text-xs text-gray-400">
-            {post.readTime} min read
+            {post.readTime}
           </span>
         </div>
         <h2 className="font-serif text-lg font-bold text-gray-900 leading-snug group-hover:text-green-800 transition-colors">
