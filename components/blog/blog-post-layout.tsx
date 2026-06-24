@@ -16,6 +16,7 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "turmeric-joint-pain-natural-remedy": "balmorex",
   "ashwagandha-stress-women-over-50": "sleep-revive",
   "natural-sleep-remedy-no-melatonin": "sleep-revive-magnesium",
+  "peppermint-tea-bloating-digestion": "gut-vita-peppermint",
 }
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
