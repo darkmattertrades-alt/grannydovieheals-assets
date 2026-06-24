@@ -17,7 +17,7 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "ashwagandha-stress-women-over-50": "sleep-revive",
   "natural-sleep-remedy-no-melatonin": "sleep-revive-magnesium",
   "peppermint-tea-bloating-digestion": "gut-vita-peppermint",
-  "peppermint-tea-bloating-and-gas": "gut-vita-peppermint",
+  "peppermint-tea-bloating-and-gas": "gut-vita-peppermint-gas",
 }
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
