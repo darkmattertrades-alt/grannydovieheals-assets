@@ -1,7 +1,17 @@
 import { MetadataRoute } from "next"
+import { getAllPosts } from "@/lib/blog"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const BASE_URL = "https://www.grannydovieheals.com"
+
+  const posts = getAllPosts()
+
+  const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.lastUpdated ?? post.publishDate),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }))
 
   return [
     {
@@ -16,18 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    {
-      url: `${BASE_URL}/blog/acv-gut-health-morning-routine`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/blog/elderberry-syrup-recipe-home`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
+    ...postEntries,
     {
       url: `${BASE_URL}/supplements`,
       lastModified: new Date(),
