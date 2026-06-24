@@ -9,12 +9,18 @@ type BlogPostLayoutProps = {
   children: React.ReactNode
 }
 
+const POST_PRELANDER_MAP: Record<string, string> = {
+  "apple-cider-vinegar-morning-routine": "gut-vita",
+  "ginger-root-digestion-remedy": "gut-vita-ginger",
+  "elderberry-syrup-immune-support": "visiflora",
+  "turmeric-joint-pain-natural-remedy": "balmorex",
+  "ashwagandha-stress-women-over-50": "sleep-revive",
+  "natural-sleep-remedy-no-melatonin": "sleep-revive-magnesium",
+}
+
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
   const category = CATEGORIES[post.category]
-  const clickbankEntry = CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.find(
-    (entry) => entry.slug === (post.slug === "natural-sleep-remedy-no-melatonin" ? "sleep-revive-magnesium" : CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.[0]?.slug)
-  )
-  const clickbankSlug = clickbankEntry?.slug
+  const clickbankSlug = POST_PRELANDER_MAP[post.slug] ?? CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.[0]?.slug
 
   return (
     <article className="min-h-screen bg-white">
