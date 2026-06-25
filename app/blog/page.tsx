@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { getAllPosts } from "@/lib/blog"
+import { getAllPosts, getPostsByCategory } from "@/lib/blog"
 import { BlogCard } from "@/components/blog/blog-card"
 import { CATEGORIES } from "@/content/blog/_categories"
 import Link from "next/link"
@@ -18,6 +18,16 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts()
+
+  // Pull the single most recent post per category for the recommended section
+  const recommendedByCategory = Object.values(CATEGORIES)
+    .map((cat) => {
+      const categoryPosts = getPostsByCategory(cat.slug as any)
+      return categoryPosts.length > 0
+        ? { category: cat, post: categoryPosts[0] }
+        : null
+    })
+    .filter(Boolean) as { category: (typeof CATEGORIES)[keyof typeof CATEGORIES]; post: ReturnType<typeof getPostsByCategory>[number] }[]
 
   return (
     <main className="min-h-screen bg-white">
@@ -77,6 +87,48 @@ export default function BlogPage() {
           </div>
         )}
       </section>
+
+      {/* Recommended by Category — Internal Linking Section */}
+      {recommendedByCategory.length > 0 && (
+        <section className="bg-amber-50 border-t border-amber-100 px-4 py-14">
+          <div className="max-w-5xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2 text-center">
+              🌿 Granny Dovie Also Recommends
+            </p>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-2">
+              Find the Remedy for What Ails You, Honey
+            </h2>
+            <p className="text-sm text-gray-500 text-center max-w-xl mx-auto mb-10 leading-relaxed">
+              Every trouble has an old remedy waiting. Start with the one
+              that speaks to what your body is carrying right now.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {recommendedByCategory.map(({ category, post }) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group block rounded-2xl border border-amber-200 bg-white overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all"
+                >
+                  <div className="p-6">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
+                      {category.emoji} {category.label}
+                    </p>
+                    <h3 className="font-serif text-base font-bold text-gray-900 leading-snug group-hover:text-amber-800 transition-colors">
+                      {post.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <p className="mt-4 text-xs font-semibold text-amber-700 group-hover:underline">
+                      Read More →
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Bottom CTA */}
       <section className="bg-green-700 px-4 py-12 text-center text-white">
