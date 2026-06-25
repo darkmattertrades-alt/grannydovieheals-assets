@@ -1,12 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-
-export const metadata = {
-  title: "Granny Dovie Recommends — GutVita Advanced Gut Support",
-  description:
-    "When peppermint tea needs a little backup, this is what Granny Dovie reaches for. Advanced gut support for women who want faster, stronger digestive results.",
-  robots: "noindex",
-}
+import { trackPrelanderClick } from "@/lib/analytics"
 
 export default function GutVitaPeppermintPreLander() {
   return (
@@ -137,6 +133,7 @@ export default function GutVitaPeppermintPreLander() {
           href="https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloating"
           rel="sponsored noopener noreferrer"
           target="_blank"
+          onClick={() => trackPrelanderClick("peppermint-tea-bloating-digestion", "gut-vita-peppermint")}
           className="inline-block bg-amber-600 hover:bg-amber-700 text-white text-xl font-bold px-10 py-5 rounded-xl transition-colors duration-200"
         >
           Watch the Full Presentation
