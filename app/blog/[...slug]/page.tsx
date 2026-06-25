@@ -173,9 +173,8 @@ export default async function BlogSlugPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <BlogPostLayout post={post}>
+      <BlogPostLayout post={post} relatedPosts={relatedPosts}>
         <MDXRemote source={post.content} components={components} />
-        {relatedPosts.length > 0 && <RelatedPosts posts={relatedPosts} />}
       </BlogPostLayout>
     </>
   )
