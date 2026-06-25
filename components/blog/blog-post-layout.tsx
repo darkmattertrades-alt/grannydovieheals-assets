@@ -1,12 +1,14 @@
 import Image from "next/image"
 import Link from "next/link"
-import type { BlogPost, BlogCategory } from "@/lib/blog"
+import type { BlogPost, BlogCategory, BlogPostMeta } from "@/lib/blog"
 import { CATEGORY_CLICKBANK_MAP } from "@/lib/blog"
 import { CATEGORIES } from "@/content/blog/_categories"
+import { RelatedPosts } from "@/components/blog/related-posts"
 
 type BlogPostLayoutProps = {
   post: BlogPost
   children: React.ReactNode
+  relatedPosts?: BlogPostMeta[]
 }
 
 const POST_PRELANDER_MAP: Record<string, string> = {
@@ -21,9 +23,11 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "peppermint-tea-bloated-stomach": "gut-vita-peppermint-bloated-stomach",
 }
 
-export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
+export function BlogPostLayout({ post, children, relatedPosts }: BlogPostLayoutProps) {
   const category = CATEGORIES[post.category]
-  const clickbankSlug = POST_PRELANDER_MAP[post.slug] ?? CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.[0]?.slug
+  const clickbankSlug =
+    POST_PRELANDER_MAP[post.slug] ??
+    CATEGORY_CLICKBANK_MAP[post.category as BlogCategory]?.[0]?.slug
 
   return (
     <article className="min-h-screen bg-white">
@@ -48,10 +52,7 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
             Home
           </Link>
           <span>/</span>
-          <Link
-            href="/blog"
-            className="hover:text-green-700 transition-colors"
-          >
+          <Link href="/blog" className="hover:text-green-700 transition-colors">
             Blog
           </Link>
           <span>/</span>
@@ -121,6 +122,13 @@ export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
           {children}
         </div>
       </div>
+
+      {/* Related Posts Widget — outside prose, full width of content column */}
+      {relatedPosts && relatedPosts.length > 0 && (
+        <div className="max-w-3xl mx-auto px-4 pb-6">
+          <RelatedPosts posts={relatedPosts} />
+        </div>
+      )}
 
       {/* ClickBank CTA */}
       {clickbankSlug && (
