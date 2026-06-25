@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   const posts = getAllPosts()
 
-  // Original logic — auto-build related posts network from relatedSlugs frontmatter
+  // Auto-build related posts network from relatedSlugs frontmatter
   const relatedNetwork = posts.flatMap((post) =>
     getRelatedPosts(post.slug, post.relatedSlugs ?? [])
   )
@@ -32,7 +32,7 @@ export default function BlogPage() {
     return true
   })
 
-  // Add-on logic — pull most recent post per category
+  // Pull most recent post per category for Find Your Remedy section
   const recommendedByCategory = Object.values(CATEGORIES)
     .map((cat) => {
       const categoryPosts = getPostsByCategory(cat.slug as any)
@@ -104,63 +104,67 @@ export default function BlogPage() {
         )}
       </section>
 
-      {/* Live Editorial Widget — Related Posts from relatedSlugs frontmatter */}
+      {/* Related Posts — Full Width Compact Collapsed Widget Box */}
       {recommendedPosts.length > 0 && (
-        <section className="border-t border-gray-100 px-4 py-10 bg-white">
+        <section className="border-t border-gray-200 bg-gray-50 px-4 py-10">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-6">
-              🌿 Granny Dovie Also Recommends
-            </p>
-            <div className="divide-y divide-gray-100">
-              {recommendedPosts.map((post) => {
-                const cat = CATEGORIES[post.category]
-                return (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="group flex items-center gap-4 py-4 hover:bg-gray-50 transition-colors rounded-xl px-2"
-                  >
-                    {/* Thumbnail */}
-                    {post.featuredImage ? (
-                      <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-green-50">
-                        <Image
-                          src={post.featuredImage}
-                          alt={post.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="64px"
-                        />
+            <div className="border border-gray-200 rounded-2xl bg-white overflow-hidden shadow-sm">
+              <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
+                <p className="text-xs font-semibold uppercase tracking-widest text-green-700">
+                  🌿 Related Posts
+                </p>
+              </div>
+              <div className="divide-y divide-gray-100">
+                {recommendedPosts.map((post) => {
+                  const cat = CATEGORIES[post.category]
+                  return (
+                    <Link
+                      key={post.slug}
+                      href={`/blog/${post.slug}`}
+                      className="group flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition-colors"
+                    >
+                      {/* Thumbnail */}
+                      {post.featuredImage ? (
+                        <div className="relative w-14 h-14 flex-shrink-0 rounded-lg overflow-hidden bg-green-50">
+                          <Image
+                            src={post.featuredImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                            sizes="56px"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-14 h-14 flex-shrink-0 rounded-lg bg-green-50 flex items-center justify-center text-xl">
+                          {cat?.emoji}
+                        </div>
+                      )}
+                      {/* Content */}
+                      <div className="flex-1 min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-0.5">
+                          {cat?.emoji} {cat?.label}
+                        </p>
+                        <h3 className="font-serif text-sm font-bold text-gray-900 leading-snug group-hover:text-green-800 transition-colors line-clamp-1">
+                          {post.title}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-gray-400">
+                          {post.readTime}
+                        </p>
                       </div>
-                    ) : (
-                      <div className="w-16 h-16 flex-shrink-0 rounded-lg bg-green-50 flex items-center justify-center text-2xl">
-                        {cat?.emoji}
-                      </div>
-                    )}
-                    {/* Title + Meta */}
-                    <div className="flex-1 min-w-0">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-1">
-                        {cat?.emoji} {cat?.label}
-                      </p>
-                      <h3 className="font-serif text-sm font-bold text-gray-900 leading-snug group-hover:text-green-800 transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="mt-1 text-xs text-gray-400">
-                        {post.readTime}
-                      </p>
-                    </div>
-                    {/* Arrow */}
-                    <span className="text-xs font-semibold text-green-700 flex-shrink-0 group-hover:underline">
-                      →
-                    </span>
-                  </Link>
-                )
-              })}
+                      {/* Arrow */}
+                      <span className="text-sm text-green-700 flex-shrink-0 group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </Link>
+                  )
+                })}
+              </div>
             </div>
           </div>
         </section>
       )}
 
-      {/* Add-on — Most Recent Post Per Category */}
+      {/* Find Your Remedy — Category Cards + Quiz Card */}
       {recommendedByCategory.length > 0 && (
         <section className="bg-green-50 border-t border-green-100 px-4 py-14">
           <div className="max-w-5xl mx-auto">
@@ -175,6 +179,7 @@ export default function BlogPage() {
               carrying right now.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Category Cards */}
               {recommendedByCategory.map(({ category, post }) => (
                 <Link
                   key={post.slug}
@@ -197,6 +202,29 @@ export default function BlogPage() {
                   </div>
                 </Link>
               ))}
+
+              {/* Quiz Card */}
+              <Link
+                href="/quiz"
+                className="group block rounded-2xl border border-amber-300 bg-amber-50 overflow-hidden hover:border-amber-500 hover:shadow-lg transition-all"
+              >
+                <div className="p-6 flex flex-col h-full">
+                  <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-3">
+                    🌿 Not Sure Where to Start?
+                  </p>
+                  <h3 className="font-serif text-base font-bold text-gray-900 leading-snug group-hover:text-amber-800 transition-colors">
+                    Take Granny Dovie's Remedy Finder Quiz
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500 leading-relaxed flex-1">
+                    Answer five simple questions and Granny Dovie will
+                    point you straight to the remedy your body is asking
+                    for, honey.
+                  </p>
+                  <p className="mt-4 text-xs font-semibold text-amber-700 group-hover:underline">
+                    Find My Remedy →
+                  </p>
+                </div>
+              </Link>
             </div>
           </div>
         </section>
