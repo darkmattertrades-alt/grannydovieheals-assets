@@ -1,12 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-
-export const metadata = {
-  title: "Granny Dovie Recommends — Sleep Revive Natural Sleep Support",
-  description:
-    "When the old ways need a little backup, this is what Granny Dovie reaches for. Advanced natural sleep support for women who want faster, stronger results.",
-  robots: "noindex",
-}
+import { trackPrelanderClick } from "@/lib/analytics"
 
 export default function SleepRevivePreLander() {
   return (
@@ -135,6 +131,7 @@ export default function SleepRevivePreLander() {
           href="https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy"
           rel="sponsored noopener noreferrer"
           target="_blank"
+          onClick={() => trackPrelanderClick("ashwagandha-stress-women-over-50", "sleep-revive")}
           className="inline-block bg-amber-600 hover:bg-amber-700 text-white text-xl font-bold px-10 py-5 rounded-xl transition-colors duration-200"
         >
           Watch the Full Presentation
