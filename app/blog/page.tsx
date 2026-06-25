@@ -104,54 +104,54 @@ export default function BlogPage() {
         )}
       </section>
 
-      {/* Original — Related Posts Network from relatedSlugs frontmatter */}
+      {/* Live Editorial Widget — Related Posts from relatedSlugs frontmatter */}
       {recommendedPosts.length > 0 && (
-        <section className="bg-amber-50 border-t border-amber-100 px-4 py-14">
+        <section className="border-t border-gray-100 px-4 py-10 bg-white">
           <div className="max-w-5xl mx-auto">
-            <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2 text-center">
+            <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-6">
               🌿 Granny Dovie Also Recommends
             </p>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-2">
-              More Remedies from God's Garden
-            </h2>
-            <p className="text-sm text-gray-500 text-center max-w-xl mx-auto mb-10 leading-relaxed">
-              Every trouble has an old remedy waiting. Find the one your
-              body is asking for, honey.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="divide-y divide-gray-100">
               {recommendedPosts.map((post) => {
                 const cat = CATEGORIES[post.category]
                 return (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="group block rounded-2xl border border-amber-200 bg-white overflow-hidden hover:border-amber-400 hover:shadow-lg transition-all"
+                    className="group flex items-center gap-4 py-4 hover:bg-gray-50 transition-colors rounded-xl px-2"
                   >
-                    {post.featuredImage && (
-                      <div className="relative w-full h-40 bg-amber-50">
+                    {/* Thumbnail */}
+                    {post.featuredImage ? (
+                      <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden bg-green-50">
                         <Image
                           src={post.featuredImage}
                           alt={post.title}
                           fill
                           className="object-cover group-hover:scale-105 transition-transform duration-300"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          sizes="64px"
                         />
                       </div>
+                    ) : (
+                      <div className="w-16 h-16 flex-shrink-0 rounded-lg bg-green-50 flex items-center justify-center text-2xl">
+                        {cat?.emoji}
+                      </div>
                     )}
-                    <div className="p-5">
-                      <p className="text-xs font-semibold uppercase tracking-widest text-amber-700 mb-2">
+                    {/* Title + Meta */}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-1">
                         {cat?.emoji} {cat?.label}
                       </p>
-                      <h3 className="font-serif text-base font-bold text-gray-900 leading-snug group-hover:text-amber-800 transition-colors">
+                      <h3 className="font-serif text-sm font-bold text-gray-900 leading-snug group-hover:text-green-800 transition-colors line-clamp-2">
                         {post.title}
                       </h3>
-                      <p className="mt-2 text-sm text-gray-500 leading-relaxed line-clamp-2">
-                        {post.excerpt}
-                      </p>
-                      <p className="mt-4 text-xs font-semibold text-amber-700 group-hover:underline">
-                        Read More →
+                      <p className="mt-1 text-xs text-gray-400">
+                        {post.readTime}
                       </p>
                     </div>
+                    {/* Arrow */}
+                    <span className="text-xs font-semibold text-green-700 flex-shrink-0 group-hover:underline">
+                      →
+                    </span>
                   </Link>
                 )
               })}
