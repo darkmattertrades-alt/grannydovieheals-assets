@@ -1,12 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-
-export const metadata = {
-  title: "Granny Dovie Recommends — Sleep Revive Natural Sleep Support",
-  description:
-    "When magnesium alone needs a little backup — Granny Dovie's recommendation for women who want deeper, steadier sleep without melatonin.",
-  robots: "noindex",
-}
+import { trackPrelanderClick } from "@/lib/analytics"
 
 export default function SleepReviveMagnesiumPreLander() {
   return (
@@ -104,6 +100,7 @@ export default function SleepReviveMagnesiumPreLander() {
         href="https://hop.clickbank.net/?vendor=revive&affiliate=dovieheals&lid=1&tid=natural-sleep-remedy"
         target="_blank"
         rel="sponsored noopener noreferrer"
+        onClick={() => trackPrelanderClick("natural-sleep-remedy-no-melatonin", "sleep-revive-magnesium")}
         className="block w-full text-center bg-amber-700 hover:bg-amber-800 text-white font-bold text-lg py-4 px-8 rounded-xl transition-colors duration-200 mb-8"
       >
         Watch the Full Presentation
