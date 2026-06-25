@@ -1,9 +1,8 @@
 import type { Metadata } from "next"
-import { getAllPosts, getRelatedPosts, getPostsByCategory } from "@/lib/blog"
+import { getAllPosts, getPostsByCategory } from "@/lib/blog"
 import { BlogCard } from "@/components/blog/blog-card"
 import { CATEGORIES } from "@/content/blog/_categories"
 import Link from "next/link"
-import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Granny Dovie's Natural Remedy Blog — Real Remedies from God's Garden",
@@ -19,18 +18,6 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts()
-
-  // Auto-build related posts network from relatedSlugs frontmatter
-  const relatedNetwork = posts.flatMap((post) =>
-    getRelatedPosts(post.slug, post.relatedSlugs ?? [])
-  )
-
-  const seen = new Set<string>()
-  const recommendedPosts = relatedNetwork.filter((post) => {
-    if (seen.has(post.slug)) return false
-    seen.add(post.slug)
-    return true
-  })
 
   // Pull most recent post per category for Find Your Remedy section
   const recommendedByCategory = Object.values(CATEGORIES)
@@ -103,66 +90,6 @@ export default function BlogPage() {
           </div>
         )}
       </section>
-
-      {/* Related Posts — Full Width Compact Collapsed Widget Box */}
-      {recommendedPosts.length > 0 && (
-        <section className="border-t border-gray-200 bg-gray-50 px-4 py-10">
-          <div className="max-w-5xl mx-auto">
-            <div className="border border-gray-200 rounded-2xl bg-white overflow-hidden shadow-sm">
-              <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-                <p className="text-xs font-semibold uppercase tracking-widest text-green-700">
-                  🌿 Related Posts
-                </p>
-              </div>
-              <div className="divide-y divide-gray-100">
-                {recommendedPosts.map((post) => {
-                  const cat = CATEGORIES[post.category]
-                  return (
-                    <Link
-                      key={post.slug}
-                      href={`/blog/${post.slug}`}
-                      className="group flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition-colors"
-                    >
-                      {/* Thumbnail */}
-                      {post.featuredImage ? (
-                        <div className="relative w-14 h-14 flex-shrink-0 rounded-lg overflow-hidden bg-green-50">
-                          <Image
-                            src={post.featuredImage}
-                            alt={post.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-300"
-                            sizes="56px"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-14 h-14 flex-shrink-0 rounded-lg bg-green-50 flex items-center justify-center text-xl">
-                          {cat?.emoji}
-                        </div>
-                      )}
-                      {/* Content */}
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs font-semibold uppercase tracking-widest text-green-700 mb-0.5">
-                          {cat?.emoji} {cat?.label}
-                        </p>
-                        <h3 className="font-serif text-sm font-bold text-gray-900 leading-snug group-hover:text-green-800 transition-colors line-clamp-1">
-                          {post.title}
-                        </h3>
-                        <p className="mt-0.5 text-xs text-gray-400">
-                          {post.readTime}
-                        </p>
-                      </div>
-                      {/* Arrow */}
-                      <span className="text-sm text-green-700 flex-shrink-0 group-hover:translate-x-1 transition-transform">
-                        →
-                      </span>
-                    </Link>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Find Your Remedy — Category Cards + Quiz Card */}
       {recommendedByCategory.length > 0 && (
