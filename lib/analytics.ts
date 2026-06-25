@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void
+  }
+}
+
 export function trackPrelanderClick(slug: string, angle: string) {
   if (typeof window === "undefined") return
   if (!window.gtag) return
