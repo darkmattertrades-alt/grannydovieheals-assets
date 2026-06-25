@@ -4,13 +4,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { trackPrelanderClick } from "@/lib/analytics"
 
-export const metadata = {
-  title: "Granny Dovie Recommends — GutVita Advanced Gut Support",
-  description:
-    "When the old ways need a little backup, this is what Granny Dovie reaches for. Advanced gut support for those who want faster, stronger results.",
-  robots: "noindex",
-}
-
 export default function GutVitaPreLander() {
   return (
     <main className="max-w-2xl mx-auto px-6 py-12">
