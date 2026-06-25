@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { trackPrelanderClick } from "@/lib/analytics"
 
 export const metadata = {
   title: "Granny Dovie Recommends — GutVita Advanced Gut Support",
@@ -135,6 +136,7 @@ export default function GutVitaPreLander() {
           href="https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=recommended-gut-vita"
           rel="sponsored noopener noreferrer"
           target="_blank"
+          onClick={() => trackPrelanderClick("apple-cider-vinegar-morning-routine", "gut-vita")}
           className="inline-block bg-amber-600 hover:bg-amber-700 text-white text-xl font-bold px-10 py-5 rounded-xl transition-colors duration-200"
         >
           Watch the Full Presentation
