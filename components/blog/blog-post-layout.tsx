@@ -18,6 +18,7 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "natural-sleep-remedy-no-melatonin": "sleep-revive-magnesium",
   "peppermint-tea-bloating-digestion": "gut-vita-peppermint",
   "peppermint-tea-bloating-and-gas": "gut-vita-peppermint-gas",
+  "peppermint-tea-bloated-stomach": "gut-vita-peppermint-bloated-stomach",
 }
 
 export function BlogPostLayout({ post, children }: BlogPostLayoutProps) {
