@@ -16,7 +16,7 @@ export function ProductRecommendation({
   imageSrc,
 }: ProductRecommendationProps) {
   return (
-    <div className="my-8 rounded-2xl border border-green-200 bg-white shadow-sm overflow-hidden">
+    <div className="not-prose my-8 rounded-2xl border border-green-200 bg-white shadow-sm overflow-hidden">
       <div className="flex flex-col sm:flex-row items-stretch">
         {imageSrc && (
           <div className="relative w-full sm:w-40 h-40 flex-shrink-0 bg-green-50">
