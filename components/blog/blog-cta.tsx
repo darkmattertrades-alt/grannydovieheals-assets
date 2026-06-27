@@ -7,7 +7,7 @@ type BlogCtaProps = {
 export function BlogCta({ variant }: BlogCtaProps) {
   if (variant === "quiz") {
     return (
-      <div className="my-8 rounded-2xl bg-green-700 px-6 py-7 text-center text-white">
+      <div className="not-prose my-8 rounded-2xl bg-green-700 px-6 py-7 text-center text-white">
         <p className="text-2xl mb-2">🌿</p>
         <h3 className="font-serif text-xl font-bold mb-2">
           Not Sure Which Remedy Is Right for You?
@@ -27,7 +27,7 @@ export function BlogCta({ variant }: BlogCtaProps) {
   }
 
   return (
-    <div className="my-8 rounded-2xl border-2 border-amber-300 bg-amber-50 px-6 py-7 text-center">
+    <div className="not-prose my-8 rounded-2xl border-2 border-amber-300 bg-amber-50 px-6 py-7 text-center">
       <p className="text-2xl mb-2">🎁</p>
       <h3 className="font-serif text-xl font-bold text-amber-900 mb-2">
         Get Granny Dovie's 15 Secret Remedies — Free
