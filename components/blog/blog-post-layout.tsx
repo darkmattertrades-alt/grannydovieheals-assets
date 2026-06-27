@@ -109,8 +109,8 @@ export function BlogPostLayout({ post, children, relatedPosts }: BlogPostLayoutP
           prose-p:text-gray-700
           prose-p:leading-relaxed
           prose-a:text-green-700
-          prose-a:no-underline
-          hover:prose-a:underline
+          prose-a:underline
+          hover:prose-a:text-green-800
           prose-strong:text-gray-900
           prose-blockquote:border-green-700
           prose-blockquote:bg-green-50
