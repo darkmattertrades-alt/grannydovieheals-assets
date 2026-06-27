@@ -12,5 +12,10 @@ export function useMDXComponents(components: Record<string, React.ComponentType<
     ProductRecommendation,
     BlogCta,
     ClickbankCta,
+    a: ({ href, children, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+      <a href={href} className="text-green-700 underline hover:text-green-800" {...props}>
+        {children}
+      </a>
+    ),
   }
 }
