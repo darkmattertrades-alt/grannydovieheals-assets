@@ -11,6 +11,7 @@ export type BlogCategory =
   | "stress-sleep"
   | "natural-skincare"
   | "faith-healing"
+  | "faith-and-healing"
 
 export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: string }[]> = {
   "gut-health": [
@@ -67,6 +68,12 @@ export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: 
     {
       slug: "gut-vita",
       href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=faith-healing",
+    },
+  ],
+  "faith-and-healing": [
+    {
+      slug: "faith-and-healing",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=god-given-natural-remedies",
     },
   ],
 }
