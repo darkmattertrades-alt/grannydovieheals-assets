@@ -46,4 +46,11 @@ export const CATEGORIES: Record<
     slug: "faith-healing",
     emoji: "✝️",
   },
+  "faith-and-healing": {
+    label: "Faith & Healing",
+    description:
+      "Scripture, prayer, and the God given natural remedies that have kept faith-filled women whole for generations.",
+    slug: "faith-and-healing",
+    emoji: "✝️",
+  },
 }
