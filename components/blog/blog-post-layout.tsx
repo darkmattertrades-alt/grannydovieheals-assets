@@ -22,6 +22,8 @@ const POST_PRELANDER_MAP: Record<string, string> = {
   "peppermint-tea-bloating-and-gas": "gut-vita-peppermint-gas",
   "peppermint-tea-bloated-stomach": "gut-vita-peppermint-bloated-stomach",
   "god-given-natural-remedies": "faith-and-healing",
+  "does-peppermint-tea-help-bloating": "gut-vita-peppermint-help",
+  "peppermint-tea-bloating-relief": "gut-vita-peppermint-relief",
 }
 
 export function BlogPostLayout({ post, children, relatedPosts }: BlogPostLayoutProps) {
