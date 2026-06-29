@@ -35,6 +35,14 @@ export const CATEGORY_CLICKBANK_MAP: Record<BlogCategory, { slug: string; href: 
       slug: "gut-vita-peppermint-bloated-stomach",
       href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloated-stomach",
     },
+    {
+      slug: "gut-vita-peppermint-help",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=does-peppermint-tea-help-bloating",
+    },
+    {
+      slug: "gut-vita-peppermint-relief",
+      href: "https://hop.clickbank.net/?affiliate=dovieheals&vendor=gutvita&vsl=1&tid=peppermint-tea-bloating-relief",
+    },
   ],
   "joints-inflammation": [
     {
